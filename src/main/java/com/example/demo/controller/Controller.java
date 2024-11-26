@@ -8,6 +8,7 @@ import java.util.Observer;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import com.example.demo.LevelParent;
 
@@ -29,9 +30,14 @@ public class Controller implements Observer {
 
 	private void goToLevel(String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
 			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+
+			// Get the dimensions of the screen
+			double screenWidth = Screen.getPrimary().getBounds().getWidth();
+			double screenHeight = Screen.getPrimary().getBounds().getHeight();
+
 			Class<?> myClass = Class.forName(className);
 			Constructor<?> constructor = myClass.getConstructor(double.class, double.class);
-			LevelParent myLevel = (LevelParent) constructor.newInstance(stage.getHeight(), stage.getWidth());
+			LevelParent myLevel = (LevelParent) constructor.newInstance(screenHeight, screenWidth);
 			myLevel.addObserver(this);
 			Scene scene = myLevel.initializeScene();
 			stage.setScene(scene);
