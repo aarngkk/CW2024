@@ -10,7 +10,7 @@ public class GameOverImage extends ImageView {
 	public GameOverImage(double xPosition, double yPosition) {
 		Image image = new Image(getClass().getResource(IMAGE_NAME).toExternalForm());
 		setImage(image);
-//		setImage(ImageSetUp.getImageList().get(ImageSetUp.getGameOver()));
+
 
 		setFitWidth(image.getWidth() / 2);
 		setFitHeight(image.getHeight() / 2);
