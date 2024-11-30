@@ -24,6 +24,7 @@ public abstract class LevelParent extends Observable {
 	private final double screenHeight;
 	private final double screenWidth;
 	private final double enemyMaximumYPosition;
+	private final int killsToAdvance;
 
 	private final Group root;
 	private final Timeline timeline;
@@ -41,13 +42,15 @@ public abstract class LevelParent extends Observable {
 	private boolean isPaused = false;
 	private Button pauseButton;
 	private Text pausedText;
+	private Text killCountText;
 	private EventHandler<KeyEvent> escapeKeyHandler;
 
-	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth) {
+	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth, int killsToAdvance) {
 		this.root = new Group();
 		this.scene = new Scene(root, screenWidth, screenHeight);
 		this.timeline = new Timeline();
 		this.user = new UserPlane(playerInitialHealth);
+		this.killsToAdvance = killsToAdvance;
 		this.friendlyUnits = new ArrayList<>();
 		this.enemyUnits = new ArrayList<>();
 		this.userProjectiles = new ArrayList<>();
@@ -79,6 +82,7 @@ public abstract class LevelParent extends Observable {
 		initializeFriendlyUnits();
 		levelView.showHeartDisplay();
 		addPauseButton();
+		initializeHUD();
 		background.requestFocus();
 		return scene;
 	}
@@ -104,7 +108,7 @@ public abstract class LevelParent extends Observable {
 		handleEnemyProjectileCollisions();
 		handlePlaneCollisions();
 		removeAllDestroyedActors();
-		updateKillCount();
+		updateHUD();
 		updateLevelView();
 		checkIfGameOver();
 	}
@@ -146,6 +150,28 @@ public abstract class LevelParent extends Observable {
 			}
 		});
 		root.getChildren().add(background);
+	}
+
+	private void initializePauseText() {
+		pausedText = new Text("PAUSED");
+		pausedText.setFont(Font.font("Trebuchet MS", 120)); // Set font and size
+		pausedText.setFill(Color.WHITE); // Text color
+		pausedText.setStroke(Color.BLACK); // Add a stroke for visibility
+		pausedText.setStrokeWidth(2);
+		pausedText.setVisible(false); // Make text initially hidden
+		pausedText.setX(screenWidth / 2 - 210); // Center horizontally
+		pausedText.setY(screenHeight / 2); // Center vertically
+
+		root.getChildren().add(pausedText); // Add to the root group
+	}
+
+	private void initializeHUD() {
+		killCountText = new Text("Kills: 0 / " + killsToAdvance);
+		killCountText.setFont(Font.font("Trebuchet MS", 30));
+		killCountText.setFill(Color.WHITE);
+		killCountText.setX(8);
+		killCountText.setY(80);
+		root.getChildren().add(killCountText);
 	}
 
 	public void addPauseButton() {
@@ -200,19 +226,6 @@ public abstract class LevelParent extends Observable {
 
 		// Re-enable ESC key functionality
 		enableEscapeKey();
-	}
-
-	private void initializePauseText() {
-		pausedText = new Text("PAUSED");
-		pausedText.setFont(Font.font("Trebuchet MS", 120)); // Set font and size
-		pausedText.setFill(Color.WHITE); // Text color
-		pausedText.setStroke(Color.BLACK); // Add a stroke for visibility
-		pausedText.setStrokeWidth(2);
-		pausedText.setVisible(false); // Make text initially hidden
-		pausedText.setX(screenWidth / 2 - 210); // Center horizontally
-		pausedText.setY(screenHeight / 2); // Center vertically
-
-		root.getChildren().add(pausedText); // Add to the root group
 	}
 
 	private void fireProjectile() {
@@ -290,10 +303,11 @@ public abstract class LevelParent extends Observable {
 		levelView.removeHearts(user.getHealth());
 	}
 
-	private void updateKillCount() {
+	protected void updateHUD() {
 		for (int i = 0; i < currentNumberOfEnemies - enemyUnits.size(); i++) {
 			user.incrementKillCount();
 		}
+		killCountText.setText("Kills: " + user.getNumberOfKills() + " / " + killsToAdvance);
 	}
 
 	private boolean enemyHasPenetratedDefenses(ActiveActorDestructible enemy) {
@@ -361,6 +375,10 @@ public abstract class LevelParent extends Observable {
 
 	protected boolean userIsDestroyed() {
 		return user.isDestroyed();
+	}
+
+	protected Text getKillCountText() {
+		return killCountText;
 	}
 
 	private void updateNumberOfEnemies() {

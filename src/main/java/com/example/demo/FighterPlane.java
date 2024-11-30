@@ -14,6 +14,9 @@ public abstract class FighterPlane extends ActiveActorDestructible {
 	@Override
 	public void takeDamage() {
 		health--;
+		if (health < 0) {
+			health = 0;  // Ensure health doesn't go below 0
+		}
 		if (healthAtZero()) {
 			this.destroy();
 		}
