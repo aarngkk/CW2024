@@ -167,18 +167,25 @@ public abstract class LevelParent extends Observable {
 	}
 
 	private void stop() {
-		// Stop vertical movement when UP, DOWN, or W, S keys are not pressed
-		if (!activeKeys.contains(KeyCode.UP) && !activeKeys.contains(KeyCode.W) &&
-				!activeKeys.contains(KeyCode.DOWN) && !activeKeys.contains(KeyCode.S)) {
+		// Prioritize vertical movement based on active keys
+		if (activeKeys.contains(KeyCode.UP) || activeKeys.contains(KeyCode.W)) {
+			user.move(-1, true); // Move up
+		} else if (activeKeys.contains(KeyCode.DOWN) || activeKeys.contains(KeyCode.S)) {
+			user.move(1, true); // Move down
+		} else {
 			user.move(0, true); // Stop vertical movement
 		}
 
-		// Stop horizontal movement when LEFT, RIGHT or A, D keys are not pressed
-		if (!activeKeys.contains(KeyCode.LEFT) && !activeKeys.contains(KeyCode.A) &&
-				!activeKeys.contains(KeyCode.RIGHT) && !activeKeys.contains(KeyCode.D)) {
+		// Prioritize horizontal movement based on active keys
+		if (activeKeys.contains(KeyCode.LEFT) || activeKeys.contains(KeyCode.A)) {
+			user.move(-1, false); // Move left
+		} else if (activeKeys.contains(KeyCode.RIGHT) || activeKeys.contains(KeyCode.D)) {
+			user.move(1, false); // Move right
+		} else {
 			user.move(0, false); // Stop horizontal movement
 		}
 	}
+
 
 	private void initializePauseControls() {
 		// Initialize pause text
