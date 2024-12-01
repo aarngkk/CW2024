@@ -44,6 +44,7 @@ public abstract class LevelParent extends Observable {
 	private Button pauseButton;
 	private Text pausedText;
 	private Text killCountText;
+	private Text firingModeText;
 	private EventHandler<KeyEvent> escapeKeyHandler;
 
 	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth, int killsToAdvance) {
@@ -79,10 +80,9 @@ public abstract class LevelParent extends Observable {
 	public Scene initializeScene() {
 		scene.getStylesheets().add(getClass().getResource("/com/example/demo/css/styles.css").toExternalForm());
 		initializeBackground();
-		initializePauseText();
+		initializePauseControls();
 		initializeFriendlyUnits();
 		levelView.showHeartDisplay();
-		addPauseButton();
 		initializeHUD();
 		background.requestFocus();
 		return scene;
@@ -154,6 +154,14 @@ public abstract class LevelParent extends Observable {
 				case LEFT, A -> user.move(-1, false); // LEFT or A for moving left
 				case RIGHT, D -> user.move(1, false); // RIGHT or D for moving right
 				case SPACE -> fireProjectile();       // SPACE for firing
+				case DIGIT1 -> {
+					user.setFiringMode(UserPlane.FiringMode.SINGLE);
+					firingModeText.setText("Mode: SINGLE");
+				}
+				case DIGIT2 -> {
+					user.setFiringMode(UserPlane.FiringMode.SPREAD);
+					firingModeText.setText("Mode: SPREAD");
+				}
 			}
 		}
 	}
@@ -172,7 +180,8 @@ public abstract class LevelParent extends Observable {
 		}
 	}
 
-	private void initializePauseText() {
+	private void initializePauseControls() {
+		// Initialize pause text
 		pausedText = new Text("PAUSED");
 		pausedText.setFont(Font.font("Trebuchet MS", 120)); // Set font and size
 		pausedText.setFill(Color.WHITE); // Text color
@@ -181,42 +190,39 @@ public abstract class LevelParent extends Observable {
 		pausedText.setVisible(false); // Make text initially hidden
 		pausedText.setX(screenWidth / 2 - 210); // Center horizontally
 		pausedText.setY(screenHeight / 2); // Center vertically
-
 		root.getChildren().add(pausedText); // Add to the root group
+
+		// Initialize pause button
+		pauseButton = new Button("Pause");
+		pauseButton.getStyleClass().add("button");
+		pauseButton.setStyle("-fx-font-size: 20px;");
+		pauseButton.setFocusTraversable(false);
+		pauseButton.setOnAction(e -> togglePause(pauseButton));
+
+		StackPane pauseButtonContainer = new StackPane();
+		pauseButtonContainer.getChildren().add(pauseButton);
+		pauseButtonContainer.setAlignment(Pos.TOP_RIGHT); // Align the button to the top-right corner
+		pauseButtonContainer.setLayoutX(screenWidth - 120); // Adjust X position
+		pauseButtonContainer.setLayoutY(15);    // Adjust Y position
+		root.getChildren().add(pauseButtonContainer);
 	}
 
 	private void initializeHUD() {
+		// Kill count text
 		killCountText = new Text("Kills: 0 / " + killsToAdvance);
 		killCountText.setFont(Font.font("Trebuchet MS", 30));
 		killCountText.setFill(Color.WHITE);
 		killCountText.setX(8);
 		killCountText.setY(80);
 		root.getChildren().add(killCountText);
-	}
 
-	public void addPauseButton() {
-		// Create a button for pausing the game
-		pauseButton = new Button("Pause");
-
-		// Set the button's visual appearance
-		pauseButton.getStyleClass().add("button");
-		pauseButton.setStyle("-fx-font-size: 20px;");
-
-		// Prevent the button from gaining focus
-		pauseButton.setFocusTraversable(false);
-
-		// Set the button's action
-		pauseButton.setOnAction(e -> togglePause(pauseButton));
-
-		// Create a StackPane to position the button
-		StackPane pauseButtonContainer = new StackPane();
-		pauseButtonContainer.getChildren().add(pauseButton);
-		pauseButtonContainer.setAlignment(Pos.TOP_RIGHT); // Align the button to the top-right corner
-		pauseButtonContainer.setLayoutX(screenWidth - 120); // Adjust X position
-		pauseButtonContainer.setLayoutY(15);    // Adjust Y position
-
-		// Add the pause button to the root container
-		root.getChildren().add(pauseButtonContainer);
+		// Firing mode text
+		firingModeText = new Text("Mode: SINGLE");
+		firingModeText.setFont(Font.font("Trebuchet MS", 30));
+		firingModeText.setFill(Color.WHITE);
+		firingModeText.setX(8);
+		firingModeText.setY(120);
+		root.getChildren().add(firingModeText);
 	}
 
 	// Method to toggle pause and resume the game
@@ -249,9 +255,11 @@ public abstract class LevelParent extends Observable {
 	}
 
 	private void fireProjectile() {
-		ActiveActorDestructible projectile = user.fireProjectile();
-		root.getChildren().add(projectile);
-		userProjectiles.add(projectile);
+		List<ActiveActorDestructible> projectiles = user.fire();
+		for (ActiveActorDestructible projectile : projectiles) {
+			root.getChildren().add(projectile);
+			userProjectiles.add(projectile);
+		}
 	}
 
 	private void generateEnemyFire() {
