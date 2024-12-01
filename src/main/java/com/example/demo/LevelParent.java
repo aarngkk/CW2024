@@ -31,6 +31,7 @@ public abstract class LevelParent extends Observable {
 	private final UserPlane user;
 	private final Scene scene;
 	private final ImageView background;
+	private final Set<KeyCode> activeKeys = new HashSet<>();
 
 	private final List<ActiveActorDestructible> friendlyUnits;
 	private final List<ActiveActorDestructible> enemyUnits;
@@ -124,32 +125,51 @@ public abstract class LevelParent extends Observable {
 		background.setFitHeight(screenHeight);
 		background.setFitWidth(screenWidth);
 
-		// Store the ESC key handler in a variable
-		escapeKeyHandler = new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent e) {
-				if (e.getCode() == KeyCode.ESCAPE) {
-					togglePause(pauseButton);
-				}
+		// ESC handler for pause
+		escapeKeyHandler = e -> {
+			if (e.getCode() == KeyCode.ESCAPE) {
+				togglePause(pauseButton);
 			}
 		};
-
 		background.addEventHandler(KeyEvent.KEY_PRESSED, escapeKeyHandler);
 
-		background.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent e) {
-				KeyCode kc = e.getCode();
-				if (kc == KeyCode.UP) user.moveUp();
-				if (kc == KeyCode.DOWN) user.moveDown();
-				if (kc == KeyCode.SPACE) fireProjectile();
-			}
+		background.setOnKeyPressed(e -> {
+			activeKeys.add(e.getCode());
+			processKeyPress();
 		});
-		background.setOnKeyReleased(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent e) {
-				KeyCode kc = e.getCode();
-				if (kc == KeyCode.UP || kc == KeyCode.DOWN) user.stop();
-			}
+
+		background.setOnKeyReleased(e -> {
+			activeKeys.remove(e.getCode());
+			stop(); // Stop movement when key is released
 		});
+
 		root.getChildren().add(background);
+	}
+
+	private void processKeyPress() {
+		for (KeyCode key : activeKeys) {
+			switch (key) {
+				case UP, W -> user.move(-1, true);   // UP or W for moving up
+				case DOWN, S -> user.move(1, true);   // DOWN or S for moving down
+				case LEFT, A -> user.move(-1, false); // LEFT or A for moving left
+				case RIGHT, D -> user.move(1, false); // RIGHT or D for moving right
+				case SPACE -> fireProjectile();       // SPACE for firing
+			}
+		}
+	}
+
+	private void stop() {
+		// Stop vertical movement when UP, DOWN, or W, S keys are not pressed
+		if (!activeKeys.contains(KeyCode.UP) && !activeKeys.contains(KeyCode.W) &&
+				!activeKeys.contains(KeyCode.DOWN) && !activeKeys.contains(KeyCode.S)) {
+			user.move(0, true); // Stop vertical movement
+		}
+
+		// Stop horizontal movement when LEFT, RIGHT or A, D keys are not pressed
+		if (!activeKeys.contains(KeyCode.LEFT) && !activeKeys.contains(KeyCode.A) &&
+				!activeKeys.contains(KeyCode.RIGHT) && !activeKeys.contains(KeyCode.D)) {
+			user.move(0, false); // Stop horizontal movement
+		}
 	}
 
 	private void initializePauseText() {
