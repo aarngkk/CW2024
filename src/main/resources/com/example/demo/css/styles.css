@@ -28,3 +28,10 @@
     -fx-background-color: #222;
     -fx-border-color: #444;
 }
+
+.health-bar {
+    -fx-accent: red;
+    -fx-control-inner-background: white;
+    -fx-background-color: white;
+}
+

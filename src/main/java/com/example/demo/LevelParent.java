@@ -69,6 +69,8 @@ public abstract class LevelParent extends Observable {
 		friendlyUnits.add(user);
 	}
 
+	protected abstract void initializeGameObjects();
+
 	protected abstract void initializeFriendlyUnits();
 
 	protected abstract void checkIfGameOver();
@@ -82,6 +84,7 @@ public abstract class LevelParent extends Observable {
 		initializeBackground();
 		initializePauseControls();
 		initializeFriendlyUnits();
+		initializeGameObjects();
 		levelView.showHeartDisplay();
 		initializeHUD();
 		background.requestFocus();

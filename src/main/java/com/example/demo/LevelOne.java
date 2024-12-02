@@ -23,6 +23,11 @@ public class LevelOne extends LevelParent {
 	}
 
 	@Override
+	protected void initializeGameObjects() {
+
+	}
+
+	@Override
 	protected void initializeFriendlyUnits() {
 		getRoot().getChildren().add(getUser());
 	}
