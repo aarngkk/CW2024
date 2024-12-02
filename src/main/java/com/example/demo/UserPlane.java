@@ -25,6 +25,16 @@ public class UserPlane extends FighterPlane {
 		SINGLE, SPREAD
 	}
 
+	private static final double SPEED_BOOST_MULTIPLIER = 1.5;
+	private static final double BOOST_DRAIN_RATE = 1; // Energy drained per frame while boosting
+	private static final double BOOST_RECHARGE_RATE = 1.5; // Energy recharged per frame
+	private static final int MAX_BOOST_ENERGY = 100;
+	private static final int BOOST_COOLDOWN_TIME = 1500; // Cooldown time in milliseconds
+
+	private int currentBoostEnergy = MAX_BOOST_ENERGY;
+	private boolean isSpeedBoostActive = false;
+	private long lastDepletedTime = 0; // Track the last time boost was depleted
+
 	private FiringMode currentFiringMode = FiringMode.SINGLE;
 
 	public UserPlane(int initialHealth) {
@@ -33,14 +43,16 @@ public class UserPlane extends FighterPlane {
 
 	@Override
 	public void updatePosition() {
+		double boostFactor = isSpeedBoostActive ? SPEED_BOOST_MULTIPLIER : 1.0;
+
 		// Handle vertical movement
-		double newYPosition = getTranslateY() + (VERTICAL_VELOCITY * velocityMultiplierY);
+		double newYPosition = getTranslateY() + (VERTICAL_VELOCITY * velocityMultiplierY * boostFactor);
 		if (newYPosition >= Y_UPPER_BOUND && newYPosition <= Y_LOWER_BOUND) {
 			setTranslateY(newYPosition);
 		}
 
 		// Handle horizontal movement
-		double newXPosition = getTranslateX() + horizontalVelocity;
+		double newXPosition = getTranslateX() + (horizontalVelocity * boostFactor);
 		if (newXPosition >= X_LEFT_BOUND && newXPosition <= X_RIGHT_BOUND) {
 			setTranslateX(newXPosition);
 		}
@@ -49,6 +61,8 @@ public class UserPlane extends FighterPlane {
 	@Override
 	public void updateActor() {
 		updatePosition();
+		drainBoostEnergy();  // Deplete boost when active
+		rechargeBoostEnergy();  // Handle boost recharge
 	}
 
 	@Override
@@ -126,12 +140,53 @@ public class UserPlane extends FighterPlane {
 		horizontalVelocity = velocity; // Set the velocity
 	}
 
+	public void setSpeedBoost(boolean isActive) {
+		if (isActive && currentBoostEnergy > 0) {
+			isSpeedBoostActive = true;
+		} else {
+			isSpeedBoostActive = false;
+			lastDepletedTime = System.currentTimeMillis(); // Track the time when boost was depleted
+		}
+	}
+
+	private void rechargeBoostEnergy() {
+		if (!isSpeedBoostActive && currentBoostEnergy < MAX_BOOST_ENERGY) {
+			// Check if cooldown period has passed before recharging
+			long currentTime = System.currentTimeMillis();
+			if (currentTime - lastDepletedTime >= BOOST_COOLDOWN_TIME) {
+				// Start recharging after cooldown period
+				currentBoostEnergy += BOOST_RECHARGE_RATE;
+				if (currentBoostEnergy > MAX_BOOST_ENERGY) {
+					currentBoostEnergy = MAX_BOOST_ENERGY;
+				}
+			}
+		}
+	}
+
+	private void drainBoostEnergy() {
+		if (isSpeedBoostActive && currentBoostEnergy > 0) {
+			currentBoostEnergy -= BOOST_DRAIN_RATE;
+			if (currentBoostEnergy <= 0) {
+				currentBoostEnergy = 0;
+				setSpeedBoost(false); // Disable boost if energy is depleted
+			}
+		}
+	}
+
 	public int getNumberOfKills() {
 		return numberOfKills;
 	}
 
 	public void incrementKillCount() {
 		numberOfKills++;
+	}
+
+	public static double getMaxBoostEnergy() {
+		return MAX_BOOST_ENERGY;
+	}
+
+	public int getBoostEnergy() {
+		return currentBoostEnergy;
 	}
 
 }

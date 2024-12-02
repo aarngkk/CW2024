@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
@@ -21,6 +22,8 @@ public abstract class LevelParent extends Observable {
 
 	private static final double SCREEN_HEIGHT_ADJUSTMENT = 100;
 	private static final int MILLISECOND_DELAY = 50;
+	private static final double BOOST_BAR_WIDTH = 200;
+	private static final double BOOST_BAR_HEIGHT = 20;
 	private final double screenHeight;
 	private final double screenWidth;
 	private final double enemyMaximumYPosition;
@@ -46,6 +49,7 @@ public abstract class LevelParent extends Observable {
 	private Text killCountText;
 	private Text firingModeText;
 	private EventHandler<KeyEvent> escapeKeyHandler;
+	private Rectangle boostBar;
 
 	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth, int killsToAdvance) {
 		this.root = new Group();
@@ -115,6 +119,7 @@ public abstract class LevelParent extends Observable {
 		updateHUD();
 		updateLevelView();
 		checkIfGameOver();
+		updateBoostBar();
 	}
 
 	private void initializeTimeline() {
@@ -138,11 +143,17 @@ public abstract class LevelParent extends Observable {
 
 		background.setOnKeyPressed(e -> {
 			activeKeys.add(e.getCode());
+			if (e.getCode() == KeyCode.SHIFT) {
+				user.setSpeedBoost(true);
+			}
 			processKeyPress();
 		});
 
 		background.setOnKeyReleased(e -> {
 			activeKeys.remove(e.getCode());
+			if (e.getCode() == KeyCode.SHIFT) {
+				user.setSpeedBoost(false);
+			}
 			stop(); // Stop movement when key is released
 		});
 
@@ -165,6 +176,7 @@ public abstract class LevelParent extends Observable {
 					user.setFiringMode(UserPlane.FiringMode.SPREAD);
 					firingModeText.setText("Mode: SPREAD");
 				}
+				case SHIFT -> user.setSpeedBoost(true); // Enable speed boost
 			}
 		}
 	}
@@ -186,6 +198,11 @@ public abstract class LevelParent extends Observable {
 			user.move(1, false); // Move right
 		} else {
 			user.move(0, false); // Stop horizontal movement
+		}
+
+		// Disable speed boost when Shift is released
+		if (!activeKeys.contains(KeyCode.SHIFT)) {
+			user.setSpeedBoost(false);
 		}
 	}
 
@@ -233,6 +250,38 @@ public abstract class LevelParent extends Observable {
 		firingModeText.setX(8);
 		firingModeText.setY(120);
 		root.getChildren().add(firingModeText);
+
+		createBoostBar();
+	}
+
+	private void createBoostBar() {
+		boostBar = new Rectangle(BOOST_BAR_WIDTH, BOOST_BAR_HEIGHT, Color.LAWNGREEN);
+		boostBar.setTranslateX(10);
+		boostBar.setTranslateY(140);
+
+		// Set rounded corners
+		boostBar.setArcWidth(15);
+		boostBar.setArcHeight(15);
+
+		// Set outline
+		boostBar.setStroke(Color.BLACK);
+		boostBar.setStrokeWidth(1);
+
+		root.getChildren().add(boostBar);
+	}
+
+	private void updateBoostBar() {
+		double energyPercentage = (double) user.getBoostEnergy() / UserPlane.getMaxBoostEnergy();
+		boostBar.setWidth(BOOST_BAR_WIDTH * energyPercentage);
+
+		// Set colour based on percentage
+		if (energyPercentage > 0.5) {
+			boostBar.setFill(Color.LAWNGREEN);
+		} else if (energyPercentage > 0.2) {
+			boostBar.setFill(Color.ORANGE);
+		} else {
+			boostBar.setFill(Color.RED);
+		}
 	}
 
 	// Method to toggle pause and resume the game
