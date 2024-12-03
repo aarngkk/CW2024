@@ -8,9 +8,11 @@ public class Boss extends FighterPlane {
 	private static final double INITIAL_X_POSITION = 1150.0;
 	private static final double INITIAL_Y_POSITION = 400;
 	private static final double PROJECTILE_Y_POSITION_OFFSET = 35.0;
-	private static final double BOSS_FIRE_RATE = .04;
+	private static final double BOSS_FIRE_RATE = 0.04;
+	private static final double INCREASED_FIRE_RATE = 0.8;
 	private static final int IMAGE_HEIGHT = 85;
 	private static final int VERTICAL_VELOCITY = 8;
+	private static final int INCREASED_VERTICAL_VELOCITY = 12;
 	private static final int HEALTH = 100;
 	private static final int MOVE_FREQUENCY_PER_CYCLE = 5;
 	private static final int ZERO = 0;
@@ -22,6 +24,7 @@ public class Boss extends FighterPlane {
 	private boolean isShielded;
 	private boolean shieldActivatedAt50;
 	private boolean shieldActivatedAt20;
+	private boolean fireRateAndSpeedBoosted;
 	private int consecutiveMovesInSameDirection;
 	private int indexOfCurrentMove;
 	private int framesWithShieldActivated;
@@ -35,6 +38,7 @@ public class Boss extends FighterPlane {
 		isShielded = false;
 		shieldActivatedAt50 = false;
 		shieldActivatedAt20 = false;
+		fireRateAndSpeedBoosted = false;
 		initializeMovePattern();
 	}
 
@@ -52,6 +56,7 @@ public class Boss extends FighterPlane {
 	public void updateActor() {
 		updatePosition();
 		updateShield();
+		checkAndApplyBoosts();
 	}
 
 	@Override
@@ -81,6 +86,14 @@ public class Boss extends FighterPlane {
 		if (shieldExhausted()) deactivateShield();
 	}
 
+	private void checkAndApplyBoosts() {
+		// Apply fire rate and speed boost if health is 20% or below
+		if (!fireRateAndSpeedBoosted && getHealth() <= HEALTH * 0.2) {
+			fireRateAndSpeedBoosted = true;
+			increaseFireRateAndMovementSpeed();
+		}
+	}
+
 	private int getNextMove() {
 		int currentMove = movePattern.get(indexOfCurrentMove);
 		consecutiveMovesInSameDirection++;
@@ -96,11 +109,22 @@ public class Boss extends FighterPlane {
 	}
 
 	private boolean bossFiresInCurrentFrame() {
-		return Math.random() < BOSS_FIRE_RATE;
+		double currentFireRate = fireRateAndSpeedBoosted ? INCREASED_FIRE_RATE : BOSS_FIRE_RATE;
+		return Math.random() < currentFireRate;
 	}
 
 	private double getProjectileInitialPosition() {
 		return getLayoutY() + getTranslateY() + PROJECTILE_Y_POSITION_OFFSET;
+	}
+
+	private void increaseFireRateAndMovementSpeed() {
+		movePattern.clear(); // Reinitialize move pattern with increased speed
+		for (int i = 0; i < MOVE_FREQUENCY_PER_CYCLE; i++) {
+			movePattern.add(INCREASED_VERTICAL_VELOCITY);
+			movePattern.add(-INCREASED_VERTICAL_VELOCITY);
+			movePattern.add(ZERO);
+		}
+		Collections.shuffle(movePattern);
 	}
 
 	private boolean shieldShouldBeActivated() {
