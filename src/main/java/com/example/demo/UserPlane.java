@@ -17,12 +17,13 @@ public class UserPlane extends FighterPlane {
 	private static final int HORIZONTAL_VELOCITY = 8;
 	private static final int VERTICAL_VELOCITY = 8;
 	private static final long FIRE_RATE = 100; // Fire rate in milliseconds
+	private static final long HEAVY_FIRE_RATE = 1000;
 	private long lastFiredTime = 0; // Stores the last time the player fired a projectile
 	private int velocityMultiplierY = 0;
 	private double horizontalVelocity = 0;
 	private int numberOfKills;
 	public enum FiringMode {
-		SINGLE, SPREAD
+		SINGLE, SPREAD, HEAVY
 	}
 	private FiringMode currentFiringMode = FiringMode.SINGLE;
 	private static int persistentHealth;
@@ -97,12 +98,29 @@ public class UserPlane extends FighterPlane {
 		return null;
 	}
 
+	public List<ActiveActorDestructible> fireHeavyProjectile() {
+		long currentTime = System.currentTimeMillis();
+
+		if (currentTime - lastFiredTime >= HEAVY_FIRE_RATE) {
+			double projectileX = getTranslateX() + (getBoundsInLocal().getWidth() / 2);
+			double projectileY = getTranslateY() + Y_UPPER_BOUND_OFFSET + getBoundsInLocal().getHeight() - 10;
+
+			lastFiredTime = currentTime;
+
+			return List.of(new HeavyProjectile(projectileX, projectileY));
+		}
+
+		return List.of();
+	}
+
 	public List<ActiveActorDestructible> fire() {
 		if (currentFiringMode == FiringMode.SINGLE) {
 			ActiveActorDestructible singleProjectile = fireProjectile();
 			return singleProjectile != null ? List.of(singleProjectile) : List.of();
 		} else if (currentFiringMode == FiringMode.SPREAD) {
 			return fireSpreadProjectile();
+		} else if (currentFiringMode == FiringMode.HEAVY) {
+			return fireHeavyProjectile();
 		}
 		return List.of();
 	}

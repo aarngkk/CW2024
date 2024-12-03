@@ -167,6 +167,10 @@ public abstract class LevelParent extends Observable {
 					user.setFiringMode(UserPlane.FiringMode.SPREAD);
 					firingModeText.setText("Mode: SPREAD");
 				}
+				case DIGIT3 -> {
+					user.setFiringMode(UserPlane.FiringMode.HEAVY);
+					firingModeText.setText("Mode: HEAVY");
+				}
 			}
 		}
 	}
