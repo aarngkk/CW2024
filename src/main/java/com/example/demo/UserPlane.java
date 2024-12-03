@@ -175,7 +175,7 @@ public class UserPlane extends FighterPlane {
 	private void updateBoostEffects() {
 		if (isSpeedBoostActive) {
 			// Apply rotation for speed boost
-			rotateEffect.setAngle(8); // Slight rotation when speed boost is active
+			rotateEffect.setAngle(5); // Slight rotation when speed boost is active
 			this.getTransforms().clear();
 			this.getTransforms().add(rotateEffect); // Apply the rotation
 		} else {
