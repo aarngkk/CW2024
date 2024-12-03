@@ -7,8 +7,10 @@ import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
@@ -25,6 +27,7 @@ public abstract class LevelParent extends Observable {
 	private final double screenWidth;
 	private final double enemyMaximumYPosition;
 	private final int killsToAdvance;
+	private final GaussianBlur blurEffect = new GaussianBlur(10);
 
 	private final Group root;
 	private final Timeline timeline;
@@ -44,8 +47,10 @@ public abstract class LevelParent extends Observable {
 	private Button pauseButton;
 	private Text pausedText;
 	private Text killCountText;
+	private Rectangle pauseOverlay;
 	private EventHandler<KeyEvent> escapeKeyHandler;
 	protected Text firingModeText;
+
 
 	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth, int killsToAdvance) {
 		this.root = new Group();
@@ -79,10 +84,10 @@ public abstract class LevelParent extends Observable {
 	public Scene initializeScene() {
 		scene.getStylesheets().add(getClass().getResource("/com/example/demo/css/styles.css").toExternalForm());
 		initializeBackground();
-		initializePauseControls();
 		initializeFriendlyUnits();
 		levelView.showHeartDisplay(user.getHealth());
 		initializeHUD();
+		initializePauseControls();
 		background.requestFocus();
 		return scene;
 	}
@@ -188,6 +193,12 @@ public abstract class LevelParent extends Observable {
 
 
 	private void initializePauseControls() {
+		// Create a semi-transparent black overlay
+		pauseOverlay = new Rectangle(screenWidth, screenHeight, Color.BLACK);
+		pauseOverlay.setOpacity(0.5); // Set transparency
+		pauseOverlay.setVisible(false); // Initially hidden
+		root.getChildren().add(pauseOverlay);
+
 		// Initialize pause text
 		pausedText = new Text("PAUSED");
 		pausedText.setFont(Font.font("Trebuchet MS", 120)); // Set font and size
@@ -238,10 +249,26 @@ public abstract class LevelParent extends Observable {
 			resumeGame();  // Resume the game if it's currently paused
 			pauseButton.setText("Pause"); // Update button text to "Pause"
 			pausedText.setVisible(false); // Hide "PAUSED" text
+			pauseOverlay.setVisible(false); // Hide overlay
+			// Remove blur effect from all elements
+			root.getChildren().forEach(node -> node.setEffect(null));
 		} else {
 			pauseGame();   // Pause the game if it's running
 			pauseButton.setText("Unpause"); // Update button text to "Unpause"
 			pausedText.setVisible(true); // Show "PAUSED" text
+			pauseOverlay.setVisible(true); // Show overlay
+
+			// Apply blur effect to all non-pause elements
+			root.getChildren().forEach(node -> {
+				if (node != pauseOverlay && node != pausedText && node != pauseButton.getParent()) {
+					node.setEffect(blurEffect);
+				}
+			});
+
+			// Bring pause elements to the front
+			pauseOverlay.toFront();
+			pausedText.toFront();
+			pauseButton.getParent().toFront();
 		}
 	}
 
