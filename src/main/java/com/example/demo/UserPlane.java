@@ -24,11 +24,12 @@ public class UserPlane extends FighterPlane {
 	public enum FiringMode {
 		SINGLE, SPREAD
 	}
-
 	private FiringMode currentFiringMode = FiringMode.SINGLE;
+	private static int persistentHealth;
 
 	public UserPlane(int initialHealth) {
-		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, initialHealth);
+		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, persistentHealth > 0 ? persistentHealth : initialHealth);
+		persistentHealth = getHealth();
 	}
 
 	@Override
@@ -120,6 +121,16 @@ public class UserPlane extends FighterPlane {
 		} else {
 			horizontalVelocity = direction * HORIZONTAL_VELOCITY; // -1 for left, 1 for right, 0 to stop
 		}
+	}
+
+	@Override
+	public void takeDamage() {
+		super.takeDamage();
+		persistentHealth = getHealth(); // Update persistent health
+	}
+
+	public static void resetHealth(int health) {
+		persistentHealth = health;
 	}
 
 	public void moveHorizontally(double velocity) {

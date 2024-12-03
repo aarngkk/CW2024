@@ -57,7 +57,6 @@ public abstract class LevelParent extends Observable {
 		this.enemyUnits = new ArrayList<>();
 		this.userProjectiles = new ArrayList<>();
 		this.enemyProjectiles = new ArrayList<>();
-
 		this.background = new ImageView(new Image(getClass().getResource(backgroundImageName).toExternalForm()));
 		this.screenHeight = screenHeight;
 		this.screenWidth = screenWidth;
@@ -82,7 +81,7 @@ public abstract class LevelParent extends Observable {
 		initializeBackground();
 		initializePauseControls();
 		initializeFriendlyUnits();
-		levelView.showHeartDisplay();
+		levelView.showHeartDisplay(user.getHealth());
 		initializeHUD();
 		background.requestFocus();
 		return scene;
@@ -96,6 +95,7 @@ public abstract class LevelParent extends Observable {
 	public void goToNextLevel(String levelName) {
 		timeline.stop();
 		setChanged();
+		UserPlane.resetHealth(user.getHealth());
 		notifyObservers(levelName);
 	}
 
