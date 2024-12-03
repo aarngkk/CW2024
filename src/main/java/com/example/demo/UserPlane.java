@@ -27,12 +27,12 @@ public class UserPlane extends FighterPlane {
 	}
 
 	private static final double SPEED_BOOST_MULTIPLIER = 1.5;
-	private static final double BOOST_DRAIN_RATE = 1; // Energy drained per frame while boosting
-	private static final double BOOST_RECHARGE_RATE = 1.5; // Energy recharged per frame
-	private static final int MAX_BOOST_ENERGY = 100;
+	private static final double BOOST_DRAIN_RATE = 1.5; // Energy drained per frame while boosting
+	private static final double BOOST_RECHARGE_RATE = 0.5; // Energy recharged per frame
+	private static final double MAX_BOOST_ENERGY = 100;
 	private static final int BOOST_COOLDOWN_TIME = 1500; // Cooldown time in milliseconds
 
-	private int currentBoostEnergy = MAX_BOOST_ENERGY;
+	private double currentBoostEnergy = MAX_BOOST_ENERGY;
 	private boolean isSpeedBoostActive = false;
 	private long lastDepletedTime = 0; // Track the last time boost was depleted
 
@@ -215,7 +215,7 @@ public class UserPlane extends FighterPlane {
 		return MAX_BOOST_ENERGY;
 	}
 
-	public int getBoostEnergy() {
+	public double getBoostEnergy() {
 		return currentBoostEnergy;
 	}
 

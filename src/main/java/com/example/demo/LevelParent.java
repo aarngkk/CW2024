@@ -204,13 +204,7 @@ public abstract class LevelParent extends Observable {
 		} else {
 			user.move(0, false); // Stop horizontal movement
 		}
-
-		// Disable speed boost when Shift is released
-		if (!activeKeys.contains(KeyCode.SHIFT)) {
-			user.setSpeedBoost(false);
-		}
 	}
-
 
 	private void initializePauseControls() {
 		// Create a semi-transparent black overlay
@@ -246,29 +240,37 @@ public abstract class LevelParent extends Observable {
 	}
 
 	protected void initializeHUD() {
-		// Kill count text
+		initializeKillCounter();
+		initializeFiringModeText();
+		initializeBoostBar();
+	}
+
+	protected void initializeKillCounter() {
 		killCountText = new Text("Kills: 0 / " + killsToAdvance);
 		killCountText.setFont(Font.font("Trebuchet MS", 30));
 		killCountText.setFill(Color.WHITE);
 		killCountText.setX(8);
 		killCountText.setY(80);
 		root.getChildren().add(killCountText);
+	}
 
-		// Firing mode text
+	protected void initializeFiringModeText() {
 		firingModeText = new Text("Mode: SINGLE");
 		firingModeText.setFont(Font.font("Trebuchet MS", 30));
 		firingModeText.setFill(Color.WHITE);
 		firingModeText.setX(8);
-		firingModeText.setY(120);
+		firingModeText.setY(getFiringModeTextYPosition());
 		root.getChildren().add(firingModeText);
-
-		createBoostBar();
 	}
 
-	private void createBoostBar() {
+	protected double getFiringModeTextYPosition() {
+		return 120; // Default Y position of firing mode text
+	}
+
+	protected void initializeBoostBar() {
 		boostBar = new Rectangle(BOOST_BAR_WIDTH, BOOST_BAR_HEIGHT, Color.LAWNGREEN);
-		boostBar.setTranslateX(10);
-		boostBar.setTranslateY(140);
+		boostBar.setTranslateX(8);
+		boostBar.setTranslateY(getBoostBarYPosition());
 
 		// Set rounded corners
 		boostBar.setArcWidth(15);
@@ -279,6 +281,10 @@ public abstract class LevelParent extends Observable {
 		boostBar.setStrokeWidth(1);
 
 		root.getChildren().add(boostBar);
+	}
+
+	protected double getBoostBarYPosition() {
+		return 140; // Default Y position of boost bar
 	}
 
 	private void updateBoostBar() {

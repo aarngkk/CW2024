@@ -25,16 +25,20 @@ public class LevelThree extends LevelParent {
 
 	@Override
 	protected void initializeHUD() {
-		firingModeText = new Text("Mode: SINGLE");
-		firingModeText.setFont(Font.font("Trebuchet MS", 30));
-		firingModeText.setFill(Color.WHITE);
-		firingModeText.setX(8);
-		firingModeText.setY(80);
-		getRoot().getChildren().add(firingModeText);
-
+		initializeFiringModeText();
+		initializeBoostBar();
 		initializeBossHealthBar();
 	}
 
+	@Override
+	protected double getFiringModeTextYPosition() {
+		return 80; // Adjusted Y position for firing mode text
+	}
+
+	@Override
+	protected double getBoostBarYPosition() {
+		return 100; // Adjusted Y position for boost bar
+	}
 
 	@Override
 	protected void initializeFriendlyUnits() {
