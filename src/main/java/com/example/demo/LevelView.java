@@ -21,9 +21,24 @@ public class LevelView {
 		this.winImage = new WinImage(WIN_IMAGE_X_POSITION, WIN_IMAGE_Y_POSITION);
 		this.gameOverImage = new GameOverImage(LOSS_SCREEN_X_POSITION, LOSS_SCREEN_Y_POSITION);
 	}
-	
-	public void showHeartDisplay() {
-		root.getChildren().add(heartDisplay.getContainer());
+
+	/**
+	 * Dynamically displays hearts based on the current health value.
+	 * @param currentHealth The player's current health.
+	 */
+	public void showHeartDisplay(int currentHealth) {
+		// Clear any existing hearts
+		heartDisplay.clearHearts();
+
+		// Add hearts based on the current health
+		for (int i = 0; i < currentHealth; i++) {
+			heartDisplay.addHeart();
+		}
+
+		// Add the heart display to the root if not already added
+		if (!root.getChildren().contains(heartDisplay.getContainer())) {
+			root.getChildren().add(heartDisplay.getContainer());
+		}
 	}
 
 	public void showWinImage() {

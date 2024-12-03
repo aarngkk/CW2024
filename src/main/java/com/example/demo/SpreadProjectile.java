@@ -4,7 +4,7 @@ public class SpreadProjectile extends Projectile {
 
     private static final double RANGE = 300.0;
     private static final String IMAGE_NAME = "userfire.png";
-    private static final int DAMAGE = 6;
+    private static final int IMAGE_HEIGHT = 6;
     private final double velocityX;
     private final double velocityY;
     private double traveledDistance = 0.0;
@@ -17,7 +17,7 @@ public class SpreadProjectile extends Projectile {
      * @param velocityY Vertical velocity
      */
     public SpreadProjectile(double x, double y, double velocityX, double velocityY) {
-        super(IMAGE_NAME, DAMAGE, x, y);
+        super(IMAGE_NAME, IMAGE_HEIGHT, x, y);
         this.velocityX = velocityX;
         this.velocityY = velocityY;
     }

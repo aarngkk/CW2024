@@ -1,80 +1,50 @@
 package com.example.demo;
 
-import javafx.scene.control.ProgressBar;
-
 public class LevelTwo extends LevelParent {
 
-	private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/background2.gif";
-	private static final int PLAYER_INITIAL_HEALTH = 5;
-	private static final int KILLS_TO_ADVANCE = 0;
-	private final Boss boss;
-	private LevelViewLevelTwo levelView;
-	private ProgressBar bossHealthBar;
+    private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/background2.gif";
+    private static final String NEXT_LEVEL = "com.example.demo.LevelThree";
+    private static final int TOTAL_ENEMIES = 7;
+    private static final int KILLS_TO_ADVANCE = 15;
+    private static final double ENEMY_SPAWN_PROBABILITY = 0.30;
+    private static final int PLAYER_INITIAL_HEALTH = 5;
 
-	public LevelTwo(double screenHeight, double screenWidth) {
-		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH, KILLS_TO_ADVANCE);
-		boss = new Boss();
-	}
+    public LevelTwo(double screenHeight, double screenWidth) {
+        super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH, KILLS_TO_ADVANCE);
+    }
 
-	@Override
-	protected void initializeGameObjects() {
-		initializeBossHealthBar();
-	}
+    @Override
+    protected void checkIfGameOver() {
+        if (userIsDestroyed()) {
+            loseGame();
+        } else if (userHasReachedKillTarget()) {
+            goToNextLevel(NEXT_LEVEL);
+        }
+    }
 
-	@Override
-	protected void initializeFriendlyUnits() {
-		getRoot().getChildren().add(getUser());
-	}
+    @Override
+    protected void initializeFriendlyUnits() {
+        getRoot().getChildren().add(getUser());
+    }
 
-	private void initializeBossHealthBar() {
-		bossHealthBar = new ProgressBar();
-		bossHealthBar.setPrefWidth(500);
-		bossHealthBar.setPrefHeight(25);
-		bossHealthBar.getStyleClass().add("health-bar");
+    @Override
+    protected void spawnEnemyUnits() {
+        int currentNumberOfEnemies = getCurrentNumberOfEnemies();
+        for (int i = 0; i < TOTAL_ENEMIES - currentNumberOfEnemies; i++) {
+            if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
+                double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
+                ActiveActorDestructible newEnemy = new EnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
+                addEnemyUnit(newEnemy);
+            }
+        }
+    }
 
-		// Position the health bar at the top center of the screen
-		bossHealthBar.setLayoutX((getScreenWidth() - bossHealthBar.getPrefWidth()) / 2);
-		bossHealthBar.setLayoutY(30);
+    @Override
+    protected LevelView instantiateLevelView() {
+        return new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
+    }
 
-		// Set the initial value based on the boss's health
-		updateBossHealthBar();
-
-		// Add the health bar to the root
-		getRoot().getChildren().add(bossHealthBar);
-	}
-
-	private void updateBossHealthBar() {
-		// Set progress based on boss's health as a percentage
-		double healthPercentage = (double) boss.getHealth() / boss.getMaxHealth();
-		bossHealthBar.setProgress(healthPercentage);
-	}
-
-	@Override
-	protected void checkIfGameOver() {
-		if (userIsDestroyed()) {
-			loseGame();
-		}
-		else if (boss.isDestroyed()) {
-			winGame();
-		}
-	}
-
-	@Override
-	protected void spawnEnemyUnits() {
-		if (getCurrentNumberOfEnemies() == 0) {
-			addEnemyUnit(boss);
-		}
-	}
-
-	@Override
-	protected LevelView instantiateLevelView() {
-		levelView = new LevelViewLevelTwo(getRoot(), PLAYER_INITIAL_HEALTH);
-		return levelView;
-	}
-
-	@Override
-	protected void updateHUD() {
-		updateBossHealthBar();;
-	}
-
+    private boolean userHasReachedKillTarget() {
+        return getUser().getNumberOfKills() >= KILLS_TO_ADVANCE;
+    }
 }

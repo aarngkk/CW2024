@@ -29,9 +29,14 @@
     -fx-border-color: #444;
 }
 
-.health-bar {
+.normal-bar {
     -fx-accent: red;
     -fx-control-inner-background: white;
     -fx-background-color: white;
 }
 
+.shielded-bar {
+    -fx-accent: grey;
+    -fx-control-inner-background: white;
+    -fx-background-color: white;
+}

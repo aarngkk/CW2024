@@ -7,6 +7,7 @@ import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.shape.Rectangle;
@@ -28,6 +29,7 @@ public abstract class LevelParent extends Observable {
 	private final double screenWidth;
 	private final double enemyMaximumYPosition;
 	private final int killsToAdvance;
+	private final GaussianBlur blurEffect = new GaussianBlur(10);
 
 	private final Group root;
 	private final Timeline timeline;
@@ -47,9 +49,11 @@ public abstract class LevelParent extends Observable {
 	private Button pauseButton;
 	private Text pausedText;
 	private Text killCountText;
-	private Text firingModeText;
+	private Rectangle pauseOverlay;
 	private EventHandler<KeyEvent> escapeKeyHandler;
 	private Rectangle boostBar;
+	protected Text firingModeText;
+
 
 	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth, int killsToAdvance) {
 		this.root = new Group();
@@ -61,7 +65,6 @@ public abstract class LevelParent extends Observable {
 		this.enemyUnits = new ArrayList<>();
 		this.userProjectiles = new ArrayList<>();
 		this.enemyProjectiles = new ArrayList<>();
-
 		this.background = new ImageView(new Image(getClass().getResource(backgroundImageName).toExternalForm()));
 		this.screenHeight = screenHeight;
 		this.screenWidth = screenWidth;
@@ -72,8 +75,6 @@ public abstract class LevelParent extends Observable {
 		initializeTimeline();
 		friendlyUnits.add(user);
 	}
-
-	protected abstract void initializeGameObjects();
 
 	protected abstract void initializeFriendlyUnits();
 
@@ -86,11 +87,10 @@ public abstract class LevelParent extends Observable {
 	public Scene initializeScene() {
 		scene.getStylesheets().add(getClass().getResource("/com/example/demo/css/styles.css").toExternalForm());
 		initializeBackground();
-		initializePauseControls();
 		initializeFriendlyUnits();
-		initializeGameObjects();
-		levelView.showHeartDisplay();
+		levelView.showHeartDisplay(user.getHealth());
 		initializeHUD();
+		initializePauseControls();
 		background.requestFocus();
 		return scene;
 	}
@@ -103,6 +103,7 @@ public abstract class LevelParent extends Observable {
 	public void goToNextLevel(String levelName) {
 		timeline.stop();
 		setChanged();
+		UserPlane.resetHealth(user.getHealth());
 		notifyObservers(levelName);
 	}
 
@@ -177,6 +178,10 @@ public abstract class LevelParent extends Observable {
 					firingModeText.setText("Mode: SPREAD");
 				}
 				case SHIFT -> user.setSpeedBoost(true); // Enable speed boost
+				case DIGIT3 -> {
+					user.setFiringMode(UserPlane.FiringMode.HEAVY);
+					firingModeText.setText("Mode: HEAVY");
+				}
 			}
 		}
 	}
@@ -208,6 +213,12 @@ public abstract class LevelParent extends Observable {
 
 
 	private void initializePauseControls() {
+		// Create a semi-transparent black overlay
+		pauseOverlay = new Rectangle(screenWidth, screenHeight, Color.BLACK);
+		pauseOverlay.setOpacity(0.5); // Set transparency
+		pauseOverlay.setVisible(false); // Initially hidden
+		root.getChildren().add(pauseOverlay);
+
 		// Initialize pause text
 		pausedText = new Text("PAUSED");
 		pausedText.setFont(Font.font("Trebuchet MS", 120)); // Set font and size
@@ -234,7 +245,7 @@ public abstract class LevelParent extends Observable {
 		root.getChildren().add(pauseButtonContainer);
 	}
 
-	private void initializeHUD() {
+	protected void initializeHUD() {
 		// Kill count text
 		killCountText = new Text("Kills: 0 / " + killsToAdvance);
 		killCountText.setFont(Font.font("Trebuchet MS", 30));
@@ -290,10 +301,26 @@ public abstract class LevelParent extends Observable {
 			resumeGame();  // Resume the game if it's currently paused
 			pauseButton.setText("Pause"); // Update button text to "Pause"
 			pausedText.setVisible(false); // Hide "PAUSED" text
+			pauseOverlay.setVisible(false); // Hide overlay
+			// Remove blur effect from all elements
+			root.getChildren().forEach(node -> node.setEffect(null));
 		} else {
 			pauseGame();   // Pause the game if it's running
 			pauseButton.setText("Unpause"); // Update button text to "Unpause"
 			pausedText.setVisible(true); // Show "PAUSED" text
+			pauseOverlay.setVisible(true); // Show overlay
+
+			// Apply blur effect to all non-pause elements
+			root.getChildren().forEach(node -> {
+				if (node != pauseOverlay && node != pausedText && node != pauseButton.getParent()) {
+					node.setEffect(blurEffect);
+				}
+			});
+
+			// Bring pause elements to the front
+			pauseOverlay.toFront();
+			pausedText.toFront();
+			pauseButton.getParent().toFront();
 		}
 	}
 
@@ -391,11 +418,14 @@ public abstract class LevelParent extends Observable {
 	}
 
 	protected void updateHUD() {
-		for (int i = 0; i < currentNumberOfEnemies - enemyUnits.size(); i++) {
-			user.incrementKillCount();
+		if (killCountText != null) {
+			for (int i = 0; i < currentNumberOfEnemies - enemyUnits.size(); i++) {
+				user.incrementKillCount();
+			}
+			killCountText.setText("Kills: " + user.getNumberOfKills() + " / " + killsToAdvance);
 		}
-		killCountText.setText("Kills: " + user.getNumberOfKills() + " / " + killsToAdvance);
 	}
+
 
 	private boolean enemyHasPenetratedDefenses(ActiveActorDestructible enemy) {
 		return Math.abs(enemy.getTranslateX()) > screenWidth;
@@ -462,10 +492,6 @@ public abstract class LevelParent extends Observable {
 
 	protected boolean userIsDestroyed() {
 		return user.isDestroyed();
-	}
-
-	protected Text getKillCountText() {
-		return killCountText;
 	}
 
 	private void updateNumberOfEnemies() {
