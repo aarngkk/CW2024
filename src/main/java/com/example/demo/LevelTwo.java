@@ -1,6 +1,9 @@
 package com.example.demo;
 
 import javafx.scene.control.ProgressBar;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class LevelTwo extends LevelParent {
 
@@ -17,9 +20,17 @@ public class LevelTwo extends LevelParent {
 	}
 
 	@Override
-	protected void initializeGameObjects() {
+	protected void initializeHUD() {
+		firingModeText = new Text("Mode: SINGLE");
+		firingModeText.setFont(Font.font("Trebuchet MS", 30));
+		firingModeText.setFill(Color.WHITE);
+		firingModeText.setX(8);
+		firingModeText.setY(80);
+		getRoot().getChildren().add(firingModeText);
+
 		initializeBossHealthBar();
 	}
+
 
 	@Override
 	protected void initializeFriendlyUnits() {
@@ -47,6 +58,15 @@ public class LevelTwo extends LevelParent {
 		// Set progress based on boss's health as a percentage
 		double healthPercentage = (double) boss.getHealth() / boss.getMaxHealth();
 		bossHealthBar.setProgress(healthPercentage);
+
+		bossHealthBar.getStyleClass().removeAll("normal-bar", "shielded-bar");
+
+		// Set the appropriate CSS when the boss is shielded
+		if (boss.getIsShielded()) {
+			bossHealthBar.getStyleClass().add("shielded-bar");
+		} else {
+			bossHealthBar.getStyleClass().add("normal-bar");
+		}
 	}
 
 	@Override

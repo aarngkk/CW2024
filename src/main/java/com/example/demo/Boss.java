@@ -9,7 +9,6 @@ public class Boss extends FighterPlane {
 	private static final double INITIAL_Y_POSITION = 400;
 	private static final double PROJECTILE_Y_POSITION_OFFSET = 35.0;
 	private static final double BOSS_FIRE_RATE = .04;
-	private static final double BOSS_SHIELD_PROBABILITY = .002;
 	private static final int IMAGE_HEIGHT = 85;
 	private static final int VERTICAL_VELOCITY = 8;
 	private static final int HEALTH = 100;
@@ -18,9 +17,11 @@ public class Boss extends FighterPlane {
 	private static final int MAX_FRAMES_WITH_SAME_MOVE = 10;
 	private static final int Y_POSITION_UPPER_BOUND = -50;
 	private static final int Y_POSITION_LOWER_BOUND = 700;
-	private static final int MAX_FRAMES_WITH_SHIELD = 500;
+	private static final int MAX_FRAMES_WITH_SHIELD = 250;
 	private final List<Integer> movePattern;
 	private boolean isShielded;
+	private boolean shieldActivatedAt50;
+	private boolean shieldActivatedAt20;
 	private int consecutiveMovesInSameDirection;
 	private int indexOfCurrentMove;
 	private int framesWithShieldActivated;
@@ -32,6 +33,8 @@ public class Boss extends FighterPlane {
 		indexOfCurrentMove = 0;
 		framesWithShieldActivated = 0;
 		isShielded = false;
+		shieldActivatedAt50 = false;
+		shieldActivatedAt20 = false;
 		initializeMovePattern();
 	}
 
@@ -101,7 +104,16 @@ public class Boss extends FighterPlane {
 	}
 
 	private boolean shieldShouldBeActivated() {
-		return Math.random() < BOSS_SHIELD_PROBABILITY;
+		int currentHealth = getHealth();
+		if (!shieldActivatedAt50 && currentHealth <= HEALTH * 0.5) {
+			shieldActivatedAt50 = true;
+			return true;
+		}
+		if (!shieldActivatedAt20 && currentHealth <= HEALTH * 0.2) {
+			shieldActivatedAt20 = true;
+			return true;
+		}
+		return false;
 	}
 
 	private boolean shieldExhausted() {
@@ -115,6 +127,10 @@ public class Boss extends FighterPlane {
 	private void deactivateShield() {
 		isShielded = false;
 		framesWithShieldActivated = 0;
+	}
+
+	public boolean getIsShielded() {
+		return isShielded;
 	}
 
 }

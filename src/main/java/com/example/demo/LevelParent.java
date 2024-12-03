@@ -44,8 +44,8 @@ public abstract class LevelParent extends Observable {
 	private Button pauseButton;
 	private Text pausedText;
 	private Text killCountText;
-	private Text firingModeText;
 	private EventHandler<KeyEvent> escapeKeyHandler;
+	protected Text firingModeText;
 
 	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth, int killsToAdvance) {
 		this.root = new Group();
@@ -69,8 +69,6 @@ public abstract class LevelParent extends Observable {
 		friendlyUnits.add(user);
 	}
 
-	protected abstract void initializeGameObjects();
-
 	protected abstract void initializeFriendlyUnits();
 
 	protected abstract void checkIfGameOver();
@@ -84,7 +82,6 @@ public abstract class LevelParent extends Observable {
 		initializeBackground();
 		initializePauseControls();
 		initializeFriendlyUnits();
-		initializeGameObjects();
 		levelView.showHeartDisplay();
 		initializeHUD();
 		background.requestFocus();
@@ -217,7 +214,7 @@ public abstract class LevelParent extends Observable {
 		root.getChildren().add(pauseButtonContainer);
 	}
 
-	private void initializeHUD() {
+	protected void initializeHUD() {
 		// Kill count text
 		killCountText = new Text("Kills: 0 / " + killsToAdvance);
 		killCountText.setFont(Font.font("Trebuchet MS", 30));
@@ -342,11 +339,14 @@ public abstract class LevelParent extends Observable {
 	}
 
 	protected void updateHUD() {
-		for (int i = 0; i < currentNumberOfEnemies - enemyUnits.size(); i++) {
-			user.incrementKillCount();
+		if (killCountText != null) {
+			for (int i = 0; i < currentNumberOfEnemies - enemyUnits.size(); i++) {
+				user.incrementKillCount();
+			}
+			killCountText.setText("Kills: " + user.getNumberOfKills() + " / " + killsToAdvance);
 		}
-		killCountText.setText("Kills: " + user.getNumberOfKills() + " / " + killsToAdvance);
 	}
+
 
 	private boolean enemyHasPenetratedDefenses(ActiveActorDestructible enemy) {
 		return Math.abs(enemy.getTranslateX()) > screenWidth;
@@ -413,10 +413,6 @@ public abstract class LevelParent extends Observable {
 
 	protected boolean userIsDestroyed() {
 		return user.isDestroyed();
-	}
-
-	protected Text getKillCountText() {
-		return killCountText;
 	}
 
 	private void updateNumberOfEnemies() {
