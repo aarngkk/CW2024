@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import javafx.scene.transform.Rotate;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class UserPlane extends FighterPlane {
 	private double currentBoostEnergy = MAX_BOOST_ENERGY;
 	private boolean isSpeedBoostActive = false;
 	private long lastDepletedTime = 0; // Track the last time boost was depleted
+	private final Rotate rotateEffect = new Rotate();
 
 	private FiringMode currentFiringMode = FiringMode.SINGLE;
 	private static int persistentHealth;
@@ -170,6 +172,19 @@ public class UserPlane extends FighterPlane {
 		horizontalVelocity = velocity; // Set the velocity
 	}
 
+	private void updateBoostEffects() {
+		if (isSpeedBoostActive) {
+			// Apply rotation for speed boost
+			rotateEffect.setAngle(8); // Slight rotation when speed boost is active
+			this.getTransforms().clear();
+			this.getTransforms().add(rotateEffect); // Apply the rotation
+		} else {
+			// Reset the rotation when speed boost is off
+			rotateEffect.setAngle(0);
+			this.getTransforms().clear(); // Remove any transform when boost is inactive
+		}
+	}
+
 	public void setSpeedBoost(boolean isActive) {
 		if (isActive && currentBoostEnergy > 0) {
 			isSpeedBoostActive = true;
@@ -177,6 +192,8 @@ public class UserPlane extends FighterPlane {
 			isSpeedBoostActive = false;
 			lastDepletedTime = System.currentTimeMillis(); // Track the time when boost was depleted
 		}
+
+		updateBoostEffects(); // Update plane speed boost effects
 	}
 
 	private void rechargeBoostEnergy() {
