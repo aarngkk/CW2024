@@ -1,5 +1,6 @@
 .vbox {
-    -fx-background-color: linear-gradient(to bottom right, 	#1c96c5, #cfecf7);
+    -fx-background-image: url("../images/mainmenubg.jpg");
+    -fx-background-size: cover;
 }
 
 .title {
