@@ -6,6 +6,15 @@ import java.util.ArrayList;
 
 public class UserPlane extends FighterPlane {
 
+	private static final String DAMAGED_SOUND = "/com/example/demo/audio/userdamaged.mp3";
+	private static final String DAMAGED_BEEPING_SOUND = "/com/example/demo/audio/userbeeping.mp3";
+	private static final String EQUIP_SINGLE_SOUND = "/com/example/demo/audio/equipsingle.wav";
+	private static final String EQUIP_SPREAD_SOUND = "/com/example/demo/audio/equipspread.mp3";
+	private static final String EQUIP_HEAVY_SOUND = "/com/example/demo/audio/equipheavy.mp3";
+	private static final String SINGLE_FIRE_SOUND = "/com/example/demo/audio/userfire.wav";
+	private static final String SPREAD_FIRE_SOUND = "/com/example/demo/audio/userspreadfire.wav";
+	private static final String HEAVY_FIRE_SOUND = "/com/example/demo/audio/userheavyfire.mp3";
+	private static final String SPEED_BOOST_SOUND = "/com/example/demo/audio/userspeedboost.mp3";
 	private static final String IMAGE_NAME = "userplane.png";
 	private static final double X_LEFT_BOUND = 0.0;
 	private static final double X_RIGHT_BOUND = 1000.0;
@@ -41,9 +50,46 @@ public class UserPlane extends FighterPlane {
 	private FiringMode currentFiringMode = FiringMode.SINGLE;
 	private static int persistentHealth;
 
+	private SoundEffectPlayer damagedImpactSound;
+	private SoundEffectPlayer damagedBeepingSound;
+	private SoundEffectPlayer equipSingleSound;
+	private SoundEffectPlayer equipSpreadSound;
+	private SoundEffectPlayer equipHeavySound;
+	private SoundEffectPlayer fireSound;
+	private SoundEffectPlayer spreadFireSound;
+	private SoundEffectPlayer heavyFireSound;
+	private SoundEffectPlayer speedBoostSound;
+
 	public UserPlane(int initialHealth) {
 		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, persistentHealth > 0 ? persistentHealth : initialHealth);
 		persistentHealth = getHealth();
+
+		fireSound = new SoundEffectPlayer(SINGLE_FIRE_SOUND);
+		fireSound.setVolume(0.15);
+
+		spreadFireSound = new SoundEffectPlayer(SPREAD_FIRE_SOUND);
+		spreadFireSound.setVolume(0.15);
+
+		heavyFireSound = new SoundEffectPlayer(HEAVY_FIRE_SOUND);
+		heavyFireSound.setVolume(0.3);
+
+		speedBoostSound = new SoundEffectPlayer(SPEED_BOOST_SOUND);
+		speedBoostSound.setVolume(0.1);
+
+		equipSingleSound = new SoundEffectPlayer(EQUIP_SINGLE_SOUND);
+		equipSingleSound.setVolume(0.9);
+
+		equipSpreadSound = new SoundEffectPlayer(EQUIP_SPREAD_SOUND);
+		equipSpreadSound.setVolume(0.15);
+
+		equipHeavySound = new SoundEffectPlayer(EQUIP_HEAVY_SOUND);
+		equipHeavySound.setVolume(0.8);
+
+		damagedBeepingSound = new SoundEffectPlayer(DAMAGED_BEEPING_SOUND);
+		damagedBeepingSound.setVolume(0.2);
+
+		damagedImpactSound = new SoundEffectPlayer(DAMAGED_SOUND);
+		damagedImpactSound.setVolume(0.3);
 	}
 
 	@Override
@@ -83,6 +129,8 @@ public class UserPlane extends FighterPlane {
 			// Update last fired time
 			lastFiredTime = currentTime;
 
+			fireSound.playSound();
+
 			return new UserProjectile(projectileX, projectileY);
 		}
 
@@ -108,6 +156,8 @@ public class UserPlane extends FighterPlane {
 			// Update last fired time
 			lastFiredTime = currentTime;
 
+			spreadFireSound.playSound();
+
 			return spreadBullets;
 		}
 
@@ -123,6 +173,8 @@ public class UserPlane extends FighterPlane {
 			double projectileY = getTranslateY() + Y_UPPER_BOUND_OFFSET + getBoundsInLocal().getHeight() - 10;
 
 			lastFiredTime = currentTime;
+
+			heavyFireSound.playSound();
 
 			return List.of(new HeavyProjectile(projectileX, projectileY));
 		}
@@ -143,7 +195,15 @@ public class UserPlane extends FighterPlane {
 	}
 
 	public void setFiringMode(FiringMode mode) {
-		this.currentFiringMode = mode;
+		if (this.currentFiringMode != mode) {
+			this.currentFiringMode = mode;
+
+			switch (mode) {
+				case SINGLE -> equipSingleSound.playSound();
+				case SPREAD -> equipSpreadSound.playSound();
+				case HEAVY -> equipHeavySound.playSound();
+			}
+		}
 	}
 
 	public FiringMode getFiringMode() {
@@ -162,6 +222,9 @@ public class UserPlane extends FighterPlane {
 	public void takeDamage() {
 		super.takeDamage();
 		persistentHealth = getHealth(); // Update persistent health
+		damagedBeepingSound.stopSound();
+		damagedBeepingSound.playSound();
+		damagedImpactSound.playSound();
 	}
 
 	public static void resetHealth(int health) {
@@ -187,8 +250,14 @@ public class UserPlane extends FighterPlane {
 
 	public void setSpeedBoost(boolean isActive) {
 		if (isActive && currentBoostEnergy > 0) {
+			if (!isSpeedBoostActive) {
+				speedBoostSound.playSound();
+			}
 			isSpeedBoostActive = true;
 		} else {
+			if (isSpeedBoostActive) {
+				speedBoostSound.stopSound();
+			}
 			isSpeedBoostActive = false;
 			lastDepletedTime = System.currentTimeMillis(); // Track the time when boost was depleted
 		}

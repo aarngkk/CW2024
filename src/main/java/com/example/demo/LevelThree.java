@@ -1,12 +1,10 @@
 package com.example.demo;
 
 import javafx.scene.control.ProgressBar;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 public class LevelThree extends LevelParent {
 
+	private static final String BOSS_LEVEL_MUSIC = "/com/example/demo/audio/bosslevel.mp3";
 	private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/background2.gif";
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 	private static final int KILLS_TO_ADVANCE = 0;
@@ -21,6 +19,8 @@ public class LevelThree extends LevelParent {
 	public LevelThree(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH, KILLS_TO_ADVANCE);
 		boss = new Boss();
+
+		switchMusic(BOSS_LEVEL_MUSIC, true);
 	}
 
 	@Override

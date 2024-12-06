@@ -4,10 +4,12 @@ import java.util.*;
 
 public class Boss extends FighterPlane {
 
+	private static final String BOSS_FIRE_SOUND = "/com/example/demo/audio/bossfire.mp3";
+	private static final String SHIELD_ACTIVATION_SOUND = "/com/example/demo/audio/bossshieldactivate.mp3";
 	private static final String IMAGE_NAME = "bossplane.png";
 	private static final double INITIAL_X_POSITION = 1150.0;
 	private static final double INITIAL_Y_POSITION = 400;
-	private static final double PROJECTILE_Y_POSITION_OFFSET = 35.0;
+	private static final double PROJECTILE_Y_POSITION_OFFSET = 10;
 	private static final double BOSS_FIRE_RATE = 0.04;
 	private static final double INCREASED_FIRE_RATE = 0.08;
 	private static final int IMAGE_HEIGHT = 85;
@@ -28,6 +30,9 @@ public class Boss extends FighterPlane {
 	private int consecutiveMovesInSameDirection;
 	private int indexOfCurrentMove;
 	private int framesWithShieldActivated;
+	private SoundEffectPlayer fireSound;
+	private SoundEffectPlayer shieldSound;
+
 
 	public Boss() {
 		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, HEALTH);
@@ -40,6 +45,12 @@ public class Boss extends FighterPlane {
 		shieldActivatedAt20 = false;
 		fireRateAndSpeedBoosted = false;
 		initializeMovePattern();
+
+		shieldSound = new SoundEffectPlayer(SHIELD_ACTIVATION_SOUND);
+		shieldSound.setVolume(0.4);
+
+		fireSound = new SoundEffectPlayer(BOSS_FIRE_SOUND);
+		fireSound.setVolume(0.1);
 	}
 
 	@Override
@@ -61,7 +72,11 @@ public class Boss extends FighterPlane {
 
 	@Override
 	public ActiveActorDestructible fireProjectile() {
-		return bossFiresInCurrentFrame() ? new BossProjectile(getProjectileInitialPosition()) : null;
+		if (bossFiresInCurrentFrame()) {
+			fireSound.playSound();
+			return new BossProjectile(getProjectileInitialPosition());
+		}
+		return null;
 	}
 	
 	@Override
@@ -146,6 +161,7 @@ public class Boss extends FighterPlane {
 
 	private void activateShield() {
 		isShielded = true;
+		shieldSound.playSound();
 	}
 
 	private void deactivateShield() {

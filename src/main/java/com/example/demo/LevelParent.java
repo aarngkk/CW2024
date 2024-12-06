@@ -21,6 +21,9 @@ import javafx.scene.text.Font;
 
 public abstract class LevelParent extends Observable {
 
+	private static final String LEVEL_MUSIC = "/com/example/demo/audio/levelmusic.mp3";
+	private static final String WON_GAME_MUSIC = "/com/example/demo/audio/wongame.mp3";
+	private static final String LOST_GAME_MUSIC = "/com/example/demo/audio/lostgame.mp3";
 	private static final double SCREEN_HEIGHT_ADJUSTMENT = 100;
 	private static final int MILLISECOND_DELAY = 50;
 	private static final double BOOST_BAR_WIDTH = 200;
@@ -53,7 +56,7 @@ public abstract class LevelParent extends Observable {
 	private EventHandler<KeyEvent> escapeKeyHandler;
 	private Rectangle boostBar;
 	protected Text firingModeText;
-
+	private MusicPlayer musicPlayer;
 
 	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth, int killsToAdvance) {
 		this.root = new Group();
@@ -71,6 +74,8 @@ public abstract class LevelParent extends Observable {
 		this.enemyMaximumYPosition = screenHeight - SCREEN_HEIGHT_ADJUSTMENT;
 		this.levelView = instantiateLevelView();
 		this.currentNumberOfEnemies = 0;
+
+		switchMusic(LEVEL_MUSIC, true);
 
 		initializeTimeline();
 		friendlyUnits.add(user);
@@ -308,8 +313,7 @@ public abstract class LevelParent extends Observable {
 			pauseButton.setText("Pause"); // Update button text to "Pause"
 			pausedText.setVisible(false); // Hide "PAUSED" text
 			pauseOverlay.setVisible(false); // Hide overlay
-			// Remove blur effect from all elements
-			root.getChildren().forEach(node -> node.setEffect(null));
+			root.getChildren().forEach(node -> node.setEffect(null)); // Remove blur effect from all elements
 		} else {
 			pauseGame();   // Pause the game if it's running
 			pauseButton.setText("Unpause"); // Update button text to "Unpause"
@@ -334,12 +338,18 @@ public abstract class LevelParent extends Observable {
 	private void pauseGame() {
 		isPaused = true;
 		timeline.pause();  // Stop the game loop
+
+		// Fade out and pause music
+		musicPlayer.fadeOutMusic(1.0, 0.05, null);
 	}
 
 	// Method to resume the game
 	private void resumeGame() {
 		isPaused = false;
 		timeline.play();  // Restart the game loop
+
+		// Fade music in
+		musicPlayer.fadeInMusic(1.0, 0.2);
 		background.requestFocus();
 
 		// Re-enable ESC key functionality
@@ -440,6 +450,7 @@ public abstract class LevelParent extends Observable {
 	protected void winGame() {
 		timeline.stop();
 		levelView.showWinImage();
+		switchMusic(WON_GAME_MUSIC, false);
 
 		// Remove the pause button from view
 		if (pauseButton != null && root.getChildren().contains(pauseButton.getParent())) {
@@ -453,6 +464,7 @@ public abstract class LevelParent extends Observable {
 	protected void loseGame() {
 		timeline.stop();
 		levelView.showGameOverImage();
+		switchMusic(LOST_GAME_MUSIC, false);
 
 		// Remove the pause button from view
 		if (pauseButton != null && root.getChildren().contains(pauseButton.getParent())) {
@@ -469,6 +481,14 @@ public abstract class LevelParent extends Observable {
 
 	private void enableEscapeKey() {
 		background.addEventHandler(KeyEvent.KEY_PRESSED, escapeKeyHandler);
+	}
+
+	protected void switchMusic(String newMusicFile, boolean shouldLoop) {
+		if (musicPlayer != null) {
+			musicPlayer.stopMusic(); // Stop the current music
+		}
+		musicPlayer = MusicPlayer.getInstance(newMusicFile);
+		musicPlayer.playMusic(shouldLoop); // Play the new music
 	}
 
 	protected UserPlane getUser() {
