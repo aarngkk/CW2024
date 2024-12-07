@@ -9,10 +9,10 @@ public class Boss extends FighterPlane {
 	private static final String IMAGE_NAME = "bossplane.png";
 	private static final double INITIAL_X_POSITION = 1150.0;
 	private static final double INITIAL_Y_POSITION = 400;
-	private static final double PROJECTILE_Y_POSITION_OFFSET = 10;
+	private static final double PROJECTILE_Y_POSITION_OFFSET = 40;
 	private static final double BOSS_FIRE_RATE = 0.04;
 	private static final double INCREASED_FIRE_RATE = 0.08;
-	private static final int IMAGE_HEIGHT = 85;
+	private static final int IMAGE_HEIGHT = 130;
 	private static final int VERTICAL_VELOCITY = 8;
 	private static final int INCREASED_VERTICAL_VELOCITY = 12;
 	private static final int HEALTH = 100;

@@ -6,7 +6,7 @@ public class LevelTwo extends LevelParent {
     private static final String NEXT_LEVEL = "com.example.demo.LevelThree";
     private static final int TOTAL_ENEMIES = 7;
     private static final int KILLS_TO_ADVANCE = 15;
-    private static final double ENEMY_SPAWN_PROBABILITY = 0.30;
+    private static final double ENEMY_SPAWN_PROBABILITY = 0.0175;
     private static final int PLAYER_INITIAL_HEALTH = 5;
 
     public LevelTwo(double screenHeight, double screenWidth) {
@@ -33,8 +33,17 @@ public class LevelTwo extends LevelParent {
         for (int i = 0; i < TOTAL_ENEMIES - currentNumberOfEnemies; i++) {
             if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
                 double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
-                ActiveActorDestructible newEnemy = new EnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
-                addEnemyUnit(newEnemy);
+                double regularEnemySpawnProbability = Math.random();
+
+                if (regularEnemySpawnProbability < 0.8) {
+                    // Spawn a regular enemy
+                    ActiveActorDestructible newEnemy = new EnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
+                    addEnemyUnit(newEnemy);
+                } else {
+                    // Spawn an advanced enemy
+                    ActiveActorDestructible advancedEnemy = new AdvancedEnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
+                    addEnemyUnit(advancedEnemy);
+                }
             }
         }
     }

@@ -9,7 +9,7 @@ public class LevelThree extends LevelParent {
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 	private static final int KILLS_TO_ADVANCE = 0;
 	private static final int INITIAL_TOTAL_ENEMIES = 2;
-	private static final double INITIAL_ENEMY_SPAWN_PROBABILITY = 0.10;
+	private static final double INITIAL_ENEMY_SPAWN_PROBABILITY = 0.02;
 	private int totalEnemies = INITIAL_TOTAL_ENEMIES;
 	private double enemySpawnProbability = INITIAL_ENEMY_SPAWN_PROBABILITY;
 	private final Boss boss;
@@ -97,13 +97,22 @@ public class LevelThree extends LevelParent {
 			addEnemyUnit(boss);
 		}
 
-		// Spawn regular enemy planes
+		// Spawn enemy planes
 		int currentNumberOfEnemies = getCurrentNumberOfEnemies() - 1;
 		for (int i = 0; i < totalEnemies - currentNumberOfEnemies; i++) {
 			if (Math.random() < enemySpawnProbability) {
 				double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
-				ActiveActorDestructible newEnemy = new EnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
-				addEnemyUnit(newEnemy);
+				double spawnProbability = Math.random();
+
+				if (spawnProbability < 0.65) {
+					// Spawn a regular enemy
+					ActiveActorDestructible newEnemy = new EnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
+					addEnemyUnit(newEnemy);
+				} else {
+					// Spawn an advanced enemy
+					ActiveActorDestructible advancedEnemy = new AdvancedEnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
+					addEnemyUnit(advancedEnemy);
+				}
 			}
 		}
 	}
@@ -115,11 +124,11 @@ public class LevelThree extends LevelParent {
 		if (bossHealthPercentage <= 0.2) {
 			// Spawn even more enemies at 20% health
 			totalEnemies = 4;  // Increase the total enemies even more
-			enemySpawnProbability = 0.2;  // Increase enemy spawn probability more
+			enemySpawnProbability = 0.025;  // Increase enemy spawn probability more
 		} else if (bossHealthPercentage <= 0.5) {
 			// Spawn more enemies at 50% health
 			totalEnemies = 3;  // Increase the total enemies
-			enemySpawnProbability = 0.15;  // Increase enemy spawn probability slightly
+			enemySpawnProbability = 0.0225;  // Increase enemy spawn probability slightly
 		} else {
 			// Default values above 50% health
 			totalEnemies = INITIAL_TOTAL_ENEMIES;

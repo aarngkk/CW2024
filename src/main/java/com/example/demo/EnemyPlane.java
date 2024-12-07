@@ -10,9 +10,9 @@ public class EnemyPlane extends FighterPlane {
 	private static final double PROJECTILE_Y_POSITION_OFFSET = 18;
 	private static final int INITIAL_HEALTH = 3;
 	private static final double FIRE_RATE = .01;
-	private static final SoundEffectPlayer sharedFireSound = new SoundEffectPlayer(ENEMY_FIRE_SOUND);
+	private static final SoundEffectPlayer fireSound = new SoundEffectPlayer(ENEMY_FIRE_SOUND);
 	static {
-		sharedFireSound.setVolume(0.07);
+		fireSound.setVolume(0.07);
 	}
 
 	public EnemyPlane(double initialXPos, double initialYPos) {
@@ -29,7 +29,7 @@ public class EnemyPlane extends FighterPlane {
 		if (Math.random() < FIRE_RATE) {
 			double projectileXPosition = getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET);
 			double projectileYPostion = getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET);
-			sharedFireSound.playSound();
+			fireSound.playSound();
 			return new EnemyProjectile(projectileXPosition, projectileYPostion);
 		}
 		return null;

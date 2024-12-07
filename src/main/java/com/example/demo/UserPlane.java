@@ -78,7 +78,7 @@ public class UserPlane extends FighterPlane {
 		speedBoostSound.setVolume(0.1);
 
 		equipSingleSound = new SoundEffectPlayer(EQUIP_SINGLE_SOUND);
-		equipSingleSound.setVolume(0.9);
+		equipSingleSound.setVolume(0.5);
 
 		equipSpreadSound = new SoundEffectPlayer(EQUIP_SPREAD_SOUND);
 		equipSpreadSound.setVolume(0.15);
