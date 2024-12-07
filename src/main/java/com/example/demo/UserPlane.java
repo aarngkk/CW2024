@@ -27,6 +27,7 @@ public class UserPlane extends FighterPlane {
 	private static final int HORIZONTAL_VELOCITY = 8;
 	private static final int VERTICAL_VELOCITY = 8;
 	private static final long FIRE_RATE = 100; // Fire rate in milliseconds
+	private static final long SPREAD_FIRE_RATE = 200;
 	private static final long HEAVY_FIRE_RATE = 1000;
 	private long lastFiredTime = 0; // Stores the last time the player fired a projectile
 	private int velocityMultiplierY = 0;
@@ -143,7 +144,7 @@ public class UserPlane extends FighterPlane {
 
 
 		// Check if enough time has passed since the last shot
-		if (currentTime - lastFiredTime >= FIRE_RATE) {
+		if (currentTime - lastFiredTime >= SPREAD_FIRE_RATE) {
 			// Fire the spread projectiles
 			List<ActiveActorDestructible> spreadBullets = new ArrayList<>();
 			double baseX = getTranslateX() + getBoundsInLocal().getWidth();

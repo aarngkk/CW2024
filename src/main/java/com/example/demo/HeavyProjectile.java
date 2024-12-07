@@ -6,7 +6,7 @@ public class HeavyProjectile extends Projectile {
     private static final int IMAGE_HEIGHT = 50;
     private static final double HORIZONTAL_VELOCITY = 8;
     private static final double VERTICAL_VELOCITY = 10;
-    private static final int PROJECTILE_HEALTH = 2;
+    private static final int PROJECTILE_HEALTH = 6;
     private int health;
 
     public HeavyProjectile(double initialXPos, double initialYPos) {

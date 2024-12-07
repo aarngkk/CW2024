@@ -8,7 +8,7 @@ public class EnemyPlane extends FighterPlane {
 	private static final int HORIZONTAL_VELOCITY = -6;
 	private static final double PROJECTILE_X_POSITION_OFFSET = -40;
 	private static final double PROJECTILE_Y_POSITION_OFFSET = 18;
-	private static final int INITIAL_HEALTH = 1;
+	private static final int INITIAL_HEALTH = 3;
 	private static final double FIRE_RATE = .01;
 	private static final SoundEffectPlayer sharedFireSound = new SoundEffectPlayer(ENEMY_FIRE_SOUND);
 	static {
