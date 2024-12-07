@@ -5,7 +5,7 @@
 
 .title {
     -fx-font-family: "Georgia";
-    -fx-font-size: 180px;
+    -fx-font-size: 210px;
     -fx-text-fill: #ffffff;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0, 0, 2);
 }
@@ -13,11 +13,11 @@
 .button {
     -fx-background-color: #333;
     -fx-text-fill: white;
-    -fx-font-size: 30px;
+    -fx-font-size: 40px;
     -fx-border-color: #888;
     -fx-border-width: 2px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
 }
 
 .button:hover {

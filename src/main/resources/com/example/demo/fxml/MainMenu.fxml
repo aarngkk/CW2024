@@ -16,12 +16,12 @@
             <Font name="Georgia" size="180.0" />
          </font>
       </Label>
-      <Button fx:id="startButton" mnemonicParsing="false" onAction="#startGame" prefHeight="70.0" prefWidth="210.0" stylesheets="@../css/styles.css" text="Start Game">
+      <Button fx:id="startButton" mnemonicParsing="false" onAction="#startGame" prefHeight="100.0" prefWidth="300.0" stylesheets="@../css/styles.css" text="Start Game">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Button fx:id="exitButton" mnemonicParsing="false" onAction="#quitGame" prefHeight="70.0" prefWidth="210.0" stylesheets="@../css/styles.css" text="Quit">
+      <Button fx:id="exitButton" mnemonicParsing="false" onAction="#quitGame" prefHeight="100.0" prefWidth="300.0" stylesheets="@../css/styles.css" text="Quit">
          <font>
             <Font size="30.0" />
          </font>

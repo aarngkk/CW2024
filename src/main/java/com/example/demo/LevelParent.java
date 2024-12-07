@@ -10,7 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
@@ -49,9 +51,9 @@ public abstract class LevelParent extends Observable {
 	private int currentNumberOfEnemies;
 	private LevelView levelView;
 	private boolean isPaused = false;
+	private VBox pauseMenu;
 	private Button pauseButton;
-	private Text pausedText;
-	private Text killCountText;
+    private Text killCountText;
 	private Rectangle pauseOverlay;
 	private EventHandler<KeyEvent> escapeKeyHandler;
 	private Rectangle boostBar;
@@ -95,7 +97,7 @@ public abstract class LevelParent extends Observable {
 		initializeFriendlyUnits();
 		levelView.showHeartDisplay(user.getHealth());
 		initializeHUD();
-		initializePauseControls();
+		initializePauseMenu();
 		background.requestFocus();
 		return scene;
 	}
@@ -211,37 +213,65 @@ public abstract class LevelParent extends Observable {
 		}
 	}
 
-	private void initializePauseControls() {
+	private void initializePauseMenu() {
+		double buttonWidth = 300;
+
 		// Create a semi-transparent black overlay
 		pauseOverlay = new Rectangle(screenWidth, screenHeight, Color.BLACK);
 		pauseOverlay.setOpacity(0.5); // Set transparency
 		pauseOverlay.setVisible(false); // Initially hidden
 		root.getChildren().add(pauseOverlay);
 
+		// Initialize pause menu VBox
+		pauseMenu = new VBox(30); // Create VBox with spacing between items
+		pauseMenu.setAlignment(Pos.CENTER);
+
 		// Initialize pause text
-		pausedText = new Text("PAUSED");
+        Text pausedText = new Text("PAUSED");
 		pausedText.setFont(Font.font("Trebuchet MS", 120)); // Set font and size
 		pausedText.setFill(Color.WHITE); // Text color
 		pausedText.setStroke(Color.BLACK); // Add a stroke for visibility
 		pausedText.setStrokeWidth(2);
-		pausedText.setVisible(false); // Make text initially hidden
-		pausedText.setX(screenWidth / 2 - 210); // Center horizontally
-		pausedText.setY(screenHeight / 2); // Center vertically
-		root.getChildren().add(pausedText); // Add to the root group
 
-		// Initialize pause button
+		// Initialize resume button
+		Button resumeButton = new Button("Resume");
+		resumeButton.getStyleClass().add("button");
+		resumeButton.setStyle("-fx-font-size: 30px;");
+		resumeButton.setPrefWidth(buttonWidth);
+		resumeButton.setOnAction(e -> togglePause(pauseButton));
+
+		// Initialize restart game button
+		Button restartButton = new Button("Restart Game");
+		restartButton.getStyleClass().add("button");
+		restartButton.setStyle("-fx-font-size: 30px;");
+		restartButton.setPrefWidth(buttonWidth);
+		restartButton.setOnAction(e -> restartGame());
+
+		// Initialize quit game button
+		Button quitButton = new Button("Quit Game");
+		quitButton.getStyleClass().add("button");
+		quitButton.setStyle("-fx-font-size: 30px;");
+		quitButton.setPrefWidth(buttonWidth);
+		quitButton.setOnAction(e -> quitGame());
+
+		// Initialize pause button in the top right
 		pauseButton = new Button("Pause");
 		pauseButton.getStyleClass().add("button");
 		pauseButton.setStyle("-fx-font-size: 20px;");
 		pauseButton.setFocusTraversable(false);
 		pauseButton.setOnAction(e -> togglePause(pauseButton));
-
 		StackPane pauseButtonContainer = new StackPane();
 		pauseButtonContainer.getChildren().add(pauseButton);
 		pauseButtonContainer.setAlignment(Pos.TOP_RIGHT); // Align the button to the top-right corner
-		pauseButtonContainer.setLayoutX(screenWidth - 120); // Adjust X position
-		pauseButtonContainer.setLayoutY(15);    // Adjust Y position
+		pauseButtonContainer.setLayoutX(screenWidth - 100); // Adjust X position
+		pauseButtonContainer.setLayoutY(20);    // Adjust Y position
 		root.getChildren().add(pauseButtonContainer);
+
+		pauseMenu.getChildren().addAll(pausedText, resumeButton, restartButton, quitButton);
+		pauseMenu.setVisible(false);
+		pauseMenu.setLayoutX(screenWidth / 2 - 210);
+		pauseMenu.setLayoutY(screenHeight / 2 - 250);
+		root.getChildren().add(pauseMenu);
 	}
 
 	protected void initializeHUD() {
@@ -310,27 +340,26 @@ public abstract class LevelParent extends Observable {
 	private void togglePause(Button pauseButton) {
 		if (isPaused) {
 			resumeGame();  // Resume the game if it's currently paused
-			pauseButton.setText("Pause"); // Update button text to "Pause"
-			pausedText.setVisible(false); // Hide "PAUSED" text
+			pauseButton.setVisible(true);
+			pauseMenu.setVisible(false);
 			pauseOverlay.setVisible(false); // Hide overlay
 			root.getChildren().forEach(node -> node.setEffect(null)); // Remove blur effect from all elements
 		} else {
 			pauseGame();   // Pause the game if it's running
-			pauseButton.setText("Unpause"); // Update button text to "Unpause"
-			pausedText.setVisible(true); // Show "PAUSED" text
+			pauseButton.setVisible(false); // Update button text to "Unpause"
 			pauseOverlay.setVisible(true); // Show overlay
+			pauseMenu.setVisible(true);
 
 			// Apply blur effect to all non-pause elements
 			root.getChildren().forEach(node -> {
-				if (node != pauseOverlay && node != pausedText && node != pauseButton.getParent()) {
+				if (node != pauseOverlay && node != pauseMenu) {
 					node.setEffect(blurEffect);
 				}
 			});
 
 			// Bring pause elements to the front
 			pauseOverlay.toFront();
-			pausedText.toFront();
-			pauseButton.getParent().toFront();
+			pauseMenu.toFront();
 		}
 	}
 
@@ -449,7 +478,14 @@ public abstract class LevelParent extends Observable {
 
 	protected void winGame() {
 		timeline.stop();
-		levelView.showWinImage();
+		Text youWinText = new Text("YOU WIN!");
+		youWinText.setFont(Font.font("Trebuchet MS", FontWeight.BOLD, 200)); // Set font and size
+		youWinText.setFill(Color.ORANGE);
+		youWinText.setStroke(Color.BLACK); // Add outline for visibility
+		youWinText.setStrokeWidth(2);
+		youWinText.setLayoutX(screenWidth / 2 - 450);
+		youWinText.setLayoutY(screenHeight / 2 + 50);
+		root.getChildren().add(youWinText);
 		switchMusic(WON_GAME_MUSIC, false);
 
 		// Remove the pause button from view
@@ -462,8 +498,8 @@ public abstract class LevelParent extends Observable {
 	}
 
 	protected void loseGame() {
+		double buttonWidth = 300;
 		timeline.stop();
-		levelView.showGameOverImage();
 		switchMusic(LOST_GAME_MUSIC, false);
 
 		// Remove the pause button from view
@@ -473,6 +509,68 @@ public abstract class LevelParent extends Observable {
 
 		// Disable ESC key functionality
 		disableEscapeKey();
+
+		pauseOverlay.setVisible(true);
+
+		// Create a VBox container for the game-over screen
+		VBox gameOverContainer = new VBox();
+		gameOverContainer.setSpacing(30); // Set spacing between elements
+		gameOverContainer.setAlignment(Pos.CENTER); // Center align the contents
+		gameOverContainer.setLayoutX(screenWidth / 2 - 425);
+		gameOverContainer.setLayoutY(screenHeight / 2 - 200);
+
+		// Create the game-over text
+		Text gameOverText = new Text("GAME OVER");
+		gameOverText.setFont(Font.font("Trebuchet MS", FontWeight.BOLD, 150)); // Set font and size
+		gameOverText.setFill(Color.RED);
+		gameOverText.setStroke(Color.BLACK); // Add outline for visibility
+		gameOverText.setStrokeWidth(2);
+
+		// Create a restart button
+		Button restartButton = new Button("Restart");
+		restartButton.getStyleClass().add("button");
+		restartButton.setStyle("-fx-font-size: 30px;");
+		restartButton.setPrefWidth(buttonWidth);
+		restartButton.setOnAction(e -> restartGame());
+
+		Button quitButton = new Button("Quit Game");
+		quitButton.getStyleClass().add("button");
+		quitButton.setStyle("-fx-font-size: 30px;");
+		quitButton.setPrefWidth(buttonWidth);
+		quitButton.setOnAction(e -> quitGame());
+
+		// Add the game-over text and restart button to the VBox
+		gameOverContainer.getChildren().addAll(gameOverText, restartButton, quitButton);
+
+		// Add game over VBox to the root
+		root.getChildren().add(gameOverContainer);
+
+		root.getChildren().forEach(node -> {
+			if (node != gameOverContainer) {
+				node.setEffect(blurEffect);
+			}
+		});
+	}
+
+	protected void restartGame() {
+		timeline.stop(); // Stop the current game loop
+		if (user != null) {
+			UserPlane.resetHealth(5); // Reset health to default
+		}
+		friendlyUnits.clear();
+		enemyUnits.clear();
+		userProjectiles.clear();
+		enemyProjectiles.clear();
+		root.getChildren().clear();
+		if (musicPlayer != null) {
+			musicPlayer.fadeInMusic(1.0, 0.2);
+		}
+		setChanged();
+		notifyObservers("com.example.demo.LevelOne"); // Transition to LevelOne
+	}
+
+	private void quitGame() {
+		System.exit(0);
 	}
 
 	private void disableEscapeKey() {
