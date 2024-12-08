@@ -5,7 +5,7 @@ import javafx.scene.control.ProgressBar;
 public class LevelThree extends LevelParent {
 
 	private static final String BOSS_LEVEL_MUSIC = "/com/example/demo/audio/bosslevel.mp3";
-	private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/background2.gif";
+	private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/background3.gif";
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 	private static final int KILLS_TO_ADVANCE = 0;
 	private static final int INITIAL_TOTAL_ENEMIES = 2;
