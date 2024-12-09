@@ -135,7 +135,6 @@ public class UserPlane extends FighterPlane {
 
 			return new UserProjectile(projectileX, projectileY);
 		}
-
 		// Do nothing if the player tries to fire before the cooldown
 		return null;
 	}
@@ -162,7 +161,6 @@ public class UserPlane extends FighterPlane {
 
 			return spreadBullets;
 		}
-
 		// Do nothing if the player tries to fire before the cooldown
 		return null;
 	}
@@ -180,7 +178,6 @@ public class UserPlane extends FighterPlane {
 
 			return List.of(new HeavyProjectile(projectileX, projectileY));
 		}
-
 		return List.of();
 	}
 
@@ -231,10 +228,6 @@ public class UserPlane extends FighterPlane {
 
 	public static void resetHealth(int health) {
 		persistentHealth = health;
-	}
-
-	public void moveHorizontally(double velocity) {
-		horizontalVelocity = velocity; // Set the velocity
 	}
 
 	private void updateBoostEffects() {
@@ -305,6 +298,18 @@ public class UserPlane extends FighterPlane {
 
 	public double getBoostEnergy() {
 		return currentBoostEnergy;
+	}
+
+	public boolean getIsSpeedBoostActive() {
+		return isSpeedBoostActive;
+	}
+
+	public static double getYUpperBound() {
+		return Y_UPPER_BOUND;
+	}
+
+	public static double getXRightBound() {
+		return X_RIGHT_BOUND;
 	}
 
 }
