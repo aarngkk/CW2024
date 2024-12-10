@@ -35,7 +35,6 @@ public class Boss extends FighterPlane {
 	private SoundEffectPlayer fireSound;
 	private SoundEffectPlayer shieldSound;
 
-
 	public Boss() {
 		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, HEALTH);
 		movePattern = new ArrayList<>();
@@ -175,4 +174,7 @@ public class Boss extends FighterPlane {
 		return isShielded;
 	}
 
+	public List<Integer> getMovePattern() {
+		return movePattern;
+	}
 }
