@@ -133,7 +133,7 @@ public class UserPlane extends FighterPlane {
 
 			fireSound.playSound();
 
-			return new UserProjectile(projectileX, projectileY);
+			return new UserSingleProjectile(projectileX, projectileY);
 		}
 		// Do nothing if the player tries to fire before the cooldown
 		return null;
@@ -150,9 +150,9 @@ public class UserPlane extends FighterPlane {
 			double baseX = getTranslateX() + getBoundsInLocal().getWidth();
 			double baseY = getTranslateY() + Y_UPPER_BOUND_OFFSET + getBoundsInLocal().getHeight() / 2;
 
-			spreadBullets.add(new SpreadProjectile(baseX, baseY, 10, 0)); // Center bullet
-			spreadBullets.add(new SpreadProjectile(baseX, baseY, 10, -5)); // Upward bullet
-			spreadBullets.add(new SpreadProjectile(baseX, baseY, 10, 5)); // Downward bullet
+			spreadBullets.add(new UserSpreadProjectile(baseX, baseY, 10, 0)); // Center bullet
+			spreadBullets.add(new UserSpreadProjectile(baseX, baseY, 10, -5)); // Upward bullet
+			spreadBullets.add(new UserSpreadProjectile(baseX, baseY, 10, 5)); // Downward bullet
 
 			// Update last fired time
 			lastFiredTime = currentTime;
@@ -176,7 +176,7 @@ public class UserPlane extends FighterPlane {
 
 			heavyFireSound.playSound();
 
-			return List.of(new HeavyProjectile(projectileX, projectileY));
+			return List.of(new UserHeavyProjectile(projectileX, projectileY));
 		}
 		return List.of();
 	}

@@ -14,6 +14,17 @@ public abstract class ActiveActor extends ImageView {
 		this.setPreserveRatio(true);
 	}
 
+	// Overloaded constructor for testing (skips image loading)
+	public ActiveActor(String imageName, int imageHeight, double initialXPos, double initialYPos, boolean skipImageLoading) {
+		if (!skipImageLoading) {
+			this.setImage(new Image(getClass().getResource(IMAGE_LOCATION + imageName).toExternalForm()));
+		}
+		this.setLayoutX(initialXPos);
+		this.setLayoutY(initialYPos);
+		this.setFitHeight(imageHeight);
+		this.setPreserveRatio(true);
+	}
+
 	public abstract void updatePosition();
 
 	protected void moveHorizontally(double horizontalMove) {

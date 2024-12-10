@@ -9,6 +9,12 @@ public abstract class ActiveActorDestructible extends ActiveActor implements Des
 		isDestroyed = false;
 	}
 
+	// Overloaded constructor for testing (skips image loading)
+	public ActiveActorDestructible(String imageName, int imageHeight, double initialXPos, double initialYPos, boolean skipImageLoading) {
+		super(imageName, imageHeight, initialXPos, initialYPos, skipImageLoading);
+		isDestroyed = false;
+	}
+
 	@Override
 	public abstract void updatePosition();
 

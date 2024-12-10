@@ -6,6 +6,11 @@ public abstract class Projectile extends ActiveActorDestructible {
 		super(imageName, imageHeight, initialXPos, initialYPos);
 	}
 
+	// Overloaded constructor for testing
+	public Projectile(String imageName, int imageHeight, double initialXPos, double initialYPos, boolean skipImageLoading) {
+		super(imageName, imageHeight, initialXPos, initialYPos, skipImageLoading);
+	}
+
 	@Override
 	public void takeDamage() {
 		this.destroy();

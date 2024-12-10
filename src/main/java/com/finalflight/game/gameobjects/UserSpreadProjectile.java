@@ -1,6 +1,6 @@
 package com.finalflight.game.gameobjects;
 
-public class SpreadProjectile extends Projectile {
+public class UserSpreadProjectile extends Projectile {
 
     private static final double RANGE = 300.0;
     private static final String IMAGE_NAME = "userfire.png";
@@ -16,7 +16,7 @@ public class SpreadProjectile extends Projectile {
      * @param velocityX Horizontal velocity
      * @param velocityY Vertical velocity
      */
-    public SpreadProjectile(double x, double y, double velocityX, double velocityY) {
+    public UserSpreadProjectile(double x, double y, double velocityX, double velocityY) {
         super(IMAGE_NAME, IMAGE_HEIGHT, x, y);
         this.velocityX = velocityX;
         this.velocityY = velocityY;
