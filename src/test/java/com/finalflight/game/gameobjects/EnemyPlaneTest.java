@@ -1,5 +1,6 @@
 package com.finalflight.game.gameobjects;
 
+import javafx.application.Platform;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,8 @@ class EnemyPlaneTest {
 
     @BeforeAll
     static void setupJavaFxToolkit() {
-        // Initialize the JavaFX Toolkit to avoid errors
-        javafx.application.Platform.startup(() -> {});
+        // Initialize JavaFX Toolkit to avoid errors
+        Platform.startup(() -> {});
     }
 
     @BeforeEach

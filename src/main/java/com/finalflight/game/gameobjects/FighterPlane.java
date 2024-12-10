@@ -16,6 +16,13 @@ public abstract class FighterPlane extends ActiveActorDestructible {
 		this.maxHealth = health;
 	}
 
+	// Overloaded constructor for testing (skips image loading)
+	public FighterPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int health, boolean skipImageLoading) {
+		super(imageName, imageHeight, initialXPos, initialYPos, skipImageLoading);
+		this.health = health;
+		this.maxHealth = health;
+	}
+
 	public abstract ActiveActorDestructible fireProjectile();
 	
 	@Override
