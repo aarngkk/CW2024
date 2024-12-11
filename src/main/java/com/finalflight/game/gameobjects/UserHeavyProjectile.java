@@ -24,6 +24,7 @@ public class UserHeavyProjectile extends Projectile {
     public void takeDamage() {
         health--; // Decrease health by 1
         if (health <= 0) {
+            health = 0;
             this.destroy(); // Destroy the projectile if health reaches 0
         }
     }
