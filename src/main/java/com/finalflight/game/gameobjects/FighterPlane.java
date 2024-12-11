@@ -4,11 +4,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.effect.ColorAdjust;
 import javafx.util.Duration;
+import java.util.function.Supplier;
 
 public abstract class FighterPlane extends ActiveActorDestructible {
 
 	private int health;
 	private final int maxHealth; // Store max health
+	protected Supplier<Double> randomSupplier = Math::random; // Default to Math.random()
 
 	public FighterPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int health) {
 		super(imageName, imageHeight, initialXPos, initialYPos);
@@ -52,6 +54,11 @@ public abstract class FighterPlane extends ActiveActorDestructible {
 
 		flashTimeline.setCycleCount(1); // Only flash once
 		flashTimeline.play();
+	}
+
+	// Allow subclasses to customize the random supplier
+	public void setRandomSupplier(Supplier<Double> randomSupplier) {
+		this.randomSupplier = randomSupplier;
 	}
 
 	protected double getProjectileXPosition(double xPositionOffset) {

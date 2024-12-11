@@ -29,7 +29,7 @@ public class AdvancedEnemyPlane extends FighterPlane {
 
     @Override
     public ActiveActorDestructible fireProjectile() {
-        if (Math.random() < FIRE_RATE) {
+        if (randomSupplier.get() < FIRE_RATE) {
             double projectileXPosition = getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET);
             double projectileYPosition = getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET);
             fireSound.playSound();
