@@ -94,4 +94,12 @@ public class MusicPlayer {
         fadeIn.play();
     }
 
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
+
+    public MediaPlayer.Status getMediaPlayerStatus() {
+        return mediaPlayer != null ? mediaPlayer.getStatus() : null;
+    }
+
 }
