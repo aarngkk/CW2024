@@ -2,7 +2,6 @@ package com.finalflight.game.audio;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.media.MediaPlayer;
 import org.junit.jupiter.api.*;
 
@@ -30,12 +29,9 @@ class MusicPlayerTest {
 
     private void waitForMediaPlayerStatus(MediaPlayer mediaPlayer, MediaPlayer.Status expectedStatus) {
         CountDownLatch latch = new CountDownLatch(1);
-        ChangeListener<MediaPlayer.Status> listener = new ChangeListener<>() {
-            @Override
-            public void changed(ObservableValue<? extends MediaPlayer.Status> observable, MediaPlayer.Status oldValue, MediaPlayer.Status newValue) {
-                if (newValue == expectedStatus) {
-                    latch.countDown();
-                }
+        ChangeListener<MediaPlayer.Status> listener = (observable, oldValue, newValue) -> {
+            if (newValue == expectedStatus) {
+                latch.countDown();
             }
         };
         mediaPlayer.statusProperty().addListener(listener);
@@ -57,10 +53,27 @@ class MusicPlayerTest {
     }
 
     @Test
+    void testSingletonWithDifferentMusicFile() {
+        String differentMusicFile = "/com/finalflight/game/audio/bosslevel.mp3";
+        MusicPlayer anotherInstance = MusicPlayer.getInstance(differentMusicFile);
+
+        assertNotSame(musicPlayer, anotherInstance, "MusicPlayer should create a new instance for a different music file.");
+    }
+
+    @Test
     void testPlayMusic() {
         musicPlayer.playMusic(false);
         waitForMediaPlayerStatus(musicPlayer.getMediaPlayer(), MediaPlayer.Status.PLAYING);
         assertEquals(MediaPlayer.Status.PLAYING, musicPlayer.getMediaPlayerStatus(), "MediaPlayer should be in PLAYING status.");
+    }
+
+    @Test
+    void testPlayMusicWhilePlaying() {
+        musicPlayer.playMusic(false);
+        waitForMediaPlayerStatus(musicPlayer.getMediaPlayer(), MediaPlayer.Status.PLAYING);
+
+        musicPlayer.playMusic(false); // Call playMusic again
+        assertEquals(MediaPlayer.Status.PLAYING, musicPlayer.getMediaPlayerStatus(), "MediaPlayer should remain in PLAYING status.");
     }
 
     @Test
@@ -119,6 +132,23 @@ class MusicPlayerTest {
     }
 
     @Test
+    void testFadeOutMusicWithoutCallback() {
+        double targetVolume = 0.0;
+
+        musicPlayer.fadeOutMusic(2.0, targetVolume, null);
+
+        // Simulate waiting for fade-out duration
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            fail("Fade-out simulation interrupted.");
+        }
+
+        assertEquals(targetVolume, musicPlayer.getVolume(), 0.01, "Volume should fade out to target value without a callback.");
+    }
+
+
+    @Test
     void testFadeInMusic() {
         musicPlayer.setVolume(0.0);
         double targetVolume = 0.8;
@@ -134,4 +164,21 @@ class MusicPlayerTest {
 
         assertEquals(targetVolume, musicPlayer.getVolume(), 0.01, "Volume should fade in to target value.");
     }
+
+    @Test
+    void testFadeInMusicWithNoChange() {
+        double targetVolume = musicPlayer.getVolume();
+
+        musicPlayer.fadeInMusic(0.0, targetVolume); // No time for fade
+        assertEquals(targetVolume, musicPlayer.getVolume(), 0.01, "Volume should remain unchanged when target is already reached.");
+    }
+
+    @Test
+    void testVolumeBinding() {
+        double newVolume = 0.5;
+        musicPlayer.setVolume(newVolume);
+
+        assertEquals(newVolume, musicPlayer.getMediaPlayer().getVolume(), 0.01, "MediaPlayer volume should match MusicPlayer volume property.");
+    }
+
 }
