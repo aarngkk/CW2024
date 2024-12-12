@@ -5,26 +5,28 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="878.0" prefWidth="1550.0" spacing="60.0" styleClass="vbox" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.finalflight.game.controller.MainMenuController">
-   <children>
-      <Label styleClass="title" stylesheets="@../css/styles.css" text="Final Flight">
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-         <font>
-            <Font name="Georgia" size="180.0" />
-         </font>
-      </Label>
-      <Button fx:id="startButton" mnemonicParsing="false" onAction="#startGame" prefHeight="100.0" prefWidth="300.0" stylesheets="@../css/styles.css" text="Start Game">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Button>
-      <Button fx:id="exitButton" mnemonicParsing="false" onAction="#quitGame" prefHeight="100.0" prefWidth="300.0" stylesheets="@../css/styles.css" text="Quit">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Button>
-   </children>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="878.0" prefWidth="1550.0" spacing="60.0" styleClass="vbox" stylesheets="@../css/styles.css"
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.finalflight.game.controller.MainMenuController">
+    <Label styleClass="title" stylesheets="@../css/styles.css" text="Final Flight">
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
+        <font>
+            <Font name="Georgia" size="180.0"/>
+        </font>
+    </Label>
+    <Button fx:id="startButton" mnemonicParsing="false" onAction="#startGame" prefHeight="100.0" prefWidth="300.0"
+            stylesheets="@../css/styles.css" text="Start Game">
+        <font>
+            <Font size="30.0"/>
+        </font>
+    </Button>
+    <Button fx:id="exitButton" mnemonicParsing="false" onAction="#quitGame" prefHeight="100.0" prefWidth="300.0"
+            stylesheets="@../css/styles.css" text="Quit">
+        <font>
+            <Font size="30.0"/>
+        </font>
+    </Button>
 </VBox>

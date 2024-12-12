@@ -19,7 +19,8 @@ class HeavyShotProjectileTest {
     @BeforeAll
     static void setupJavaFxToolkit() {
         // Initialize JavaFX Toolkit to avoid errors during testing
-        Platform.startup(() -> {});
+        Platform.startup(() -> {
+        });
     }
 
     @BeforeEach

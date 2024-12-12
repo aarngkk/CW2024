@@ -17,7 +17,8 @@ class AdvancedEnemyPlaneTest {
 
     @BeforeAll
     static void setupJavaFxToolkit() {
-        Platform.startup(() -> {});
+        Platform.startup(() -> {
+        });
     }
 
     @BeforeEach

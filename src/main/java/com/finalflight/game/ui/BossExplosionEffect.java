@@ -1,8 +1,8 @@
 package com.finalflight.game.ui;
 
+import com.finalflight.game.audio.SoundEffectPlayer;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import com.finalflight.game.audio.SoundEffectPlayer;
 
 
 public class BossExplosionEffect extends ImageView {
@@ -12,7 +12,7 @@ public class BossExplosionEffect extends ImageView {
     private static final int EXPLOSION_SIZE = 800;
     private static final double BOSS_EXPLOSION_X_OFFSET = -200;
     private static final double BOSS_EXPLOSION_Y_OFFSET = -325;
-    private SoundEffectPlayer bossExplodeSound;
+    private final SoundEffectPlayer bossExplodeSound;
 
     public BossExplosionEffect(double bossXPosition, double bossYPosition) {
         this.setLayoutX(bossXPosition + BOSS_EXPLOSION_X_OFFSET);

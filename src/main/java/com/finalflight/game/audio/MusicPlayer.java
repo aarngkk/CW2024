@@ -1,19 +1,19 @@
 package com.finalflight.game.audio;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.util.Duration;
 
 public class MusicPlayer {
 
     private static MusicPlayer instance;
-    private MediaPlayer mediaPlayer;
-    private DoubleProperty volumeProperty = new SimpleDoubleProperty(0.2);
+    private final MediaPlayer mediaPlayer;
+    private final DoubleProperty volumeProperty = new SimpleDoubleProperty(0.2);
 
     private MusicPlayer(String musicFile) {
         Media media = new Media(getClass().getResource(musicFile).toExternalForm());

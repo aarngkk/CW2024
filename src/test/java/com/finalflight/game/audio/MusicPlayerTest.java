@@ -3,7 +3,10 @@ package com.finalflight.game.audio;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.media.MediaPlayer;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -19,7 +22,8 @@ class MusicPlayerTest {
     @BeforeAll
     static void setupJavaFxToolkit() {
         // Initialize JavaFX Toolkit to avoid errors
-        Platform.startup(() -> {});
+        Platform.startup(() -> {
+        });
     }
 
     @BeforeEach

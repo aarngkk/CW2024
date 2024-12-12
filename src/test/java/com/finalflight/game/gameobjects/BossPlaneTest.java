@@ -15,7 +15,8 @@ class BossPlaneTest {
     @BeforeAll
     static void setupJavaFxToolkit() {
         // Initialize JavaFX Toolkit to avoid errors
-        Platform.startup(() -> {});
+        Platform.startup(() -> {
+        });
     }
 
     @BeforeEach

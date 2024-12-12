@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +18,8 @@ class UserPlaneTest {
     @BeforeAll
     static void setupJavaFxToolkit() {
         // Initialize JavaFX Toolkit to avoid errors
-        Platform.startup(() -> {});
+        Platform.startup(() -> {
+        });
     }
 
     @BeforeEach

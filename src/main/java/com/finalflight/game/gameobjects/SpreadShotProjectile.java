@@ -11,8 +11,9 @@ public class SpreadShotProjectile extends AbstractProjectile {
 
     /**
      * Creates a spread projectile with specified position and velocity.
-     * @param x Initial X position
-     * @param y Initial Y position
+     *
+     * @param x         Initial X position
+     * @param y         Initial Y position
      * @param velocityX Horizontal velocity
      * @param velocityY Vertical velocity
      */

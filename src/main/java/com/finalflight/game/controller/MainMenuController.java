@@ -8,15 +8,12 @@ import javafx.stage.Stage;
 public class MainMenuController {
 
     private GameController gameController;
-    private Stage stage;
-    private MusicPlayer musicPlayer;
-    private static final String MAIN_MENU_MUSIC= "/com/finalflight/game/audio/mainmenu.mp3";
+    private static final String MAIN_MENU_MUSIC = "/com/finalflight/game/audio/mainmenu.mp3";
 
     public void setStage(Stage stage) {
-        this.stage = stage;
         this.gameController = new GameController(stage);
 
-        musicPlayer = MusicPlayer.getInstance(MAIN_MENU_MUSIC);
+        MusicPlayer musicPlayer = MusicPlayer.getInstance(MAIN_MENU_MUSIC);
         musicPlayer.playMusic(true);
     }
 

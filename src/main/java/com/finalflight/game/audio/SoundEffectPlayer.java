@@ -4,7 +4,7 @@ import javafx.scene.media.AudioClip;
 
 public class SoundEffectPlayer {
 
-    private AudioClip audioClip;
+    private final AudioClip audioClip;
 
     public SoundEffectPlayer(String soundFilePath) {
         this.audioClip = new AudioClip(getClass().getResource(soundFilePath).toExternalForm());

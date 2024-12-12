@@ -1,7 +1,7 @@
 package com.finalflight.game.level;
 
-import com.finalflight.game.gameobjects.DestructibleGameObject;
 import com.finalflight.game.gameobjects.AdvancedEnemyPlane;
+import com.finalflight.game.gameobjects.DestructibleGameObject;
 import com.finalflight.game.gameobjects.EnemyPlane;
 import com.finalflight.game.ui.BaseLevelView;
 
