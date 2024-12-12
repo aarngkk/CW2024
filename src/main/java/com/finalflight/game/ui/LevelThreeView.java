@@ -19,13 +19,5 @@ public class LevelThreeView extends BaseLevelView {
 	private void addImagesToRoot() {
 		root.getChildren().addAll(shieldImage);
 	}
-	
-	public void showShield() {
-		shieldImage.showShield();
-	}
-
-	public void hideShield() {
-		shieldImage.hideShield();
-	}
 
 }

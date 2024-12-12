@@ -61,10 +61,6 @@ public class MusicPlayer {
         }
     }
 
-    public DoubleProperty volumeProperty() {
-        return volumeProperty;
-    }
-
     public double getVolume() {
         return volumeProperty.get();
     }

@@ -10,8 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class EnemyProjectileTest {
 
     private EnemyProjectile testEnemyProjectile;
-    private static final String IMAGE_NAME = "enemyfire.png";
-    private static final int IMAGE_HEIGHT = 16;
     private static final double INITIAL_X_POS = 100.0;
     private static final double INITIAL_Y_POS = 50.0;
     private static final int HORIZONTAL_VELOCITY = -10;
