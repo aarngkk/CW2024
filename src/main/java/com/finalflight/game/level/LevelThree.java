@@ -4,8 +4,10 @@ import com.finalflight.game.gameobjects.ActiveActorDestructible;
 import com.finalflight.game.gameobjects.AdvancedEnemyPlane;
 import com.finalflight.game.gameobjects.Boss;
 import com.finalflight.game.gameobjects.EnemyPlane;
+import com.finalflight.game.ui.BossExplosion;
 import com.finalflight.game.ui.LevelView;
 import com.finalflight.game.ui.LevelViewLevelThree;
+import com.finalflight.game.ui.ShieldImage;
 import javafx.scene.control.ProgressBar;
 
 public class LevelThree extends LevelParent {
@@ -21,12 +23,20 @@ public class LevelThree extends LevelParent {
 	private final Boss boss;
 	private LevelViewLevelThree levelView;
 	private ProgressBar bossHealthBar;
+	private ShieldImage shieldImage;
+	private BossExplosion bossExplosion;
 
 	public LevelThree(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH, KILLS_TO_ADVANCE);
 		boss = new Boss();
-
+		shieldImage = new ShieldImage(boss.getLayoutX(), boss.getLayoutY());
 		switchMusic(BOSS_LEVEL_MUSIC, true);
+	}
+
+	@Override
+	protected void updateScene() {
+		super.updateScene();
+		updateShield();
 	}
 
 	@Override
@@ -68,6 +78,10 @@ public class LevelThree extends LevelParent {
 		getRoot().getChildren().add(bossHealthBar);
 	}
 
+	private void initializeBossShield() {
+		getRoot().getChildren().add(shieldImage);
+	}
+
 	private void updateBossHealthBar() {
 		// Set progress based on boss's health as a percentage
 		double healthPercentage = (double) boss.getHealth() / boss.getMaxHealth();
@@ -89,8 +103,15 @@ public class LevelThree extends LevelParent {
 			loseGame();
 		}
 		else if (boss.isDestroyed()) {
+			bossExplode();
 			winGame();
 		}
+	}
+
+	private void bossExplode() {
+		bossExplosion = new BossExplosion(boss.getLayoutX() + boss.getTranslateX(), boss.getLayoutY() + boss.getTranslateY());
+		getRoot().getChildren().add(bossExplosion);
+		bossExplosion.playExplosionSound();
 	}
 
 	@Override
@@ -101,6 +122,7 @@ public class LevelThree extends LevelParent {
 		// Add the boss if no enemies exist
 		if (getCurrentNumberOfEnemies() == 0) {
 			addEnemyUnit(boss);
+			initializeBossShield();
 		}
 
 		// Spawn enemy planes
@@ -139,6 +161,21 @@ public class LevelThree extends LevelParent {
 			// Default values above 50% health
 			totalEnemies = INITIAL_TOTAL_ENEMIES;
 			enemySpawnProbability = INITIAL_ENEMY_SPAWN_PROBABILITY;
+		}
+	}
+
+	private void updateShield(){
+		if (shieldImage != null && boss != null) {
+			// Update shield image position to match the boss's position
+			shieldImage.setTranslateX(boss.getTranslateX() + shieldImage.getShieldXOffset());
+			shieldImage.setTranslateY(boss.getTranslateY() + shieldImage.getShieldYOffset());
+
+			// Show or hide the shield image based on the boss's shield state
+			if (boss.getIsShielded()) {
+				shieldImage.showShield();
+			} else {
+				shieldImage.hideShield();
+			}
 		}
 	}
 

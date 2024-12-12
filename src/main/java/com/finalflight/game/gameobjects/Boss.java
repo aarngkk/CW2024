@@ -7,11 +7,11 @@ import java.util.*;
 public class Boss extends FighterPlane {
 
 	private static final String BOSS_FIRE_SOUND = "/com/finalflight/game/audio/bossfire.mp3";
-	private static final String SHIELD_ACTIVATION_SOUND = "/com/finalflight/game/audio/bossshieldactivate.mp3";
+	private static final String SHIELD_ACTIVATE_SOUND = "/com/finalflight/game/audio/bossshieldactivate.wav";
 	private static final String IMAGE_NAME = "bossplane.png";
 	private static final double INITIAL_X_POSITION = 1150.0;
 	private static final double INITIAL_Y_POSITION = 400;
-	private static final double PROJECTILE_Y_POSITION_OFFSET = 40;
+	private static final double PROJECTILE_Y_POSITION_OFFSET = 45;
 	private static final double BOSS_FIRE_RATE = 0.04;
 	private static final double INCREASED_FIRE_RATE = 0.08;
 	private static final int IMAGE_HEIGHT = 130;
@@ -25,6 +25,8 @@ public class Boss extends FighterPlane {
 	private static final int Y_POSITION_LOWER_BOUND = 700;
 	private static final int MAX_FRAMES_WITH_SHIELD = 250;
 	private final List<Integer> movePattern;
+	private final SoundEffectPlayer fireSound;
+	private final SoundEffectPlayer shieldActivateSound;
 	private boolean isShielded;
 	private boolean shieldActivatedAt50;
 	private boolean shieldActivatedAt20;
@@ -32,8 +34,7 @@ public class Boss extends FighterPlane {
 	private int consecutiveMovesInSameDirection;
 	private int indexOfCurrentMove;
 	private int framesWithShieldActivated;
-	private SoundEffectPlayer fireSound;
-	private SoundEffectPlayer shieldSound;
+
 
 
 	public Boss() {
@@ -48,8 +49,8 @@ public class Boss extends FighterPlane {
 		fireRateAndSpeedBoosted = false;
 		initializeMovePattern();
 
-		shieldSound = new SoundEffectPlayer(SHIELD_ACTIVATION_SOUND);
-		shieldSound.setVolume(0.4);
+		shieldActivateSound = new SoundEffectPlayer(SHIELD_ACTIVATE_SOUND);
+		shieldActivateSound.setVolume(0.6);
 
 		fireSound = new SoundEffectPlayer(BOSS_FIRE_SOUND);
 		fireSound.setVolume(0.1);
@@ -163,7 +164,7 @@ public class Boss extends FighterPlane {
 
 	private void activateShield() {
 		isShielded = true;
-		shieldSound.playSound();
+		shieldActivateSound.playSound();
 	}
 
 	private void deactivateShield() {
