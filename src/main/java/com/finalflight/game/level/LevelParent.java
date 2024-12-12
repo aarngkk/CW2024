@@ -119,7 +119,7 @@ public abstract class LevelParent extends Observable {
 		notifyObservers(levelName);
 	}
 
-	private void updateScene() {
+	protected void updateScene() {
 		spawnEnemyUnits();
 		updateActors();
 		generateEnemyFire();
@@ -483,6 +483,7 @@ public abstract class LevelParent extends Observable {
 
 	protected void winGame() {
 		timeline.stop();
+		clearActorsAfterWin();
 		Text youWinText = new Text("YOU WIN!");
 		youWinText.setFont(Font.font("Trebuchet MS", FontWeight.BOLD, 200)); // Set font and size
 		youWinText.setFill(Color.ORANGE);
@@ -500,6 +501,12 @@ public abstract class LevelParent extends Observable {
 
 		// Disable ESC key functionality
 		disableEscapeKey();
+	}
+
+	private void clearActorsAfterWin() {
+		if (enemyUnits != null) root.getChildren().removeAll(enemyUnits);
+		if (enemyProjectiles != null) root.getChildren().removeAll(enemyProjectiles);
+		if (userProjectiles != null) root.getChildren().removeAll(userProjectiles);
 	}
 
 	protected void loseGame() {
