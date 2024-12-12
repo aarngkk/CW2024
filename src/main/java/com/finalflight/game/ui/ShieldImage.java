@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 
 public class ShieldImage extends ImageView {
 
-	private static final String SHIELD_IMAGE = "/com/finalflight/game/images/shield.png";
+	private static final String SHIELD_IMAGE = "/com/finalflight/game/images/bossshield.png";
 	private static final int SHIELD_IMAGE_WIDTH = 500;
 	private static final int SHIELD_IMAGE_HEIGHT = 250;
 	private static final double SHIELD_IMAGE_X_OFFSET = -25;
