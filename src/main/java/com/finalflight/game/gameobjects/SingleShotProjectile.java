@@ -1,12 +1,12 @@
 package com.finalflight.game.gameobjects;
 
-public class UserSingleProjectile extends Projectile {
+public class SingleShotProjectile extends AbstractProjectile {
 
 	private static final String IMAGE_NAME = "userfire.png";
 	private static final int IMAGE_HEIGHT = 8;
 	private static final int HORIZONTAL_VELOCITY = 15;
 
-	public UserSingleProjectile(double initialXPos, double initialYPos) {
+	public SingleShotProjectile(double initialXPos, double initialYPos) {
 		super(IMAGE_NAME, IMAGE_HEIGHT, initialXPos, initialYPos);
 	}
 

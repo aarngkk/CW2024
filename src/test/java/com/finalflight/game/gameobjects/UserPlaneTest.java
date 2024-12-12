@@ -122,7 +122,7 @@ class UserPlaneTest {
 
     @Test
     void testFiringSingleProjectile() {
-        ActiveActorDestructible projectile = userPlane.fireProjectile();
+        DestructibleGameObject projectile = userPlane.fireProjectile();
         assertNotNull(projectile);
     }
 
@@ -130,7 +130,7 @@ class UserPlaneTest {
     void testFiringSpreadProjectile() {
         userPlane.setFiringMode(UserPlane.FiringMode.SPREAD);
 
-        List<ActiveActorDestructible> projectiles = userPlane.fire();
+        List<DestructibleGameObject> projectiles = userPlane.fire();
         assertEquals(3, projectiles.size()); // Spread mode fires 3 projectiles
     }
 
@@ -138,14 +138,14 @@ class UserPlaneTest {
     void testFiringHeavyProjectile() {
         userPlane.setFiringMode(UserPlane.FiringMode.HEAVY);
 
-        List<ActiveActorDestructible> projectiles = userPlane.fire();
+        List<DestructibleGameObject> projectiles = userPlane.fire();
         assertEquals(1, projectiles.size()); // Heavy mode fires 1 projectile
     }
 
     @Test
     void testFireProjectileCooldown() {
         // Fire once to initialize the lastFiredTime
-        ActiveActorDestructible projectile = userPlane.fireProjectile();
+        DestructibleGameObject projectile = userPlane.fireProjectile();
         assertNotNull(projectile);
 
         // Immediately try to fire again (cooldown still active)
@@ -158,7 +158,7 @@ class UserPlaneTest {
         userPlane.setFiringMode(UserPlane.FiringMode.SPREAD);
 
         // Fire once
-        List<ActiveActorDestructible> projectiles = userPlane.fire();
+        List<DestructibleGameObject> projectiles = userPlane.fire();
         assertEquals(3, projectiles.size());
 
         // Immediately try to fire again (cooldown still active)
@@ -171,7 +171,7 @@ class UserPlaneTest {
         userPlane.setFiringMode(UserPlane.FiringMode.HEAVY);
 
         // Fire once
-        List<ActiveActorDestructible> projectiles = userPlane.fire();
+        List<DestructibleGameObject> projectiles = userPlane.fire();
         assertEquals(1, projectiles.size());
 
         // Immediately try to fire again (cooldown still active)

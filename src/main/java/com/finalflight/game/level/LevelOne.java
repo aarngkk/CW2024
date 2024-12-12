@@ -1,10 +1,10 @@
 package com.finalflight.game.level;
 
-import com.finalflight.game.gameobjects.ActiveActorDestructible;
+import com.finalflight.game.gameobjects.DestructibleGameObject;
 import com.finalflight.game.gameobjects.EnemyPlane;
-import com.finalflight.game.ui.LevelView;
+import com.finalflight.game.ui.BaseLevelView;
 
-public class LevelOne extends LevelParent {
+public class LevelOne extends BaseLevel {
 	
 	private static final String BACKGROUND_IMAGE_NAME = "/com/finalflight/game/images/background1.gif";
 	private static final String NEXT_LEVEL = "com.finalflight.game.level.LevelTwo";
@@ -37,15 +37,15 @@ public class LevelOne extends LevelParent {
 		for (int i = 0; i < TOTAL_ENEMIES - currentNumberOfEnemies; i++) {
 			if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
 				double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
-				ActiveActorDestructible newEnemy = new EnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
+				DestructibleGameObject newEnemy = new EnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
 				addEnemyUnit(newEnemy);
 			}
 		}
 	}
 
 	@Override
-	protected LevelView instantiateLevelView() {
-		return new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
+	protected BaseLevelView instantiateLevelView() {
+		return new BaseLevelView(getRoot(), PLAYER_INITIAL_HEALTH);
 	}
 
 	private boolean userHasReachedKillTarget() {

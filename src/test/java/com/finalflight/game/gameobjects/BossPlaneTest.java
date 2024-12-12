@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BossTest {
+class BossPlaneTest {
 
-    private Boss boss;
+    private BossPlane boss;
     private static final double DELTA = 0.01;
 
     @BeforeAll
@@ -20,7 +20,7 @@ class BossTest {
 
     @BeforeEach
     void setUp() {
-        boss = new Boss();
+        boss = new BossPlane();
     }
 
     @Test
@@ -134,7 +134,7 @@ class BossTest {
 
         // Additionally, check that the projectiles are being created correctly
         for (int i = 0; i < projectileCount; i++) {
-            ActiveActorDestructible projectile = boss.fireProjectile();
+            DestructibleGameObject projectile = boss.fireProjectile();
             if (projectile != null) {
                 assertInstanceOf(BossProjectile.class, projectile);
                 assertEquals(boss.getTranslateX(), projectile.getTranslateX(), DELTA); // X position should match boss
@@ -148,7 +148,7 @@ class BossTest {
         boss.setTranslateX(1150); // Boss's initial X position
         boss.setTranslateY(400); // Boss's initial Y position
 
-        ActiveActorDestructible projectile = boss.fireProjectile();
+        DestructibleGameObject projectile = boss.fireProjectile();
 
         if (projectile != null) {
             assertInstanceOf(BossProjectile.class, projectile); // Ensure it's the correct type

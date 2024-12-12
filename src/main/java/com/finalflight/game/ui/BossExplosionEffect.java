@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 import com.finalflight.game.audio.SoundEffectPlayer;
 
 
-public class BossExplosion extends ImageView {
+public class BossExplosionEffect extends ImageView {
 
     private static final String BOSS_EXPLOSION_GIF = "/com/finalflight/game/images/bossexplosion.gif";
     private static final String BOSS_EXPLOSION_SOUND = "/com/finalflight/game/audio/bossexplosion.mp3";
@@ -14,7 +14,7 @@ public class BossExplosion extends ImageView {
     private static final double BOSS_EXPLOSION_Y_OFFSET = -325;
     private SoundEffectPlayer bossExplodeSound;
 
-    public BossExplosion(double bossXPosition, double bossYPosition) {
+    public BossExplosionEffect(double bossXPosition, double bossYPosition) {
         this.setLayoutX(bossXPosition + BOSS_EXPLOSION_X_OFFSET);
         this.setLayoutY(bossYPosition + BOSS_EXPLOSION_Y_OFFSET);
         this.setImage(new Image(getClass().getResource(BOSS_EXPLOSION_GIF).toExternalForm()));

@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserHeavyProjectileTest {
+class HeavyShotProjectileTest {
 
-    private UserHeavyProjectile testProjectile;
+    private HeavyShotProjectile testProjectile;
     private static final double INITIAL_X_POS = 100.0;
     private static final double INITIAL_Y_POS = 50.0;
     private static final double EXPECTED_HORIZONTAL_VELOCITY = 8.0;
@@ -24,7 +24,7 @@ class UserHeavyProjectileTest {
 
     @BeforeEach
     void setUp() {
-        testProjectile = new UserHeavyProjectile(INITIAL_X_POS, INITIAL_Y_POS);
+        testProjectile = new HeavyShotProjectile(INITIAL_X_POS, INITIAL_Y_POS);
     }
 
     @Test

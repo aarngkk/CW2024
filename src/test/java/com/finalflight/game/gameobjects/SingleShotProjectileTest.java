@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserSingleProjectileTest {
+class SingleShotProjectileTest {
 
-    private UserSingleProjectile testProjectile;
+    private SingleShotProjectile testProjectile;
     private static final String EXPECTED_IMAGE_NAME = "userfire.png";
     private static final int EXPECTED_IMAGE_HEIGHT = 8;
     private static final double INITIAL_X_POS = 200.0;
@@ -25,7 +25,7 @@ class UserSingleProjectileTest {
     @BeforeEach
     void setUp() {
         // Create a new instance of UserSingleProjectile with the required initial position
-        testProjectile = new UserSingleProjectile(INITIAL_X_POS, INITIAL_Y_POS);
+        testProjectile = new SingleShotProjectile(INITIAL_X_POS, INITIAL_Y_POS);
     }
 
     @Test

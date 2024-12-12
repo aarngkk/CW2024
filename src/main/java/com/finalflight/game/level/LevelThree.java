@@ -1,16 +1,16 @@
 package com.finalflight.game.level;
 
-import com.finalflight.game.gameobjects.ActiveActorDestructible;
+import com.finalflight.game.gameobjects.DestructibleGameObject;
 import com.finalflight.game.gameobjects.AdvancedEnemyPlane;
-import com.finalflight.game.gameobjects.Boss;
+import com.finalflight.game.gameobjects.BossPlane;
 import com.finalflight.game.gameobjects.EnemyPlane;
-import com.finalflight.game.ui.BossExplosion;
-import com.finalflight.game.ui.LevelView;
-import com.finalflight.game.ui.LevelViewLevelThree;
+import com.finalflight.game.ui.BossExplosionEffect;
+import com.finalflight.game.ui.BaseLevelView;
+import com.finalflight.game.ui.LevelThreeView;
 import com.finalflight.game.ui.ShieldImage;
 import javafx.scene.control.ProgressBar;
 
-public class LevelThree extends LevelParent {
+public class LevelThree extends BaseLevel {
 
 	private static final String BOSS_LEVEL_MUSIC = "/com/finalflight/game/audio/bosslevel.mp3";
 	private static final String BACKGROUND_IMAGE_NAME = "/com/finalflight/game/images/background3.gif";
@@ -20,15 +20,15 @@ public class LevelThree extends LevelParent {
 	private static final double INITIAL_ENEMY_SPAWN_PROBABILITY = 0.02;
 	private int totalEnemies = INITIAL_TOTAL_ENEMIES;
 	private double enemySpawnProbability = INITIAL_ENEMY_SPAWN_PROBABILITY;
-	private final Boss boss;
-	private LevelViewLevelThree levelView;
+	private final BossPlane boss;
+	private LevelThreeView levelView;
 	private ProgressBar bossHealthBar;
 	private ShieldImage shieldImage;
-	private BossExplosion bossExplosion;
+	private BossExplosionEffect bossExplosionEffect;
 
 	public LevelThree(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH, KILLS_TO_ADVANCE);
-		boss = new Boss();
+		boss = new BossPlane();
 		shieldImage = new ShieldImage(boss.getLayoutX(), boss.getLayoutY());
 		switchMusic(BOSS_LEVEL_MUSIC, true);
 	}
@@ -109,9 +109,9 @@ public class LevelThree extends LevelParent {
 	}
 
 	private void bossExplode() {
-		bossExplosion = new BossExplosion(boss.getLayoutX() + boss.getTranslateX(), boss.getLayoutY() + boss.getTranslateY());
-		getRoot().getChildren().add(bossExplosion);
-		bossExplosion.playExplosionSound();
+		bossExplosionEffect = new BossExplosionEffect(boss.getLayoutX() + boss.getTranslateX(), boss.getLayoutY() + boss.getTranslateY());
+		getRoot().getChildren().add(bossExplosionEffect);
+		bossExplosionEffect.playExplosionSound();
 	}
 
 	@Override
@@ -134,11 +134,11 @@ public class LevelThree extends LevelParent {
 
 				if (spawnProbability < 0.65) {
 					// Spawn a regular enemy
-					ActiveActorDestructible newEnemy = new EnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
+					DestructibleGameObject newEnemy = new EnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
 					addEnemyUnit(newEnemy);
 				} else {
 					// Spawn an advanced enemy
-					ActiveActorDestructible advancedEnemy = new AdvancedEnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
+					DestructibleGameObject advancedEnemy = new AdvancedEnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
 					addEnemyUnit(advancedEnemy);
 				}
 			}
@@ -180,8 +180,8 @@ public class LevelThree extends LevelParent {
 	}
 
 	@Override
-	protected LevelView instantiateLevelView() {
-		levelView = new LevelViewLevelThree(getRoot(), PLAYER_INITIAL_HEALTH);
+	protected BaseLevelView instantiateLevelView() {
+		levelView = new LevelThreeView(getRoot(), PLAYER_INITIAL_HEALTH);
 		return levelView;
 	}
 

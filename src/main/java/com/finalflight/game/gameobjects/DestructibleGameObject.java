@@ -1,16 +1,16 @@
 package com.finalflight.game.gameobjects;
 
-public abstract class ActiveActorDestructible extends ActiveActor implements Destructible {
+public abstract class DestructibleGameObject extends GameObject implements Destructible {
 
 	private boolean isDestroyed;
 
-	public ActiveActorDestructible(String imageName, int imageHeight, double initialXPos, double initialYPos) {
+	public DestructibleGameObject(String imageName, int imageHeight, double initialXPos, double initialYPos) {
 		super(imageName, imageHeight, initialXPos, initialYPos);
 		isDestroyed = false;
 	}
 
 	// Overloaded constructor for testing (skips image loading)
-	public ActiveActorDestructible(String imageName, int imageHeight, double initialXPos, double initialYPos, boolean skipImageLoading) {
+	public DestructibleGameObject(String imageName, int imageHeight, double initialXPos, double initialYPos, boolean skipImageLoading) {
 		super(imageName, imageHeight, initialXPos, initialYPos, skipImageLoading);
 		isDestroyed = false;
 	}

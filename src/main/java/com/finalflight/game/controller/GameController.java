@@ -10,14 +10,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import com.finalflight.game.level.LevelParent;
+import com.finalflight.game.level.BaseLevel;
 
-public class Controller implements Observer {
+public class GameController implements Observer {
 
 	private static final String LEVEL_ONE_CLASS_NAME = "com.finalflight.game.level.LevelOne";
 	private final Stage stage;
 
-	public Controller(Stage stage) {
+	public GameController(Stage stage) {
 		this.stage = stage;
 	}
 
@@ -37,7 +37,7 @@ public class Controller implements Observer {
 
 			Class<?> myClass = Class.forName(className);
 			Constructor<?> constructor = myClass.getConstructor(double.class, double.class);
-			LevelParent myLevel = (LevelParent) constructor.newInstance(screenHeight, screenWidth);
+			BaseLevel myLevel = (BaseLevel) constructor.newInstance(screenHeight, screenWidth);
 			myLevel.addObserver(this);
 			Scene scene = myLevel.initializeScene();
 			stage.setScene(scene);

@@ -1,6 +1,6 @@
 package com.finalflight.game.gameobjects;
 
-public class BossProjectile extends Projectile {
+public class BossProjectile extends AbstractProjectile {
 	
 	private static final String IMAGE_NAME = "bossfire2.png";
 	private static final int IMAGE_HEIGHT = 65;

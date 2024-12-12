@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserSpreadProjectileTest {
+class SpreadShotProjectileTest {
 
-    private UserSpreadProjectile testProjectile;
+    private SpreadShotProjectile testProjectile;
     private static final double INITIAL_X_POS = 100.0;
     private static final double INITIAL_Y_POS = 200.0;
     private static final double VELOCITY_X = 5.0;
@@ -24,7 +24,7 @@ class UserSpreadProjectileTest {
 
     @BeforeEach
     void setUp() {
-        testProjectile = new UserSpreadProjectile(INITIAL_X_POS, INITIAL_Y_POS, VELOCITY_X, VELOCITY_Y);
+        testProjectile = new SpreadShotProjectile(INITIAL_X_POS, INITIAL_Y_POS, VELOCITY_X, VELOCITY_Y);
     }
 
     @Test

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BossProjectileTest {
 
     private BossProjectile testBossProjectile;
-    private static final double INITIAL_X_POS = 1000.0;
+    private static final double INITIAL_X_POS = 1020.0;
     private static final double INITIAL_Y_POS = 200.0;
     private static final int HORIZONTAL_VELOCITY = -15;
 

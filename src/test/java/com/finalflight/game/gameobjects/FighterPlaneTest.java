@@ -19,7 +19,7 @@ class FighterPlaneTest {
         }
 
         @Override
-        public ActiveActorDestructible fireProjectile() {
+        public DestructibleGameObject fireProjectile() {
             return new MockProjectile("projectile.png", 10, 0, 0, true); // Return a mock projectile
         }
 
@@ -37,7 +37,7 @@ class FighterPlaneTest {
     }
 
     // Mock subclass for Projectile
-    private static class MockProjectile extends Projectile {
+    private static class MockProjectile extends AbstractProjectile {
         public MockProjectile(String imageName, int imageHeight, double initialXPos, double initialYPos, boolean skipImageLoading) {
             super(imageName, imageHeight, initialXPos, initialYPos, skipImageLoading);
         }
@@ -116,9 +116,9 @@ class FighterPlaneTest {
 
     @Test
     void testFireProjectile() {
-        ActiveActorDestructible projectile = fighterPlane.fireProjectile();
+        DestructibleGameObject projectile = fighterPlane.fireProjectile();
         assertNotNull(projectile);
-        assertInstanceOf(Projectile.class, projectile); // Verify the type of projectile
+        assertInstanceOf(AbstractProjectile.class, projectile); // Verify the type of projectile
     }
 
     @Test

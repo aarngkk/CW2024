@@ -6,7 +6,7 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.util.Duration;
 import java.util.function.Supplier;
 
-public abstract class FighterPlane extends ActiveActorDestructible {
+public abstract class FighterPlane extends DestructibleGameObject {
 
 	private int health;
 	private final int maxHealth; // Store max health
@@ -25,7 +25,7 @@ public abstract class FighterPlane extends ActiveActorDestructible {
 		this.maxHealth = health;
 	}
 
-	public abstract ActiveActorDestructible fireProjectile();
+	public abstract DestructibleGameObject fireProjectile();
 	
 	@Override
 	public void takeDamage() {

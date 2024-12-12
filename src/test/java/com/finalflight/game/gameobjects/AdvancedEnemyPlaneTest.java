@@ -46,7 +46,7 @@ class AdvancedEnemyPlaneTest {
         // Mock randomSupplier to always trigger firing
         advancedEnemyPlane.setRandomSupplier(() -> 0.0); // Ensures fireProjectile condition is always true
 
-        ActiveActorDestructible projectile = advancedEnemyPlane.fireProjectile();
+        DestructibleGameObject projectile = advancedEnemyPlane.fireProjectile();
 
         assertNotNull(projectile, "fireProjectile should return a projectile when the fire condition is met.");
         assertEquals(EnemyProjectile.class, projectile.getClass(), "fireProjectile should return an EnemyProjectile.");
@@ -57,7 +57,7 @@ class AdvancedEnemyPlaneTest {
         // Mock randomSupplier to never trigger firing
         advancedEnemyPlane.setRandomSupplier(() -> 1.0); // Ensures fireProjectile condition is always false
 
-        ActiveActorDestructible projectile = advancedEnemyPlane.fireProjectile();
+        DestructibleGameObject projectile = advancedEnemyPlane.fireProjectile();
 
         assertNull(projectile, "fireProjectile should return null when the fire condition is not met.");
     }

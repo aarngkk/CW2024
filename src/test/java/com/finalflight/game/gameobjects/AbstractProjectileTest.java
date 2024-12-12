@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProjectileTest {
+class AbstractProjectileTest {
 
-    private Projectile testProjectile;
+    private AbstractProjectile testProjectile;
     private static final String IMAGE_NAME = "testImage.png";
     private static final int IMAGE_HEIGHT = 10;
     private static final double INITIAL_X_POS = 100.0;
@@ -41,7 +41,7 @@ class ProjectileTest {
     }
 
     // A concrete subclass for testing purposes
-    private static class TestProjectile extends Projectile {
+    private static class TestProjectile extends AbstractProjectile {
         public TestProjectile(String imageName, int imageHeight, double initialXPos, double initialYPos, boolean skipImageLoading) {
             super(imageName, imageHeight, initialXPos, initialYPos, skipImageLoading);
         }

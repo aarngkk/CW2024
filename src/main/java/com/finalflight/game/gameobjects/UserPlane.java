@@ -119,7 +119,7 @@ public class UserPlane extends FighterPlane {
 	}
 
 	@Override
-	public ActiveActorDestructible fireProjectile() {
+	public DestructibleGameObject fireProjectile() {
 		long currentTime = System.currentTimeMillis(); // Get the current time in milliseconds
 
 		// Check if enough time has passed since the last shot
@@ -133,26 +133,26 @@ public class UserPlane extends FighterPlane {
 
 			fireSound.playSound();
 
-			return new UserSingleProjectile(projectileX, projectileY);
+			return new SingleShotProjectile(projectileX, projectileY);
 		}
 		// Do nothing if the player tries to fire before the cooldown
 		return null;
 	}
 
-	public List<ActiveActorDestructible> fireSpreadProjectile() {
+	public List<DestructibleGameObject> fireSpreadProjectile() {
 		long currentTime = System.currentTimeMillis();
 
 
 		// Check if enough time has passed since the last shot
 		if (currentTime - lastFiredTime >= SPREAD_FIRE_RATE) {
 			// Fire the spread projectiles
-			List<ActiveActorDestructible> spreadBullets = new ArrayList<>();
+			List<DestructibleGameObject> spreadBullets = new ArrayList<>();
 			double baseX = getTranslateX() + getBoundsInLocal().getWidth();
 			double baseY = getTranslateY() + Y_UPPER_BOUND_OFFSET + getBoundsInLocal().getHeight() / 2;
 
-			spreadBullets.add(new UserSpreadProjectile(baseX, baseY, 10, 0)); // Center bullet
-			spreadBullets.add(new UserSpreadProjectile(baseX, baseY, 10, -5)); // Upward bullet
-			spreadBullets.add(new UserSpreadProjectile(baseX, baseY, 10, 5)); // Downward bullet
+			spreadBullets.add(new SpreadShotProjectile(baseX, baseY, 10, 0)); // Center bullet
+			spreadBullets.add(new SpreadShotProjectile(baseX, baseY, 10, -5)); // Upward bullet
+			spreadBullets.add(new SpreadShotProjectile(baseX, baseY, 10, 5)); // Downward bullet
 
 			// Update last fired time
 			lastFiredTime = currentTime;
@@ -165,7 +165,7 @@ public class UserPlane extends FighterPlane {
 		return null;
 	}
 
-	public List<ActiveActorDestructible> fireHeavyProjectile() {
+	public List<DestructibleGameObject> fireHeavyProjectile() {
 		long currentTime = System.currentTimeMillis();
 
 		if (currentTime - lastFiredTime >= HEAVY_FIRE_RATE) {
@@ -176,14 +176,14 @@ public class UserPlane extends FighterPlane {
 
 			heavyFireSound.playSound();
 
-			return List.of(new UserHeavyProjectile(projectileX, projectileY));
+			return List.of(new HeavyShotProjectile(projectileX, projectileY));
 		}
 		return List.of();
 	}
 
-	public List<ActiveActorDestructible> fire() {
+	public List<DestructibleGameObject> fire() {
 		if (currentFiringMode == FiringMode.SINGLE) {
-			ActiveActorDestructible singleProjectile = fireProjectile();
+			DestructibleGameObject singleProjectile = fireProjectile();
 			return singleProjectile != null ? List.of(singleProjectile) : List.of();
 		} else if (currentFiringMode == FiringMode.SPREAD) {
 			return fireSpreadProjectile();

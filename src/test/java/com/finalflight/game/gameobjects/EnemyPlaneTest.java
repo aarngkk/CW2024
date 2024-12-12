@@ -44,7 +44,7 @@ class EnemyPlaneTest {
         // Force Math.random to always return 0.0, which is below FIRE_RATE
         enemyPlane.setRandomSupplier(() -> 0.0);
         for (int i = 0; i < 100; i++) { // Simulate multiple calls to fireProjectile
-            ActiveActorDestructible projectile = enemyPlane.fireProjectile();
+            DestructibleGameObject projectile = enemyPlane.fireProjectile();
             if (projectile != null) {
                 assertInstanceOf(EnemyProjectile.class, projectile);
                 return; // Test successful if at least one projectile is fired

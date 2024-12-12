@@ -4,7 +4,7 @@ import com.finalflight.game.audio.SoundEffectPlayer;
 
 import java.util.*;
 
-public class Boss extends FighterPlane {
+public class BossPlane extends FighterPlane {
 
 	private static final String BOSS_FIRE_SOUND = "/com/finalflight/game/audio/bossfire.mp3";
 	private static final String SHIELD_ACTIVATE_SOUND = "/com/finalflight/game/audio/bossshieldactivate.wav";
@@ -36,7 +36,7 @@ public class Boss extends FighterPlane {
 	private int framesWithShieldActivated;
 
 
-	public Boss() {
+	public BossPlane() {
 		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, HEALTH);
 		movePattern = new ArrayList<>();
 		consecutiveMovesInSameDirection = 0;
@@ -73,7 +73,7 @@ public class Boss extends FighterPlane {
 	}
 
 	@Override
-	public ActiveActorDestructible fireProjectile() {
+	public DestructibleGameObject fireProjectile() {
 		if (bossFiresInCurrentFrame()) {
 			fireSound.playSound();
 			return new BossProjectile(getProjectileInitialPosition());
