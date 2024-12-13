@@ -1,3 +1,13 @@
+/**
+ * The {@code SpreadShotProjectile} class represents a projectile with a spread effect,
+ * moving in a specified direction and destroyed once it exceeds its range.
+ *
+ * <p>This class extends {@link AbstractProjectile} and adds functionality for range-based destruction
+ * and directional movement based on initial velocity values.</p>
+ *
+ * <p>Original Source Code:
+ * <a href="com/finalflight/game/gameobjects/SpreadShotProjectile.java">SpreadShotProjectile.java</a></p>
+ */
 package com.finalflight.game.gameobjects;
 
 public class SpreadShotProjectile extends AbstractProjectile {
@@ -10,12 +20,12 @@ public class SpreadShotProjectile extends AbstractProjectile {
     private double traveledDistance = 0.0;
 
     /**
-     * Creates a spread projectile with specified position and velocity.
+     * Constructs a {@code SpreadShotProjectile} with specified initial position and velocity.
      *
-     * @param x         Initial X position
-     * @param y         Initial Y position
-     * @param velocityX Horizontal velocity
-     * @param velocityY Vertical velocity
+     * @param x         the initial X-coordinate of the projectile.
+     * @param y         the initial Y-coordinate of the projectile.
+     * @param velocityX the horizontal velocity of the projectile.
+     * @param velocityY the vertical velocity of the projectile.
      */
     public SpreadShotProjectile(double x, double y, double velocityX, double velocityY) {
         super(IMAGE_NAME, IMAGE_HEIGHT, x, y);
@@ -24,7 +34,7 @@ public class SpreadShotProjectile extends AbstractProjectile {
     }
 
     /**
-     * Updates the position of the projectile and destroys it if it exceeds its range.
+     * Updates the position of the spread-shot projectile and destroys it if it exceeds its range.
      */
     @Override
     public void updatePosition() {
@@ -42,6 +52,10 @@ public class SpreadShotProjectile extends AbstractProjectile {
         }
     }
 
+    /**
+     * Updates the state of the spread-shot projectile. This method ensures
+     * the position update logic is executed.
+     */
     @Override
     public void updateActor() {
         updatePosition();

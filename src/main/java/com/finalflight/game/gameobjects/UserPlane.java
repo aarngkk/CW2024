@@ -1,3 +1,10 @@
+/**
+ * Represents the player's plane with specific abilities, firing modes, and movement mechanics.
+ * Extends {@link FighterPlane} and includes additional features like speed boost and multiple firing modes.
+ *
+ * <p>Original Source Code:
+ * <a href="com/finalflight/game/gameobjects/UserPlane.java">UserPlane.java</a></p>
+ */
 package com.finalflight.game.gameobjects;
 
 import com.finalflight.game.audio.SoundEffectPlayer;
@@ -64,6 +71,11 @@ public class UserPlane extends FighterPlane {
     private final SoundEffectPlayer heavyFireSound;
     private final SoundEffectPlayer speedBoostSound;
 
+    /**
+     * Initializes a UserPlane instance with a specified initial health.
+     *
+     * @param initialHealth The starting health of the UserPlane.
+     */
     public UserPlane(int initialHealth) {
         super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, persistentHealth > 0 ? persistentHealth : initialHealth);
         persistentHealth = getHealth();
@@ -96,6 +108,10 @@ public class UserPlane extends FighterPlane {
         damagedImpactSound.setVolume(0.3);
     }
 
+    /**
+     * Updates the position of the user plane based on velocity and current boost status.
+     * Ensures the plane stays within predefined bounds.
+     */
     @Override
     public void updatePosition() {
         double boostFactor = isSpeedBoostActive ? SPEED_BOOST_MULTIPLIER : 1.0;
@@ -113,6 +129,10 @@ public class UserPlane extends FighterPlane {
         }
     }
 
+    /**
+     * Updates the state of the user plane each frame.
+     * Handles position, boost energy, and other periodic changes.
+     */
     @Override
     public void updateActor() {
         updatePosition();
@@ -120,6 +140,11 @@ public class UserPlane extends FighterPlane {
         rechargeBoostEnergy();  // Handle boost recharge
     }
 
+    /**
+     * Fires a single projectile from the user plane.
+     *
+     * @return A {@link DestructibleGameObject} representing the fired projectile, or null if the cooldown has not elapsed.
+     */
     @Override
     public DestructibleGameObject fireProjectile() {
         long currentTime = System.currentTimeMillis(); // Get the current time in milliseconds
@@ -141,6 +166,11 @@ public class UserPlane extends FighterPlane {
         return null;
     }
 
+    /**
+     * Fires a spread of projectiles from the user plane.
+     *
+     * @return A list of {@link DestructibleGameObject} instances representing the spread projectiles.
+     */
     public List<DestructibleGameObject> fireSpreadProjectile() {
         long currentTime = System.currentTimeMillis();
 
@@ -167,6 +197,11 @@ public class UserPlane extends FighterPlane {
         return null;
     }
 
+    /**
+     * Fires a heavy projectile with high damage from the user plane.
+     *
+     * @return A list containing a single {@link DestructibleGameObject} instance representing the heavy projectile.
+     */
     public List<DestructibleGameObject> fireHeavyProjectile() {
         long currentTime = System.currentTimeMillis();
 
@@ -183,6 +218,11 @@ public class UserPlane extends FighterPlane {
         return List.of();
     }
 
+    /**
+     * Fires projectiles based on the current firing mode.
+     *
+     * @return A list of {@link DestructibleGameObject} instances representing the fired projectiles.
+     */
     public List<DestructibleGameObject> fire() {
         if (currentFiringMode == FiringMode.SINGLE) {
             DestructibleGameObject singleProjectile = fireProjectile();
@@ -195,6 +235,11 @@ public class UserPlane extends FighterPlane {
         return List.of();
     }
 
+    /**
+     * Sets the firing mode of the user plane.
+     *
+     * @param mode The desired {@link FiringMode} to switch to.
+     */
     public void setFiringMode(FiringMode mode) {
         if (this.currentFiringMode != mode) {
             this.currentFiringMode = mode;
@@ -207,10 +252,21 @@ public class UserPlane extends FighterPlane {
         }
     }
 
+    /**
+     * Gets the current firing mode of the user plane.
+     *
+     * @return The current {@link FiringMode} of the plane.
+     */
     public FiringMode getFiringMode() {
         return currentFiringMode;
     }
 
+    /**
+     * Moves the user plane in the specified direction.
+     *
+     * @param direction  The direction of movement (-1 for left/up, 1 for right/down, 0 to stop).
+     * @param isVertical Whether the movement is vertical or horizontal.
+     */
     public void move(int direction, boolean isVertical) {
         if (isVertical) {
             velocityMultiplierY = direction; // -1 for up, 1 for down, 0 to stop
@@ -219,6 +275,9 @@ public class UserPlane extends FighterPlane {
         }
     }
 
+    /**
+     * Reduces the plane's health and plays damage sound effects.
+     */
     @Override
     public void takeDamage() {
         super.takeDamage();
@@ -228,10 +287,20 @@ public class UserPlane extends FighterPlane {
         damagedImpactSound.playSound();
     }
 
+    /**
+     * Resets the static health of the user plane.
+     *
+     * @param health The new health value to set.
+     */
     public static void resetHealth(int health) {
         persistentHealth = health;
     }
 
+    /**
+     * Updates the visual effects of the user plane when the speed boost is active.
+     * If the speed boost is active, the plane will have a slight rotation to indicate boost.
+     * If the boost is not active, any transformations applied (such as rotation) are cleared.
+     */
     private void updateBoostEffects() {
         if (isSpeedBoostActive) {
             // Apply rotation for speed boost
@@ -245,6 +314,12 @@ public class UserPlane extends FighterPlane {
         }
     }
 
+    /**
+     * Activates or deactivates the speed boost for the user plane.
+     * Updates effects and handles sound playback.
+     *
+     * @param isActive Whether the speed boost should be active.
+     */
     public void setSpeedBoost(boolean isActive) {
         if (isActive && currentBoostEnergy > 0) {
             if (!isSpeedBoostActive) {
@@ -262,6 +337,11 @@ public class UserPlane extends FighterPlane {
         updateBoostEffects(); // Update plane speed boost effects
     }
 
+    /**
+     * Recharges the user's boost energy over time, provided the boost is not active.
+     * Boost energy is recharged at a specified rate, and the recharge only begins after a cooldown
+     * period has passed since the last depletion.
+     */
     private void rechargeBoostEnergy() {
         if (!isSpeedBoostActive && currentBoostEnergy < MAX_BOOST_ENERGY) {
             // Check if cooldown period has passed before recharging
@@ -276,6 +356,10 @@ public class UserPlane extends FighterPlane {
         }
     }
 
+    /**
+     * Drains the user's boost energy while the speed boost is active.
+     * The energy is drained at a specified rate, and if the energy reaches zero, the speed boost is deactivated.
+     */
     private void drainBoostEnergy() {
         if (isSpeedBoostActive && currentBoostEnergy > 0) {
             currentBoostEnergy -= BOOST_DRAIN_RATE;
@@ -286,30 +370,63 @@ public class UserPlane extends FighterPlane {
         }
     }
 
+    /**
+     * Gets the current number of kills achieved by the user.
+     *
+     * @return The total kill count.
+     */
     public int getNumberOfKills() {
         return numberOfKills;
     }
 
+    /**
+     * Increments the kill count of the user by one.
+     */
     public void incrementKillCount() {
         numberOfKills++;
     }
 
+    /**
+     * Gets the maximum boost energy available for the user plane.
+     *
+     * @return The maximum boost energy value.
+     */
     public static double getMaxBoostEnergy() {
         return MAX_BOOST_ENERGY;
     }
 
+    /**
+     * Gets the current boost energy level of the user plane.
+     *
+     * @return The current boost energy value.
+     */
     public double getBoostEnergy() {
         return currentBoostEnergy;
     }
 
+    /**
+     * Checks whether the speed boost is currently active.
+     *
+     * @return True if the speed boost is active, false otherwise.
+     */
     public boolean getIsSpeedBoostActive() {
         return isSpeedBoostActive;
     }
 
+    /**
+     * Gets the upper bound for the plane's vertical movement.
+     *
+     * @return The vertical upper bound.
+     */
     public static double getYUpperBound() {
         return Y_UPPER_BOUND;
     }
 
+    /**
+     * Gets the right bound for the plane's horizontal movement.
+     *
+     * @return The horizontal right bound.
+     */
     public static double getXRightBound() {
         return X_RIGHT_BOUND;
     }

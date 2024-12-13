@@ -1,3 +1,12 @@
+/**
+ * The {@code LevelThree} class represents the final level of the game, featuring
+ * a boss fight and more challenging gameplay mechanics. It extends the {@link BaseLevel}
+ * class and defines behaviors specific to Level Three, such as spawning enemies
+ * based on the boss's health and managing the boss's unique characteristics.
+ *
+ * <p>Original Source Code:
+ * <a href="com/finalflight/game/level/LevelThree.java">LevelThree.java</a></p>
+ */
 package com.finalflight.game.level;
 
 import com.finalflight.game.gameobjects.*;
@@ -20,12 +29,25 @@ public class LevelThree extends BaseLevel {
     private final BossPlane boss;
     private LevelThreeView levelView;
 
+    /**
+     * Constructs a new {@code LevelThree} instance with the specified screen dimensions.
+     * Initializes the boss and sets the music for the level.
+     *
+     * @param screenHeight the height of the game screen.
+     * @param screenWidth  the width of the game screen.
+     */
     public LevelThree(double screenHeight, double screenWidth) {
         super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH, KILLS_TO_ADVANCE);
         boss = new BossPlane();
         switchMusic(BOSS_LEVEL_MUSIC, true);
     }
 
+    /**
+     * Initializes the scene for Level Three. This includes setting the background,
+     * adding stylesheets, initializing friendly units, and configuring the HUD.
+     *
+     * @return the {@link Scene} object representing the game scene for Level Three.
+     */
     @Override
     public Scene initializeScene() {
         getScene().getStylesheets().add(getClass().getResource("/com/finalflight/game/css/styles.css").toExternalForm());
@@ -38,6 +60,9 @@ public class LevelThree extends BaseLevel {
         return getScene();
     }
 
+    /**
+     * Updates the scene during gameplay, including HUD updates and boss shield updates.
+     */
     @Override
     protected void updateScene() {
         super.updateScene();
@@ -45,11 +70,18 @@ public class LevelThree extends BaseLevel {
         updateHUD();
     }
 
+    /**
+     * Initializes the player's plane and adds it to the scene graph.
+     */
     @Override
     protected void initializeFriendlyUnits() {
         getRoot().getChildren().add(getUser());
     }
 
+    /**
+     * Checks if the game is over. The game ends if the player's plane is destroyed,
+     * resulting in a loss, or if the boss is destroyed, resulting in a win.
+     */
     @Override
     protected void checkIfGameOver() {
         if (userIsDestroyed()) {
@@ -60,12 +92,20 @@ public class LevelThree extends BaseLevel {
         }
     }
 
+    /**
+     * Handles the boss's explosion effect upon being destroyed.
+     * Calculates the position of the explosion and displays it.
+     */
     private void bossExplode() {
         double explosionX = boss.getLayoutX() + boss.getTranslateX();
         double explosionY = boss.getLayoutY() + boss.getTranslateY();
         levelView.showBossExplosion(explosionX, explosionY);
     }
 
+    /**
+     * Spawns enemy units during the level. Adjusts the spawn rate and total enemies
+     * based on the boss's remaining health. Also ensures the boss is added to the scene.
+     */
     @Override
     protected void spawnEnemyUnits() {
         // Update enemy spawn rate based on the boss's health
@@ -97,6 +137,10 @@ public class LevelThree extends BaseLevel {
         }
     }
 
+    /**
+     * Updates the enemy spawn rate and the total number of enemies based on the boss's health.
+     * As the boss's health decreases, the difficulty increases by spawning more enemies.
+     */
     private void updateEnemySpawnRate() {
         // Increase the number of enemies and spawn probability based on boss health
         double bossHealthPercentage = (double) boss.getHealth() / boss.getMaxHealth();
@@ -116,12 +160,21 @@ public class LevelThree extends BaseLevel {
         }
     }
 
+    /**
+     * Creates and returns the level view for Level Three, including HUD and boss-specific UI.
+     *
+     * @return a {@link BaseLevelView} object for Level Three.
+     */
     @Override
     protected BaseLevelView instantiateLevelView() {
         levelView = new LevelThreeView(getRoot(), PLAYER_INITIAL_HEALTH, this); // Save the view
         return levelView;
     }
 
+    /**
+     * Updates the HUD elements during gameplay, such as the boss's health bar,
+     * the boost bar, and the player's firing mode.
+     */
     @Override
     protected void updateHUD() {
         double bossHealthPercentage = (double) boss.getHealth() / boss.getMaxHealth();
@@ -131,6 +184,9 @@ public class LevelThree extends BaseLevel {
         levelView.updateFiringMode(getUser().getFiringMode().toString());
     }
 
+    /**
+     * Overrides the default kill count update behavior, as Level Three does not track kill counts.
+     */
     @Override
     protected void updateKillCount() {
         // Do nothing since LevelThree does not need to track kill count

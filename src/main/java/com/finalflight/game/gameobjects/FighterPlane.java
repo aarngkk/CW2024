@@ -1,3 +1,13 @@
+/**
+ * The {@code FighterPlane} class represents a general fighter plane in the game.
+ * It is an abstract class that provides basic attributes and behaviors for
+ * fighter planes, including health management, damage handling, and projectile firing.
+ *
+ * <p>Subclasses must implement specific behaviors for updating position and firing projectiles.</p>
+ *
+ * <p>Original Source Code:
+ * <a href="com/finalflight/game/gameobjects/FighterPlane.java">FighterPlane.java</a></p>
+ */
 package com.finalflight.game.gameobjects;
 
 import javafx.animation.KeyFrame;
@@ -13,21 +23,48 @@ public abstract class FighterPlane extends DestructibleGameObject {
     private final int maxHealth; // Store max health
     protected Supplier<Double> randomSupplier = Math::random; // Default to Math.random()
 
+    /**
+     * Constructs a {@code FighterPlane} with the specified attributes.
+     *
+     * @param imageName     the image name of the fighter plane.
+     * @param imageHeight   the height of the image.
+     * @param initialXPos   the initial X position.
+     * @param initialYPos   the initial Y position.
+     * @param health        the initial health of the fighter plane.
+     */
     public FighterPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int health) {
         super(imageName, imageHeight, initialXPos, initialYPos);
         this.health = health;
         this.maxHealth = health;
     }
 
-    // Overloaded constructor for testing (skips image loading)
+    /**
+     * Overloaded constructor for testing purposes (skips image loading).
+     *
+     * @param imageName         the image name of the fighter plane.
+     * @param imageHeight       the height of the image.
+     * @param initialXPos       the initial X position.
+     * @param initialYPos       the initial Y position.
+     * @param health            the initial health of the fighter plane.
+     * @param skipImageLoading  {@code true} to skip image loading, {@code false} otherwise.
+     */
     public FighterPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int health, boolean skipImageLoading) {
         super(imageName, imageHeight, initialXPos, initialYPos, skipImageLoading);
         this.health = health;
         this.maxHealth = health;
     }
 
+    /**
+     * Abstract method to fire a projectile.
+     * Subclasses must provide an implementation to define projectile behavior.
+     *
+     * @return a {@code DestructibleGameObject} representing the fired projectile.
+     */
     public abstract DestructibleGameObject fireProjectile();
 
+    /**
+     * Reduces the health of the fighter plane by 1. If health reaches zero, the plane is destroyed.
+     */
     @Override
     public void takeDamage() {
         health--;
@@ -42,6 +79,9 @@ public abstract class FighterPlane extends DestructibleGameObject {
         }
     }
 
+    /**
+     * Creates a flash effect on the plane when it takes damage.
+     */
     private void flashOnDamage() {
         // Create a ColorAdjust effect to create a flash effect
         ColorAdjust flashEffect = new ColorAdjust();
@@ -57,27 +97,58 @@ public abstract class FighterPlane extends DestructibleGameObject {
         flashTimeline.play();
     }
 
-    // Allow subclasses to customize the random supplier
+    /**
+     * Allows subclasses to customize the random supplier.
+     *
+     * @param randomSupplier a {@code Supplier<Double>} providing random values.
+     */
     public void setRandomSupplier(Supplier<Double> randomSupplier) {
         this.randomSupplier = randomSupplier;
     }
 
+    /**
+     * Calculates the X position for a projectile based on the specified offset.
+     *
+     * @param xPositionOffset the offset to add to the current X position.
+     * @return the calculated X position.
+     */
     protected double getProjectileXPosition(double xPositionOffset) {
         return getLayoutX() + getTranslateX() + xPositionOffset;
     }
 
+    /**
+     * Calculates the Y position for a projectile based on the specified offset.
+     *
+     * @param yPositionOffset the offset to add to the current Y position.
+     * @return the calculated Y position.
+     */
     protected double getProjectileYPosition(double yPositionOffset) {
         return getLayoutY() + getTranslateY() + yPositionOffset;
     }
 
+    /**
+     * Checks if the health of the plane is zero.
+     *
+     * @return {@code true} if health is zero, {@code false} otherwise.
+     */
     private boolean healthAtZero() {
         return health == 0;
     }
 
+    /**
+     * Returns the current health of the fighter plane.
+     *
+     * @return the current health.
+     */
     public int getHealth() {
         return health;
     }
 
+    /**
+     * Returns the maximum health of the fighter plane.
+     *
+     * @return the maximum health.
+     */
     public int getMaxHealth() {
         return maxHealth;
     }

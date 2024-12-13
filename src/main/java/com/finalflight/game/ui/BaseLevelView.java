@@ -1,3 +1,10 @@
+/**
+ * Handles the UI elements and interactions for a base game level, including HUD elements
+ * such as health, boost energy, and firing mode, as well as pause and game-over menus.
+ *
+ * <p>Original Source Code:
+ * <a href="com/finalflight/game/ui/BaseLevelView.java">BaseLevelView.java</a></p>
+ */
 package com.finalflight.game.ui;
 
 import com.finalflight.game.gameobjects.DestructibleGameObject;
@@ -16,10 +23,6 @@ import javafx.scene.text.Text;
 
 import java.util.List;
 
-/**
- * Handles the initialization and coordination of the user interface (UI) elements for a base level.
- * This includes the Player HUD and the Pause Menu.
- */
 public class BaseLevelView {
 
     private static final double HEART_DISPLAY_X_POSITION = 5;
@@ -76,6 +79,11 @@ public class BaseLevelView {
         }
     }
 
+    /**
+     * Removes hearts from the display based on the remaining health.
+     *
+     * @param heartsRemaining The number of hearts to remain displayed.
+     */
     public void removeHearts(int heartsRemaining) {
         int currentNumberOfHearts = heartDisplay.getContainer().getChildren().size();
         for (int i = 0; i < currentNumberOfHearts - heartsRemaining; i++) {
@@ -84,7 +92,7 @@ public class BaseLevelView {
     }
 
     /**
-     * Initializes the pause menu and its elements.
+     * Initializes the pause menu and its elements, including buttons for resuming, restarting, and quitting the game.
      */
     public void initializePauseMenu() {
         double buttonWidth = 300;
@@ -157,7 +165,7 @@ public class BaseLevelView {
     }
 
     /**
-     * Hides the pause menu.
+     * Hides the pause menu from the screen.
      */
     public void hidePauseMenu() {
         pauseButton.setVisible(true);
@@ -175,7 +183,7 @@ public class BaseLevelView {
     }
 
     /**
-     * Brings the pause menu and overlay elements to the front of the UI.
+     * Brings pause-related UI elements to the front of the screen.
      */
     public void bringPauseElementsToFront() {
         if (pauseOverlay != null) {
@@ -187,7 +195,7 @@ public class BaseLevelView {
     }
 
     /**
-     * Displays the pause overlay without showing the menu.
+     * Displays the pause overlay without showing the pause menu.
      */
     public void showPauseOverlay() {
         if (pauseOverlay != null) {
@@ -196,7 +204,7 @@ public class BaseLevelView {
     }
 
     /**
-     * Applies or removes the blur effect to all non-pause elements.
+     * Applies or removes a blur effect to non-pause elements of the game.
      *
      * @param apply True to apply the blur effect, false to remove it.
      */
@@ -208,12 +216,24 @@ public class BaseLevelView {
         });
     }
 
+    /**
+     * Initializes HUD elements such as the kill counter, boost bar, and firing mode display.
+     *
+     * @param killsToAdvance The total number of kills required to advance to the next level.
+     * @param boostbarY      The Y-coordinate for placing the boost bar.
+     * @param firingModeY    The Y-coordinate for placing the firing mode display.
+     */
     public void initializeHUD(int killsToAdvance, double boostbarY, double firingModeY) {
         initializeKillCounter(killsToAdvance);
         initializeFiringModeText(firingModeY);
         initializeBoostBar(boostbarY);
     }
 
+    /**
+     * Initializes the kill counter display on the HUD.
+     *
+     * @param killsToAdvance The total number of kills required to advance to the next level.
+     */
     private void initializeKillCounter(int killsToAdvance) {
         killCountText = new Text("Kills: 0 / " + killsToAdvance);
         killCountText.setFont(Font.font("Trebuchet MS", 30));
@@ -223,6 +243,11 @@ public class BaseLevelView {
         root.getChildren().add(killCountText);
     }
 
+    /**
+     * Initializes the firing mode text display on the HUD.
+     *
+     * @param yPosition The Y-coordinate position where the firing mode text is placed.
+     */
     protected void initializeFiringModeText(double yPosition) {
         firingModeText = new Text("Mode: SINGLE");
         firingModeText.setFont(Font.font("Trebuchet MS", 30));
@@ -232,6 +257,11 @@ public class BaseLevelView {
         root.getChildren().add(firingModeText);
     }
 
+    /**
+     * Initializes the boost bar on the HUD.
+     *
+     * @param yPosition The Y-coordinate position where the boost bar is placed.
+     */
     protected void initializeBoostBar(double yPosition) {
         boostBar = new Rectangle(BOOST_BAR_WIDTH, BOOST_BAR_HEIGHT, Color.LAWNGREEN);
         boostBar.setTranslateX(8);
@@ -248,18 +278,34 @@ public class BaseLevelView {
         root.getChildren().add(boostBar);
     }
 
+    /**
+     * Updates the kill counter displayed on the HUD.
+     *
+     * @param kills          The current number of kills.
+     * @param killsToAdvance The total number of kills required to advance.
+     */
     public void updateKillCounter(int kills, int killsToAdvance) {
         if (killCountText != null) {
             killCountText.setText("Kills: " + kills + " / " + killsToAdvance);
         }
     }
 
+    /**
+     * Updates the firing mode text displayed on the HUD.
+     *
+     * @param mode The current firing mode of the player's weapon.
+     */
     public void updateFiringMode(String mode) {
         if (firingModeText != null) {
             firingModeText.setText("Mode: " + mode);
         }
     }
 
+    /**
+     * Updates the boost bar's visual representation based on the player's boost energy.
+     *
+     * @param energyPercentage The percentage of boost energy remaining (0 to 1).
+     */
     public void updateBoostBar(double energyPercentage) {
         if (boostBar != null) {
             boostBar.setWidth(BOOST_BAR_WIDTH * energyPercentage);
@@ -267,6 +313,9 @@ public class BaseLevelView {
         }
     }
 
+    /**
+     * Displays a "You Win" message and removes the pause button.
+     */
     public void displayWinText() {
         Text youWinText = new Text("YOU WIN!");
         youWinText.setFont(Font.font("Trebuchet MS", FontWeight.BOLD, 200)); // Set font and size
@@ -280,13 +329,23 @@ public class BaseLevelView {
         removePauseButton();
     }
 
+    /**
+     * Clears all game actors such as enemies and projectiles after a win condition.
+     *
+     * @param enemyUnits        The list of enemy game objects to remove.
+     * @param userProjectiles   The list of user projectiles to remove.
+     * @param enemyProjectiles  The list of enemy projectiles to remove.
+     */
     public void clearActorsAfterWin(List<DestructibleGameObject> enemyUnits, List<DestructibleGameObject> userProjectiles, List<DestructibleGameObject> enemyProjectiles) {
         if (enemyUnits != null) root.getChildren().removeAll(enemyUnits);
         if (enemyProjectiles != null) root.getChildren().removeAll(enemyProjectiles);
         if (userProjectiles != null) root.getChildren().removeAll(userProjectiles);
     }
 
-    public void displayLoseText() {
+    /**
+     * Displays a "Game Over" screen with options to restart or quit the game.
+     */
+    public void displayGameOverText() {
         double buttonWidth = 300;
         removePauseButton();
         showPauseOverlay();
@@ -331,10 +390,20 @@ public class BaseLevelView {
         });
     }
 
+    /**
+     * Returns the root JavaFX Group containing all UI elements.
+     *
+     * @return The root JavaFX Group.
+     */
     public Group getRoot() {
         return root;
     }
 
+    /**
+     * Returns the screen width in pixels.
+     *
+     * @return The screen width.
+     */
     public double getScreenWidth() {
         return screenWidth;
     }

@@ -1,3 +1,14 @@
+/**
+ * The {@code HeartDisplay} class represents a graphical display of hearts in the game,
+ * which is typically used to represent a player's health. It manages the creation, addition,
+ * removal, and clearing of heart icons in an {@link HBox} container.
+ *
+ * <p>The display is positioned at a specified X and Y coordinate, and the number of hearts
+ * is configurable.</p>
+ *
+ * <p>Original Source Code:
+ * <a href="com/finalflight/game/ui/HeartDisplay.java">HeartDisplay.java</a></p>
+ */
 package com.finalflight.game.ui;
 
 import javafx.scene.image.Image;
@@ -14,6 +25,14 @@ public class HeartDisplay {
     private final double containerYPosition;
     private final int numberOfHeartsToDisplay;
 
+    /**
+     * Constructs a {@code HeartDisplay} at the specified position with the specified
+     * number of hearts to display initially.
+     *
+     * @param xPosition the X-coordinate for the heart display container.
+     * @param yPosition the Y-coordinate for the heart display container.
+     * @param heartsToDisplay the initial number of hearts to display.
+     */
     public HeartDisplay(double xPosition, double yPosition, int heartsToDisplay) {
         this.containerXPosition = xPosition;
         this.containerYPosition = yPosition;
@@ -23,7 +42,7 @@ public class HeartDisplay {
     }
 
     /**
-     * Initializes the container for the hearts.
+     * Initializes the container for the hearts, positioning it at the specified coordinates.
      */
     private void initializeContainer() {
         container = new HBox();
@@ -31,6 +50,10 @@ public class HeartDisplay {
         container.setLayoutY(containerYPosition);
     }
 
+    /**
+     * Initializes the hearts by creating and adding the specified number of heart icons
+     * to the container.
+     */
     private void initializeHearts() {
         for (int i = 0; i < numberOfHeartsToDisplay; i++) {
             ImageView heart = new ImageView(new Image(getClass().getResource(HEART_IMAGE_NAME).toExternalForm()));
@@ -59,7 +82,7 @@ public class HeartDisplay {
     }
 
     /**
-     * Removes the last heart in the display.
+     * Removes the last heart from the display, if any exist.
      */
     public void removeHeart() {
         if (!container.getChildren().isEmpty())
@@ -67,9 +90,9 @@ public class HeartDisplay {
     }
 
     /**
-     * Returns the heart container.
+     * Retrieves the heart container.
      *
-     * @return The HBox containing the hearts.
+     * @return the {@link HBox} containing the heart icons.
      */
     public HBox getContainer() {
         return container;

@@ -1,3 +1,10 @@
+/**
+ * The {@code EnemyPlane} class represents a basic enemy fighter plane in the game.
+ * It can move horizontally and fire projectiles at random intervals.
+ *
+ * <p>Original Source Code:
+ * <a href="com/finalflight/game/gameobjects/EnemyPlane.java">EnemyPlane.java</a></p>
+ */
 package com.finalflight.game.gameobjects;
 
 import com.finalflight.game.audio.SoundEffectPlayer;
@@ -18,15 +25,29 @@ public class EnemyPlane extends FighterPlane {
         fireSound.setVolume(0.07);
     }
 
+    /**
+     * Constructs an {@code EnemyPlane} with the specified initial position.
+     *
+     * @param initialXPos the initial X position.
+     * @param initialYPos the initial Y position.
+     */
     public EnemyPlane(double initialXPos, double initialYPos) {
         super(IMAGE_NAME, IMAGE_HEIGHT, initialXPos, initialYPos, INITIAL_HEALTH);
     }
 
+    /**
+     * Updates the position of the enemy plane, moving it horizontally.
+     */
     @Override
     public void updatePosition() {
         moveHorizontally(HORIZONTAL_VELOCITY);
     }
 
+    /**
+     * Fires a projectile at random intervals based on the fire rate.
+     *
+     * @return an {@code EnemyProjectile} if fired, otherwise {@code null}.
+     */
     @Override
     public DestructibleGameObject fireProjectile() {
         if (randomSupplier.get() < FIRE_RATE) {
@@ -38,6 +59,10 @@ public class EnemyPlane extends FighterPlane {
         return null;
     }
 
+    /**
+     * Updates the state of the enemy plane. This method ensures
+     * the position update logic is executed.
+     */
     @Override
     public void updateActor() {
         updatePosition();
