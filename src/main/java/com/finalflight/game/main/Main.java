@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 public class Main extends Application {
     private static final String ICON_IMAGE_NAME = "/com/finalflight/game/images/icon.png";

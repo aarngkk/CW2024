@@ -55,7 +55,7 @@ public class LevelTwo extends BaseLevel {
 
     @Override
     protected BaseLevelView instantiateLevelView() {
-        return new BaseLevelView(getRoot(), PLAYER_INITIAL_HEALTH);
+        return new BaseLevelView(getRoot(), PLAYER_INITIAL_HEALTH, getScreenWidth(), getScreenHeight(), this);
     }
 
     private boolean userHasReachedKillTarget() {

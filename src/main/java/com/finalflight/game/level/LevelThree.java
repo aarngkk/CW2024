@@ -1,14 +1,9 @@
 package com.finalflight.game.level;
 
-import com.finalflight.game.gameobjects.AdvancedEnemyPlane;
-import com.finalflight.game.gameobjects.BossPlane;
-import com.finalflight.game.gameobjects.DestructibleGameObject;
-import com.finalflight.game.gameobjects.EnemyPlane;
+import com.finalflight.game.gameobjects.*;
 import com.finalflight.game.ui.BaseLevelView;
-import com.finalflight.game.ui.BossExplosionEffect;
 import com.finalflight.game.ui.LevelThreeView;
-import com.finalflight.game.ui.ShieldImage;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.Scene;
 
 public class LevelThree extends BaseLevel {
 
@@ -18,81 +13,41 @@ public class LevelThree extends BaseLevel {
     private static final int KILLS_TO_ADVANCE = 0;
     private static final int INITIAL_TOTAL_ENEMIES = 2;
     private static final double INITIAL_ENEMY_SPAWN_PROBABILITY = 0.02;
+    private static final double LEVEL_THREE_HUD_BOOST_BAR_Y = 100;
+    private static final double LEVEL_THREE_HUD_FIRING_MODE_Y = 80;
     private int totalEnemies = INITIAL_TOTAL_ENEMIES;
     private double enemySpawnProbability = INITIAL_ENEMY_SPAWN_PROBABILITY;
     private final BossPlane boss;
-    private ProgressBar bossHealthBar;
-    private final ShieldImage shieldImage;
+    private LevelThreeView levelView;
 
     public LevelThree(double screenHeight, double screenWidth) {
         super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH, KILLS_TO_ADVANCE);
         boss = new BossPlane();
-        shieldImage = new ShieldImage(boss.getLayoutX(), boss.getLayoutY());
         switchMusic(BOSS_LEVEL_MUSIC, true);
+    }
+
+    @Override
+    public Scene initializeScene() {
+        getScene().getStylesheets().add(getClass().getResource("/com/finalflight/game/css/styles.css").toExternalForm());
+        initializeBackground();
+        initializeFriendlyUnits();
+        levelView.showHeartDisplay(getUser().getHealth());
+        levelView.initializeHUD(getKillsToAdvance(), LEVEL_THREE_HUD_BOOST_BAR_Y, LEVEL_THREE_HUD_FIRING_MODE_Y);
+        levelView.initializePauseMenu();
+        getBackground().requestFocus();
+        return getScene();
     }
 
     @Override
     protected void updateScene() {
         super.updateScene();
-        updateShield();
-    }
-
-    @Override
-    protected void initializeHUD() {
-        initializeFiringModeText();
-        initializeBoostBar();
-        initializeBossHealthBar();
-    }
-
-    @Override
-    protected double getFiringModeTextYPosition() {
-        return 80; // Adjusted Y position for firing mode text
-    }
-
-    @Override
-    protected double getBoostBarYPosition() {
-        return 100; // Adjusted Y position for boost bar
+        levelView.updateShield(boss);
+        updateHUD();
     }
 
     @Override
     protected void initializeFriendlyUnits() {
         getRoot().getChildren().add(getUser());
-    }
-
-    private void initializeBossHealthBar() {
-        bossHealthBar = new ProgressBar();
-        bossHealthBar.setPrefWidth(500);
-        bossHealthBar.setPrefHeight(25);
-        bossHealthBar.getStyleClass().add("health-bar");
-
-        // Position the health bar at the top center of the screen
-        bossHealthBar.setLayoutX((getScreenWidth() - bossHealthBar.getPrefWidth()) / 2);
-        bossHealthBar.setLayoutY(30);
-
-        // Set the initial value based on the boss's health
-        updateBossHealthBar();
-
-        // Add the health bar to the root
-        getRoot().getChildren().add(bossHealthBar);
-    }
-
-    private void initializeBossShield() {
-        getRoot().getChildren().add(shieldImage);
-    }
-
-    private void updateBossHealthBar() {
-        // Set progress based on boss's health as a percentage
-        double healthPercentage = (double) boss.getHealth() / boss.getMaxHealth();
-        bossHealthBar.setProgress(healthPercentage);
-
-        bossHealthBar.getStyleClass().removeAll("normal-bar", "shielded-bar");
-
-        // Set the appropriate CSS when the boss is shielded
-        if (boss.getIsShielded()) {
-            bossHealthBar.getStyleClass().add("shielded-bar");
-        } else {
-            bossHealthBar.getStyleClass().add("normal-bar");
-        }
     }
 
     @Override
@@ -106,9 +61,9 @@ public class LevelThree extends BaseLevel {
     }
 
     private void bossExplode() {
-        BossExplosionEffect bossExplosionEffect = new BossExplosionEffect(boss.getLayoutX() + boss.getTranslateX(), boss.getLayoutY() + boss.getTranslateY());
-        getRoot().getChildren().add(bossExplosionEffect);
-        bossExplosionEffect.playExplosionSound();
+        double explosionX = boss.getLayoutX() + boss.getTranslateX();
+        double explosionY = boss.getLayoutY() + boss.getTranslateY();
+        levelView.showBossExplosion(explosionX, explosionY);
     }
 
     @Override
@@ -119,7 +74,7 @@ public class LevelThree extends BaseLevel {
         // Add the boss if no enemies exist
         if (getCurrentNumberOfEnemies() == 0) {
             addEnemyUnit(boss);
-            initializeBossShield();
+            levelView.initializeShield(boss);
         }
 
         // Spawn enemy planes
@@ -161,30 +116,24 @@ public class LevelThree extends BaseLevel {
         }
     }
 
-    private void updateShield() {
-        if (shieldImage != null && boss != null) {
-            // Update shield image position to match the boss's position
-            shieldImage.setTranslateX(boss.getTranslateX() + shieldImage.getShieldXOffset());
-            shieldImage.setTranslateY(boss.getTranslateY() + shieldImage.getShieldYOffset());
-
-            // Show or hide the shield image based on the boss's shield state
-            if (boss.getIsShielded()) {
-                shieldImage.showShield();
-            } else {
-                shieldImage.hideShield();
-            }
-        }
-    }
-
     @Override
     protected BaseLevelView instantiateLevelView() {
-        LevelThreeView levelView = new LevelThreeView(getRoot(), PLAYER_INITIAL_HEALTH);
+        levelView = new LevelThreeView(getRoot(), PLAYER_INITIAL_HEALTH, this); // Save the view
         return levelView;
     }
 
     @Override
     protected void updateHUD() {
-        updateBossHealthBar();
+        double bossHealthPercentage = (double) boss.getHealth() / boss.getMaxHealth();
+        boolean isBossShielded = boss.getIsShielded();
+        levelView.updateBossHealthBar(bossHealthPercentage, isBossShielded);
+        levelView.updateBoostBar(getUser().getBoostEnergy() / UserPlane.getMaxBoostEnergy());
+        levelView.updateFiringMode(getUser().getFiringMode().toString());
+    }
+
+    @Override
+    protected void updateKillCount() {
+        // Do nothing since LevelThree does not need to track kill count
     }
 
 }
