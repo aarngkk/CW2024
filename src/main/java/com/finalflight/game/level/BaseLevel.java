@@ -495,7 +495,7 @@ public abstract class BaseLevel extends Observable {
     protected void winGame() {
         timeline.stop();
         levelView.clearActorsAfterWin(enemyUnits, enemyProjectiles, userProjectiles);
-        levelView.displayWinText();
+        levelView.displayGameWin();
         switchMusic(WON_GAME_MUSIC, false);
 
         // Disable ESC key functionality
@@ -507,7 +507,7 @@ public abstract class BaseLevel extends Observable {
      */
     protected void loseGame() {
         timeline.stop();
-        levelView.displayGameOverText();
+        levelView.displayGameOver();
         switchMusic(LOST_GAME_MUSIC, false);
 
         // Disable ESC key functionality

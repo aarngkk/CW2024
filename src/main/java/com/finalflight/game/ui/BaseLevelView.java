@@ -314,19 +314,43 @@ public class BaseLevelView {
     }
 
     /**
-     * Displays a "You Win" message and removes the pause button.
+     * Displays a "Victory" screen with options to restart or quit the game.
      */
-    public void displayWinText() {
-        Text youWinText = new Text("YOU WIN!");
-        youWinText.setFont(Font.font("Trebuchet MS", FontWeight.BOLD, 200)); // Set font and size
-        youWinText.setFill(Color.ORANGE);
-        youWinText.setStroke(Color.BLACK); // Add outline for visibility
-        youWinText.setStrokeWidth(2);
-        youWinText.setLayoutX(screenWidth / 2 - 450);
-        youWinText.setLayoutY(screenHeight / 2 + 50);
-        root.getChildren().add(youWinText);
-
+    public void displayGameWin() {
+        double buttonWidth = 300;
         removePauseButton();
+
+        // Create a VBox container for the game win screen
+        VBox gameWinContainer = new VBox();
+        gameWinContainer.setSpacing(30); // Set spacing between elements
+        gameWinContainer.setAlignment(Pos.CENTER); // Center align the contents
+        gameWinContainer.setLayoutX(screenWidth / 2 - 485);
+        gameWinContainer.setLayoutY(screenHeight / 2 - 235);
+
+        // Create the "VICTORY!" text
+        Text victoryText = new Text("VICTORY!");
+        victoryText.setFont(Font.font("Trebuchet MS", FontWeight.BOLD, 225)); // Set font and size
+        victoryText.setFill(Color.ORANGE);
+        victoryText.setStroke(Color.BLACK); // Add outline for visibility
+        victoryText.setStrokeWidth(2);
+
+        Button restartButton = new Button("Restart Game");
+        restartButton.getStyleClass().add("button");
+        restartButton.setStyle("-fx-font-size: 30px;");
+        restartButton.setPrefWidth(buttonWidth);
+        restartButton.setOnAction(e -> baseLevel.publicRestartGame());
+
+        Button quitButton = new Button("Quit Game");
+        quitButton.getStyleClass().add("button");
+        quitButton.setStyle("-fx-font-size: 30px;");
+        quitButton.setPrefWidth(buttonWidth);
+        quitButton.setOnAction(e -> baseLevel.publicQuitGame());
+
+        // Add the victory text, restart game button, and quit button to the VBox
+        gameWinContainer.getChildren().addAll(victoryText, restartButton, quitButton);
+
+        // Add game win VBox to the root
+        root.getChildren().add(gameWinContainer);
     }
 
     /**
@@ -345,7 +369,7 @@ public class BaseLevelView {
     /**
      * Displays a "Game Over" screen with options to restart or quit the game.
      */
-    public void displayGameOverText() {
+    public void displayGameOver() {
         double buttonWidth = 300;
         removePauseButton();
         showPauseOverlay();
