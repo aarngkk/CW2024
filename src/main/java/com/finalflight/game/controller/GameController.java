@@ -23,6 +23,8 @@ import java.util.Observer;
 public class GameController implements Observer {
 
     private static final String LEVEL_ONE_CLASS_NAME = "com.finalflight.game.level.LevelOne";
+    private static final double SCENE_WIDTH = 1540.0;
+    private static final double SCENE_HEIGHT = 870.0;
     private final Stage stage;
 
     /**
@@ -66,14 +68,9 @@ public class GameController implements Observer {
      */
     private void goToLevel(String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-
-        // Get the dimensions of the screen
-        double screenWidth = Screen.getPrimary().getBounds().getWidth();
-        double screenHeight = Screen.getPrimary().getBounds().getHeight();
-
         Class<?> myClass = Class.forName(className);
         Constructor<?> constructor = myClass.getConstructor(double.class, double.class);
-        BaseLevel myLevel = (BaseLevel) constructor.newInstance(screenHeight, screenWidth);
+        BaseLevel myLevel = (BaseLevel) constructor.newInstance(SCENE_HEIGHT, SCENE_WIDTH);
         myLevel.addObserver(this);
         Scene scene = myLevel.initializeScene();
         stage.setScene(scene);
