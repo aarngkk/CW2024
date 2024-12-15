@@ -1,11 +1,4 @@
-/**
- * Handles the UI elements and interactions for a base game level, including HUD elements
- * such as health, boost energy, and firing mode, as well as pause and game-over menus.
- *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/ui/BaseLevelView.java">BaseLevelView.java</a></p>
- */
-package com.finalflight.game.ui;
+package com.finalflight.game.visual;
 
 import com.finalflight.game.gameobjects.DestructibleGameObject;
 import com.finalflight.game.level.BaseLevel;
@@ -23,6 +16,12 @@ import javafx.scene.text.Text;
 
 import java.util.List;
 
+/**
+ * Handles the UI elements and interactions for a base game level, including HUD elements
+ * such as health, boost energy, and firing mode, as well as pause and game-over menus.
+ *
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/visual/BaseLevelView.java</p>
+ */
 public class BaseLevelView {
 
     private static final double HEART_DISPLAY_X_POSITION = 5;

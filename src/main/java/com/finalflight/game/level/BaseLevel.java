@@ -1,24 +1,10 @@
-/**
- * Represents an abstract base class for levels in the Final Flight game.
- * Handles core gameplay mechanics such as spawning enemies, handling collisions,
- * updating the scene, managing the game state, and rendering the level.
- *
- * <p>This class provides methods for initializing game elements, managing the game loop,
- * updating actors, and handling user interactions. Subclasses must provide specific
- * implementations for level-specific logic and UI components.</p>
- *
- * This class extends {@code Observable} to allow game state transitions to be observed.
- *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/level/BaseLevel.java">BaseLevel.java</a></p>
- */
 package com.finalflight.game.level;
 
 import com.finalflight.game.audio.MusicPlayer;
 import com.finalflight.game.gameobjects.DestructibleGameObject;
 import com.finalflight.game.gameobjects.FighterPlane;
 import com.finalflight.game.gameobjects.UserPlane;
-import com.finalflight.game.ui.BaseLevelView;
+import com.finalflight.game.visual.BaseLevelView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
@@ -33,6 +19,19 @@ import javafx.util.Duration;
 
 import java.util.*;
 
+/**
+ * Represents an abstract base class for levels in the Final Flight game.
+ * Handles core gameplay mechanics such as spawning enemies, handling collisions,
+ * updating the scene, managing the game state, and rendering the level.
+ *
+ * <p>This class provides methods for initializing game elements, managing the game loop,
+ * updating actors, and handling user interactions. Subclasses must provide specific
+ * implementations for level-specific logic and UI components.</p>
+ *
+ * This class extends {@code Observable} to allow game state transitions to be observed.
+ *
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/level/BaseLevel.java</p>
+ */
 public abstract class BaseLevel extends Observable {
 
     private static final String LEVEL_MUSIC = "/com/finalflight/game/audio/levelmusic.mp3";

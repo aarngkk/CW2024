@@ -1,12 +1,13 @@
 package com.finalflight.game.audio;
 
+import com.finalflight.game.BaseTest;
 import javafx.scene.media.AudioClip;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SoundEffectPlayerTest {
+class SoundEffectPlayerTest extends BaseTest {
 
     private SoundEffectPlayer soundEffectPlayer;
     private static final String TEST_SOUND_FILE = "/com/finalflight/game/audio/userfire.wav";

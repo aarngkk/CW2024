@@ -1,13 +1,12 @@
 package com.finalflight.game.gameobjects;
 
-import javafx.application.Platform;
-import org.junit.jupiter.api.BeforeAll;
+import com.finalflight.game.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SpreadShotProjectileTest {
+class SpreadShotProjectileTest extends BaseTest {
 
     private SpreadShotProjectile testProjectile;
     private static final double INITIAL_X_POS = 100.0;
@@ -15,13 +14,6 @@ class SpreadShotProjectileTest {
     private static final double VELOCITY_X = 5.0;
     private static final double VELOCITY_Y = 3.0;
     private static final double RANGE = 300.0;
-
-    @BeforeAll
-    static void setupJavaFxToolkit() {
-        // Initialize JavaFX Toolkit to avoid errors during testing
-        Platform.startup(() -> {
-        });
-    }
 
     @BeforeEach
     void setUp() {

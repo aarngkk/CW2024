@@ -1,3 +1,10 @@
+package com.finalflight.game.visual;
+
+import com.finalflight.game.gameobjects.BossPlane;
+import com.finalflight.game.level.BaseLevel;
+import javafx.scene.Group;
+import javafx.scene.control.ProgressBar;
+
 /**
  * The {@code LevelThreeView} class extends {@link BaseLevelView} and provides
  * the visual components and functionality specific to the third level of the game.
@@ -6,16 +13,8 @@
  * <p>This class is responsible for initializing and updating the Heads-Up Display (HUD)
  * and managing visual elements like the boss's health bar and shield during gameplay.</p>
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/ui/LevelThreeView.java">LevelThreeView.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/visual/LevelThreeView.java</p>
  */
-package com.finalflight.game.ui;
-
-import com.finalflight.game.gameobjects.BossPlane;
-import com.finalflight.game.level.BaseLevel;
-import javafx.scene.Group;
-import javafx.scene.control.ProgressBar;
-
 public class LevelThreeView extends BaseLevelView {
 
     private final Group root;

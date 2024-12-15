@@ -1,11 +1,12 @@
 package com.finalflight.game.gameobjects;
 
+import com.finalflight.game.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AbstractProjectileTest {
+class AbstractProjectileTest extends BaseTest {
 
     private AbstractProjectile testProjectile;
     private static final String IMAGE_NAME = "testImage.png";

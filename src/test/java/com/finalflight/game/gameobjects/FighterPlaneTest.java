@@ -1,13 +1,12 @@
 package com.finalflight.game.gameobjects;
 
-import javafx.application.Platform;
-import org.junit.jupiter.api.BeforeAll;
+import com.finalflight.game.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FighterPlaneTest {
+class FighterPlaneTest extends BaseTest {
 
     private FighterPlane fighterPlane;
     private static final int INITIAL_HEALTH = 5;
@@ -53,13 +52,6 @@ class FighterPlaneTest {
         public void updateActor() {
             updatePosition();
         }
-    }
-
-    @BeforeAll
-    static void setupJavaFxToolkit() {
-        // Initialize JavaFX Toolkit to avoid errors
-        Platform.startup(() -> {
-        });
     }
 
     @BeforeEach

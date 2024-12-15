@@ -1,3 +1,5 @@
+package com.finalflight.game.gameobjects;
+
 /**
  * The {@code HeavyShotProjectile} class represents a high-damage projectile with limited health.
  * It extends {@link AbstractProjectile} and introduces functionality for decrementing health
@@ -5,11 +7,8 @@
  *
  * <p>This class is designed for slower, more durable projectiles with a predefined lifespan.</p>
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/HeavyShotProjectile.java">HeavyShotProjectile.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/HeavyShotProjectile.java</p>
  */
-package com.finalflight.game.gameobjects;
-
 public class HeavyShotProjectile extends AbstractProjectile {
 
     private static final String IMAGE_NAME = "heavyfire.png";

@@ -1,11 +1,3 @@
-/**
- * The {@code BossPlane} class represents the final and most powerful enemy plane in the game.
- * It extends {@link FighterPlane} and features advanced behaviors such as shields, move patterns,
- * and the ability to boost its fire rate and movement speed when health is low.
- *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/BossPlane.java">BossPlane.java</a></p>
- */
 package com.finalflight.game.gameobjects;
 
 import com.finalflight.game.audio.SoundEffectPlayer;
@@ -14,6 +6,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * The {@code BossPlane} class represents the final and most powerful enemy plane in the game.
+ * It extends {@link FighterPlane} and features advanced behaviors such as shields, move patterns,
+ * and the ability to boost its fire rate and movement speed when health is low.
+ *
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/BossPlane.java</p>
+ */
 public class BossPlane extends FighterPlane {
 
     private static final String BOSS_FIRE_SOUND = "/com/finalflight/game/audio/bossfire.mp3";

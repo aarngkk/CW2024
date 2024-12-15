@@ -1,3 +1,9 @@
+package com.finalflight.game.visual;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+
 /**
  * The {@code HeartDisplay} class represents a graphical display of hearts in the game,
  * which is typically used to represent a player's health. It manages the creation, addition,
@@ -6,15 +12,8 @@
  * <p>The display is positioned at a specified X and Y coordinate, and the number of hearts
  * is configurable.</p>
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/ui/HeartDisplay.java">HeartDisplay.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/visual/HeartDisplay.java</p>
  */
-package com.finalflight.game.ui;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-
 public class HeartDisplay {
 
     private static final String HEART_IMAGE_NAME = "/com/finalflight/game/images/heart.png";

@@ -1,3 +1,10 @@
+package com.finalflight.game.level;
+
+import com.finalflight.game.gameobjects.AdvancedEnemyPlane;
+import com.finalflight.game.gameobjects.DestructibleGameObject;
+import com.finalflight.game.gameobjects.EnemyPlane;
+import com.finalflight.game.visual.BaseLevelView;
+
 /**
  * The {@code LevelTwo} class represents the second level of the game. It extends
  * the {@link BaseLevel} class and defines the behavior and characteristics specific
@@ -7,16 +14,8 @@
  * such as spawning regular and advanced enemies, checking game-over conditions,
  * and transitioning to the next level.</p>
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/level/LevelTwo.java">LevelTwo.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/level/LevelTwo.java</p>
  */
-package com.finalflight.game.level;
-
-import com.finalflight.game.gameobjects.AdvancedEnemyPlane;
-import com.finalflight.game.gameobjects.DestructibleGameObject;
-import com.finalflight.game.gameobjects.EnemyPlane;
-import com.finalflight.game.ui.BaseLevelView;
-
 public class LevelTwo extends BaseLevel {
 
     private static final String BACKGROUND_IMAGE_NAME = "/com/finalflight/game/images/background2.gif";

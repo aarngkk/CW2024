@@ -1,14 +1,13 @@
+package com.finalflight.game.gameobjects;
+
 /**
  * The {@code SingleShotProjectile} class represents a basic projectile fired by the player.
  * It extends {@link AbstractProjectile} and defines specific behavior for movement and updates.
  *
  * <p>This class is used for simple, straight-line projectiles with predefined image and velocity settings.</p>
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/SingleShotProjectile.java">SingleShotProjectile.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/SingleShotProjectile.java</p>
  */
-package com.finalflight.game.gameobjects;
-
 public class SingleShotProjectile extends AbstractProjectile {
 
     private static final String IMAGE_NAME = "userfire.png";

@@ -1,12 +1,3 @@
-/**
- * MusicPlayer is a singleton class responsible for managing music playback
- * in the game. It handles playing, pausing, resuming, and fading music in
- * and out. This class ensures that only one instance of the MusicPlayer is
- * created at a time.
- *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/audio/MusicPlayer.java">MusicPlayer.java</a></p>
- */
 package com.finalflight.game.audio;
 
 import javafx.animation.KeyFrame;
@@ -18,6 +9,14 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+/**
+ * MusicPlayer is a singleton class responsible for managing music playback
+ * in the game. It handles playing, pausing, resuming, and fading music in
+ * and out. This class ensures that only one instance of the MusicPlayer is
+ * created at a time.
+ *
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/audio/MusicPlayer.java</p>
+ */
 public class MusicPlayer {
 
     private static MusicPlayer instance;

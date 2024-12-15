@@ -1,7 +1,6 @@
 package com.finalflight.game.gameobjects;
 
-import javafx.application.Platform;
-import org.junit.jupiter.api.BeforeAll;
+import com.finalflight.game.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,18 +8,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserPlaneTest {
+class UserPlaneTest extends BaseTest {
 
     private UserPlane userPlane;
     private static final int INITIAL_HEALTH = 5;
     private static final double DELTA = 0.01;
-
-    @BeforeAll
-    static void setupJavaFxToolkit() {
-        // Initialize JavaFX Toolkit to avoid errors
-        Platform.startup(() -> {
-        });
-    }
 
     @BeforeEach
     void setUp() {

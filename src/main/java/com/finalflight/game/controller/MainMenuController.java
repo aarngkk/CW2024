@@ -1,3 +1,10 @@
+package com.finalflight.game.controller;
+
+import com.finalflight.game.audio.MusicPlayer;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
+
 /**
  * The {@code MainMenuController} class is responsible for managing the main menu of the game.
  * It initializes the game controller, handles main menu actions such as starting the game,
@@ -6,15 +13,8 @@
  * <p>This class is connected to the main menu FXML file and provides functionality for the
  * start and quit buttons.</p>
  *
- * <p>Original Source Code: <a href="com/finalflight/game/controller/MainMenuController.java">MainMenuController.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/controller/MainMenuController.java</p>
  */
-package com.finalflight.game.controller;
-
-import com.finalflight.game.audio.MusicPlayer;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.stage.Stage;
-
 public class MainMenuController {
 
     private GameController gameController;

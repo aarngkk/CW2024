@@ -1,3 +1,5 @@
+package com.finalflight.game.gameobjects;
+
 /**
  * The {@code SpreadShotProjectile} class represents a projectile with a spread effect,
  * moving in a specified direction and destroyed once it exceeds its range.
@@ -5,11 +7,8 @@
  * <p>This class extends {@link AbstractProjectile} and adds functionality for range-based destruction
  * and directional movement based on initial velocity values.</p>
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/SpreadShotProjectile.java">SpreadShotProjectile.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/SpreadShotProjectile.java</p>
  */
-package com.finalflight.game.gameobjects;
-
 public class SpreadShotProjectile extends AbstractProjectile {
 
     private static final double RANGE = 300.0;

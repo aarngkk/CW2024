@@ -1,14 +1,13 @@
-/**
- * The {@code EnemyPlane} class represents a basic enemy fighter plane in the game.
- * It can move horizontally and fire projectiles at random intervals.
- *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/EnemyPlane.java">EnemyPlane.java</a></p>
- */
 package com.finalflight.game.gameobjects;
 
 import com.finalflight.game.audio.SoundEffectPlayer;
 
+/**
+ * The {@code EnemyPlane} class represents a basic enemy fighter plane in the game.
+ * It can move horizontally and fire projectiles at random intervals.
+ *
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/EnemyPlane.java</p>
+ */
 public class EnemyPlane extends FighterPlane {
 
     private static final String ENEMY_FIRE_SOUND = "/com/finalflight/game/audio/enemyfire.wav";

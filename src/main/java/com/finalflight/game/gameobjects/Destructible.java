@@ -1,12 +1,11 @@
+package com.finalflight.game.gameobjects;
+
 /**
  * The {@code Destructible} interface defines behavior for game objects that can take damage
  * and be destroyed.
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/Destructible.java">Destructible.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/Destructible.java</p>
  */
-package com.finalflight.game.gameobjects;
-
 public interface Destructible {
 
     /**

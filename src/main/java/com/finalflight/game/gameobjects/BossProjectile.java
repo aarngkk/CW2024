@@ -1,14 +1,13 @@
+package com.finalflight.game.gameobjects;
+
 /**
  * The {@code BossProjectile} class represents projectiles fired by a boss enemy in the game.
  * It extends {@link AbstractProjectile} and defines specific behavior for movement and updates.
  *
  * <p>This class is tailored for boss attacks, featuring predefined image, velocity, and initial position.</p>
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/BossProjectile.java">BossProjectile.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/BossProjectile.java</p>
  */
-package com.finalflight.game.gameobjects;
-
 public class BossProjectile extends AbstractProjectile {
 
     private static final String IMAGE_NAME = "bossfire2.png";

@@ -1,16 +1,15 @@
-/**
- * Represents the first level in the game, introducing the player to basic mechanics and enemy interactions.
- * This level includes spawning enemy planes, checking for game over conditions, and transitioning to the next level.
- *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/level/LevelOne.java">LevelOne.java</a></p>
- */
 package com.finalflight.game.level;
 
 import com.finalflight.game.gameobjects.DestructibleGameObject;
 import com.finalflight.game.gameobjects.EnemyPlane;
-import com.finalflight.game.ui.BaseLevelView;
+import com.finalflight.game.visual.BaseLevelView;
 
+/**
+ * Represents the first level in the game, introducing the player to basic mechanics and enemy interactions.
+ * This level includes spawning enemy planes, checking for game over conditions, and transitioning to the next level.
+ *
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/level/LevelOne.java</p>
+ */
 public class LevelOne extends BaseLevel {
 
     private static final String BACKGROUND_IMAGE_NAME = "/com/finalflight/game/images/background1.gif";

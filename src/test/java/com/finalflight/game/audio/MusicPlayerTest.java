@@ -1,9 +1,8 @@
 package com.finalflight.game.audio;
 
-import javafx.application.Platform;
+import com.finalflight.game.BaseTest;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.media.MediaPlayer;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -14,17 +13,10 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class MusicPlayerTest {
+class MusicPlayerTest extends BaseTest {
 
     private static final String TEST_MUSIC_FILE = "/com/finalflight/game/audio/levelmusic.mp3";
     private MusicPlayer musicPlayer;
-
-    @BeforeAll
-    static void setupJavaFxToolkit() {
-        // Initialize JavaFX Toolkit to avoid errors
-        Platform.startup(() -> {
-        });
-    }
 
     @BeforeEach
     void setUp() {
