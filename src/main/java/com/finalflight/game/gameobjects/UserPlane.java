@@ -28,8 +28,8 @@ public class UserPlane extends FighterPlane {
     private static final double X_LEFT_BOUND = 0.0;
     private static final double X_RIGHT_BOUND = 1000.0;
     private static final double Y_UPPER_BOUND_OFFSET = 400.0;
-    private static final double Y_UPPER_BOUND = -25 - Y_UPPER_BOUND_OFFSET;
-    private static final double Y_LOWER_BOUND = 775.0 - Y_UPPER_BOUND_OFFSET;
+    private static final double Y_UPPER_BOUND = - Y_UPPER_BOUND_OFFSET;
+    private static final double Y_LOWER_BOUND = 800.0 - Y_UPPER_BOUND_OFFSET;
     private static final double INITIAL_X_POSITION = 5.0;
     private static final double INITIAL_Y_POSITION = 400.0;
     private static final int IMAGE_HEIGHT = 60;

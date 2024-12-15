@@ -24,6 +24,8 @@ public class Main extends Application {
     private static final String ICON_IMAGE_NAME = "/com/finalflight/game/images/icon.png";
     private static final String FXML_FILE_NAME = "/com/finalflight/game/fxml/MainMenu.fxml";
     private static final String TITLE = "Final Flight";
+    private static final double SCENE_WIDTH = 1540.0;
+    private static final double SCENE_HEIGHT = 870.0;
 
     /**
      * The entry point for the JavaFX application. Initializes the primary stage with
@@ -41,7 +43,7 @@ public class Main extends Application {
         stage.getIcons().add(icon);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_FILE_NAME));
-        Scene scene = new Scene(loader.load());
+        Scene scene = new Scene(loader.load(), SCENE_WIDTH, SCENE_HEIGHT);
 
         MainMenuController mainMenuController = loader.getController();
         mainMenuController.setStage(stage);
@@ -49,7 +51,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setTitle(TITLE);
         stage.setResizable(false);
-        stage.setMaximized(true);
         stage.show();
     }
 
