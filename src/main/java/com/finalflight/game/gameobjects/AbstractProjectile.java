@@ -1,3 +1,5 @@
+package com.finalflight.game.gameobjects;
+
 /**
  * The {@code AbstractProjectile} class serves as a base class for all projectile objects
  * in the game. It provides core functionality such as maintaining image properties,
@@ -6,11 +8,8 @@
  * <p>This class is intended to be extended by specific projectile types to implement
  * their unique behaviors, such as movement patterns and collision logic.</p>
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/AbstractProjectile.java">AbstractProjectile.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/AbstractProjectile.java</p>
  */
-package com.finalflight.game.gameobjects;
-
 public abstract class AbstractProjectile extends DestructibleGameObject {
 
     private final String imageName;

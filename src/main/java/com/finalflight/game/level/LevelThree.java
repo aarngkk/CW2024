@@ -1,19 +1,18 @@
+package com.finalflight.game.level;
+
+import com.finalflight.game.gameobjects.*;
+import com.finalflight.game.visual.BaseLevelView;
+import com.finalflight.game.visual.LevelThreeView;
+import javafx.scene.Scene;
+
 /**
  * The {@code LevelThree} class represents the final level of the game, featuring
  * a boss fight and more challenging gameplay mechanics. It extends the {@link BaseLevel}
  * class and defines behaviors specific to Level Three, such as spawning enemies
  * based on the boss's health and managing the boss's unique characteristics.
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/level/LevelThree.java">LevelThree.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/level/LevelThree.java</p>
  */
-package com.finalflight.game.level;
-
-import com.finalflight.game.gameobjects.*;
-import com.finalflight.game.ui.BaseLevelView;
-import com.finalflight.game.ui.LevelThreeView;
-import javafx.scene.Scene;
-
 public class LevelThree extends BaseLevel {
 
     private static final String BOSS_LEVEL_MUSIC = "/com/finalflight/game/audio/bosslevel.mp3";

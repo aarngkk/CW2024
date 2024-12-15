@@ -1,13 +1,12 @@
 package com.finalflight.game.gameobjects;
 
-import javafx.application.Platform;
-import org.junit.jupiter.api.BeforeAll;
+import com.finalflight.game.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class HeavyShotProjectileTest {
+class HeavyShotProjectileTest extends BaseTest {
 
     private HeavyShotProjectile testProjectile;
     private static final double INITIAL_X_POS = 100.0;
@@ -15,13 +14,6 @@ class HeavyShotProjectileTest {
     private static final double EXPECTED_HORIZONTAL_VELOCITY = 8.0;
     private static final double EXPECTED_VERTICAL_VELOCITY = 10.0;
     private static final int EXPECTED_HEALTH = 6;
-
-    @BeforeAll
-    static void setupJavaFxToolkit() {
-        // Initialize JavaFX Toolkit to avoid errors during testing
-        Platform.startup(() -> {
-        });
-    }
 
     @BeforeEach
     void setUp() {

@@ -1,15 +1,14 @@
+package com.finalflight.game.gameobjects;
+
+import com.finalflight.game.audio.SoundEffectPlayer;
+
 /**
  * The {@code AdvancedEnemyPlane} class represents a more challenging enemy plane in the game.
  * It extends {@link FighterPlane} and introduces faster movement, higher health, and a higher firing rate
  * compared to a regular enemy plane.
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/AdvancedEnemyPlane.java">AdvancedEnemyPlane.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/AdvancedEnemyPlane.java</p>
  */
-package com.finalflight.game.gameobjects;
-
-import com.finalflight.game.audio.SoundEffectPlayer;
-
 public class AdvancedEnemyPlane extends FighterPlane {
 
     private static final String IMAGE_NAME = "advancedenemyplane.png";

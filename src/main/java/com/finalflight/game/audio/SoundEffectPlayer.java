@@ -1,3 +1,7 @@
+package com.finalflight.game.audio;
+
+import javafx.scene.media.AudioClip;
+
 /**
  * The {@code SoundEffectPlayer} class is responsible for playing sound effects
  * in the game. It uses JavaFX's {@link AudioClip} to handle audio playback.
@@ -6,13 +10,8 @@
  * <p>This class is designed to manage individual sound effects and provides
  * straightforward control over their behavior.</p>
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/audio/SoundEffectPlayer.java">SoundEffectPlayer.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/audio/SoundEffectPlayer.java</p>
  */
-package com.finalflight.game.audio;
-
-import javafx.scene.media.AudioClip;
-
 public class SoundEffectPlayer {
 
     private final AudioClip audioClip;

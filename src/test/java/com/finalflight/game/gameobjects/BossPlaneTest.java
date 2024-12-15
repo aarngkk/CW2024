@@ -1,23 +1,15 @@
 package com.finalflight.game.gameobjects;
 
-import javafx.application.Platform;
-import org.junit.jupiter.api.BeforeAll;
+import com.finalflight.game.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BossPlaneTest {
+class BossPlaneTest extends BaseTest {
 
     private BossPlane boss;
     private static final double DELTA = 0.01;
-
-    @BeforeAll
-    static void setupJavaFxToolkit() {
-        // Initialize JavaFX Toolkit to avoid errors
-        Platform.startup(() -> {
-        });
-    }
 
     @BeforeEach
     void setUp() {

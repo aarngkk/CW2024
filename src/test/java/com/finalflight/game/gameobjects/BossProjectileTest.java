@@ -1,25 +1,17 @@
 package com.finalflight.game.gameobjects;
 
-import javafx.application.Platform;
-import org.junit.jupiter.api.BeforeAll;
+import com.finalflight.game.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BossProjectileTest {
+class BossProjectileTest extends BaseTest {
 
     private BossProjectile testBossProjectile;
     private static final double INITIAL_X_POS = 1020.0;
     private static final double INITIAL_Y_POS = 200.0;
     private static final int HORIZONTAL_VELOCITY = -15;
-
-    @BeforeAll
-    static void setupJavaFxToolkit() {
-        // Initialize JavaFX Toolkit to avoid errors
-        Platform.startup(() -> {
-        });
-    }
 
     @BeforeEach
     void setUp() {

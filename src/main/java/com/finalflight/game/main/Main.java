@@ -1,14 +1,3 @@
-/**
- * The {@code Main} class serves as the entry point for the Final Flight game application.
- * It initializes the primary JavaFX stage, sets up the main menu, and applies essential
- * configurations such as the application icon and window properties.
- *
- * <p>This class extends {@link Application} and overrides the {@link #start(Stage)} method
- * to load and display the main menu scene.</p>
- *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/main/Main.java">Main.java</a></p>
- */
 package com.finalflight.game.main;
 
 import com.finalflight.game.controller.MainMenuController;
@@ -20,6 +9,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The {@code Main} class serves as the entry point for the Final Flight game application.
+ * It initializes the primary JavaFX stage, sets up the main menu, and applies essential
+ * configurations such as the application icon and window properties.
+ *
+ * <p>This class extends {@link Application} and overrides the {@link #start(Stage)} method
+ * to load and display the main menu scene.</p>
+ *
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/main/Main.java</p>
+ */
 public class Main extends Application {
     private static final String ICON_IMAGE_NAME = "/com/finalflight/game/images/icon.png";
     private static final String FXML_FILE_NAME = "/com/finalflight/game/fxml/MainMenu.fxml";

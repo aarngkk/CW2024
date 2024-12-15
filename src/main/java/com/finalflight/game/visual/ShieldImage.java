@@ -1,16 +1,15 @@
+package com.finalflight.game.visual;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /**
  * The {@code ShieldImage} class represents a graphical shield component in the game.
  * It extends {@link ImageView} to display a shield image and provides methods to
  * control its visibility and position.
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/ui/ShieldImage.java">ShieldImage.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/visual/ShieldImage.java</p>
  */
-package com.finalflight.game.ui;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 public class ShieldImage extends ImageView {
 
     private static final String SHIELD_IMAGE = "/com/finalflight/game/images/bossshield.png";

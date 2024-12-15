@@ -1,13 +1,12 @@
+package com.finalflight.game.gameobjects;
+
 /**
  * The {@code DestructibleGameObject} class extends {@link GameObject} and implements
  * {@link Destructible}, providing properties and methods for handling destructible
  * game objects.
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/DestructibleGameObject.java">DestructibleGameObject.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/DestructibleGameObject.java</p>
  */
-package com.finalflight.game.gameobjects;
-
 public abstract class DestructibleGameObject extends GameObject implements Destructible {
 
     private boolean isDestroyed;

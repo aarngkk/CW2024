@@ -1,16 +1,15 @@
-/**
- * The {@code GameObject} class represents a generic game object in the game world.
- * It extends {@link ImageView} and provides basic properties such as image, position, and size.
- * This class is designed to be subclassed for specific game object behavior.
- *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/GameObject.java">GameObject.java</a></p>
- */
 package com.finalflight.game.gameobjects;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * The {@code GameObject} class represents a generic game object in the game world.
+ * It extends {@link ImageView} and provides basic properties such as image, position, and size.
+ * This class is designed to be subclassed for specific game object behavior.
+ *
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/GameObject.java</p>
+ */
 public abstract class GameObject extends ImageView {
 
     private static final String IMAGE_LOCATION = "/com/finalflight/game/images/";

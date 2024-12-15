@@ -1,3 +1,10 @@
+package com.finalflight.game.visual;
+
+import com.finalflight.game.audio.SoundEffectPlayer;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+
 /**
  * The {@code BossExplosionEffect} class represents the visual and audio effects
  * of a boss explosion in the game. It extends {@link ImageView} to display a GIF animation
@@ -5,16 +12,8 @@
  *
  * <p>The explosion is centered around the boss's position with predefined offsets.</p>
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/ui/BossExplosionEffect.java">BossExplosionEffect.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/visual/BossExplosionEffect.java</p>
  */
-package com.finalflight.game.ui;
-
-import com.finalflight.game.audio.SoundEffectPlayer;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-
 public class BossExplosionEffect extends ImageView {
 
     private static final String BOSS_EXPLOSION_GIF = "/com/finalflight/game/images/bossexplosion.gif";

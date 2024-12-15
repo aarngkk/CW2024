@@ -1,11 +1,3 @@
-/**
- * The {@code GameController} class is responsible for managing the game's flow and handling transitions
- * between different levels. It observes changes in the game state and updates the current level accordingly.
- *
- * <p>This class uses reflection to dynamically load and transition between levels in the game.</p>
- *
- * <p>Original Source Code: <a href="com/finalflight/game/controller/GameController.java">GameController.java</a></p>
- */
 package com.finalflight.game.controller;
 
 import com.finalflight.game.level.BaseLevel;
@@ -19,6 +11,15 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 import java.util.Observer;
+
+/**
+ * The {@code GameController} class is responsible for managing the game's flow and handling transitions
+ * between different levels. It observes changes in the game state and updates the current level accordingly.
+ *
+ * <p>This class uses reflection to dynamically load and transition between levels in the game.</p>
+ *
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/controller/GameController.java</p>
+ */
 
 public class GameController implements Observer {
 

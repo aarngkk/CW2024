@@ -1,10 +1,3 @@
-/**
- * Represents the player's plane with specific abilities, firing modes, and movement mechanics.
- * Extends {@link FighterPlane} and includes additional features like speed boost and multiple firing modes.
- *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/UserPlane.java">UserPlane.java</a></p>
- */
 package com.finalflight.game.gameobjects;
 
 import com.finalflight.game.audio.SoundEffectPlayer;
@@ -13,6 +6,12 @@ import javafx.scene.transform.Rotate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the player's plane with specific abilities, firing modes, and movement mechanics.
+ * Extends {@link FighterPlane} and includes additional features like speed boost and multiple firing modes.
+ *
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/UserPlane.java</p>
+ */
 public class UserPlane extends FighterPlane {
 
     private static final String DAMAGED_SOUND = "/com/finalflight/game/audio/userdamaged.mp3";

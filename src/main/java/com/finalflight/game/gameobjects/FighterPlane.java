@@ -1,13 +1,3 @@
-/**
- * The {@code FighterPlane} class represents a general fighter plane in the game.
- * It is an abstract class that provides basic attributes and behaviors for
- * fighter planes, including health management, damage handling, and projectile firing.
- *
- * <p>Subclasses must implement specific behaviors for updating position and firing projectiles.</p>
- *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/FighterPlane.java">FighterPlane.java</a></p>
- */
 package com.finalflight.game.gameobjects;
 
 import javafx.animation.KeyFrame;
@@ -17,6 +7,15 @@ import javafx.util.Duration;
 
 import java.util.function.Supplier;
 
+/**
+ * The {@code FighterPlane} class represents a general fighter plane in the game.
+ * It is an abstract class that provides basic attributes and behaviors for
+ * fighter planes, including health management, damage handling, and projectile firing.
+ *
+ * <p>Subclasses must implement specific behaviors for updating position and firing projectiles.</p>
+ *
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/FighterPlane.java</p>
+ */
 public abstract class FighterPlane extends DestructibleGameObject {
 
     private int health;

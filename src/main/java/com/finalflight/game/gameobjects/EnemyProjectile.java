@@ -1,3 +1,5 @@
+package com.finalflight.game.gameobjects;
+
 /**
  * The {@code EnemyProjectile} class represents projectiles fired by enemy entities
  * in the game. It extends {@link AbstractProjectile} and defines specific behavior
@@ -6,11 +8,8 @@
  * <p>This class is tailored to enemy attacks, using predefined image and velocity settings
  * to simulate hostile projectiles moving across the screen.</p>
  *
- * <p>Original Source Code:
- * <a href="com/finalflight/game/gameobjects/EnemyProjectile.java">EnemyProjectile.java</a></p>
+ * <p>Original Source Code: (Project Root)/src/main/java/com/finalflight/game/gameobjects/EnemyProjectile.java</p>
  */
-package com.finalflight.game.gameobjects;
-
 public class EnemyProjectile extends AbstractProjectile {
 
     private static final String IMAGE_NAME = "enemyfire.png";
