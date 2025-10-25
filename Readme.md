@@ -1,4 +1,4 @@
-![titlebanner.png](src/main/resources/com/finalflight/game/images/titlebanner.png)
+![titlebanner.png](https://github.com/aarngkk/CW2024/blob/49caa3199ac3707c498ec0514e30916d76e07fcd/src/main/resources/com/finalflight/game/images/titlebanner.png)
 
 # Final Flight
 Final Flight is a 2D arcade-style aerial combat game where the player controls a fighter plane to defeat enemy planes and progress through three increasingly challenging levels. The gameplay focuses on movement, shooting, and managing different weapon modes, while avoiding enemy fire and maintaining health.

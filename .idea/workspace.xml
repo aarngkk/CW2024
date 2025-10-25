@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0240a1e6-4213-41e9-bb62-618f8e1e9f20" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/maximized-layout" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;aarngkk&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/aarngkk/CW2024.git&quot;,
+    &quot;accountId&quot;: &quot;4b9085dd-c3c8-41e8-adb1-c9f588ee2efb&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2oLJqOCzyjCu9T3vDoWM0aZzX8J" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "JUnit.AbstractProjectileTest.executor": "Run",
+    "JUnit.AdvancedEnemyPlaneTest.executor": "Run",
+    "JUnit.All in CW2024.executor": "Coverage",
+    "JUnit.BossPlaneTest.executor": "Run",
+    "JUnit.BossProjectileTest and 9 more.executor": "Coverage",
+    "JUnit.BossProjectileTest.executor": "Coverage",
+    "JUnit.BossTest.executor": "Coverage",
+    "JUnit.EnemyPlaneTest.executor": "Coverage",
+    "JUnit.EnemyProjectileTest.executor": "Coverage",
+    "JUnit.FighterPlaneTest.executor": "Coverage",
+    "JUnit.HeavyShotProjectileTest.executor": "Coverage",
+    "JUnit.LevelOneTest.executor": "Run",
+    "JUnit.MusicPlayerTest.executor": "Run",
+    "JUnit.ProjectileTest.executor": "Coverage",
+    "JUnit.SingleShotProjectileTest.executor": "Coverage",
+    "JUnit.SoundEffectPlayerTest.executor": "Coverage",
+    "JUnit.SpreadShotProjectileTest.executor": "Coverage",
+    "JUnit.UserHeavyProjectileTest.executor": "Coverage",
+    "JUnit.UserPlaneTest.executor": "Run",
+    "JUnit.UserPlaneTest.testBoostEnergyDrainAndRecharge.executor": "Coverage",
+    "JUnit.UserSingleProjectileTest.executor": "Coverage",
+    "JUnit.UserSpreadProjectileTest.executor": "Run",
+    "JUnit.com.finalflight.game in CW2024.executor": "Coverage",
+    "JUnit.com.finalflight.game.audio in CW2024.executor": "Coverage",
+    "JUnit.com.finalflight.game.gameobjects in CW2024.executor": "Coverage",
+    "JUnit.game in CW2024.executor": "Coverage",
+    "JUnit.gameobjects in CW2024.executor": "Run",
+    "JUnit.java in CW2024.executor": "Coverage",
+    "Maven.CW2024 [clean].executor": "Run",
+    "Maven.CW2024 [install].executor": "Run",
+    "Maven.CW2024 [org.apache.maven.plugins:maven-javadoc-plugin:3.11.2:javadoc].executor": "Run",
+    "Maven.CW2024 [package].executor": "Run",
+    "Maven.CW2024 [test].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Final Flight (DMS Project)/CW2024",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.36127743",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\aaron\OneDrive\Documents\GitHub\CW2024\src\main\resources\com\finalflight\game\images" />
+      <recent name="C:\Users\aaron\OneDrive\Documents\GitHub\CW2024\src\main\resources\com\finalflight\game\audio" />
+      <recent name="C:\Users\aaron\OneDrive\Documents\GitHub\CW2024\src\main\resources\com\example\demo\images" />
+      <recent name="C:\Users\aaron\OneDrive\Documents\GitHub\CW2024\src\main\resources\com\example\demo\audio" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\aaron\OneDrive\Documents\GitHub\CW2024\src\main\resources\com\finalflight\game\images" />
+      <recent name="C:\Users\aaron\OneDrive\Documents\GitHub\CW2024\src\main\resources\com\example\demo\audio" />
+      <recent name="C:\Users\aaron\OneDrive\Documents\GitHub\CW2024\src\main\resources\com\example\demo\images" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.finalflight.game" />
+      <recent name="com.finalflight.game.gameobjects" />
+      <recent name="com.finalflight.game.level" />
+      <recent name="com.finalflight.game.audio" />
+      <recent name="com.example.demo" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="All in CW2024" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CW2024" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserPlaneTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CW2024" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.finalflight.game.gameobjects.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.finalflight.game.gameobjects" />
+      <option name="MAIN_CLASS_NAME" value="com.finalflight.game.gameobjects.UserPlaneTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.finalflight.game in CW2024" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CW2024" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.finalflight.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.finalflight.game" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.finalflight.game.gameobjects in CW2024" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CW2024" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.finalflight.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.finalflight.game.gameobjects" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="java in CW2024" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CW2024" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.java in CW2024" />
+        <item itemvalue="JUnit.UserPlaneTest" />
+        <item itemvalue="JUnit.All in CW2024" />
+        <item itemvalue="JUnit.com.finalflight.game in CW2024" />
+        <item itemvalue="JUnit.com.finalflight.game.gameobjects in CW2024" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0240a1e6-4213-41e9-bb62-618f8e1e9f20" name="Changes" comment="" />
+      <created>1730643114110</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1730643114110</updated>
+      <workItem from="1734183086017" duration="1467000" />
+      <workItem from="1734193380123" duration="25000" />
+      <workItem from="1734448309773" duration="4000" />
+      <workItem from="1734450400912" duration="2000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CW2024$com_finalflight_game_in_CW2024.ic" NAME="com.finalflight.game in CW2024 Coverage Results" MODIFIED="1734181052239" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$EnemyProjectileTest.ic" NAME="EnemyProjectileTest Coverage Results" MODIFIED="1734066220279" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$SpreadShotProjectileTest.ic" NAME="SpreadShotProjectileTest Coverage Results" MODIFIED="1734066235589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$UserSpreadProjectileTest.ic" NAME="UserSpreadProjectileTest Coverage Results" MODIFIED="1733991929415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$EnemyPlaneTest.ic" NAME="EnemyPlaneTest Coverage Results" MODIFIED="1734066216158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$java_in_CW2024.ic" NAME="java in CW2024 Coverage Results" MODIFIED="1734249130021" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/CW2024$UserHeavyProjectileTest.ic" NAME="UserHeavyProjectileTest Coverage Results" MODIFIED="1733991914478" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$UserSingleProjectileTest.ic" NAME="UserSingleProjectileTest Coverage Results" MODIFIED="1733991925398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$LevelOneTest.ic" NAME="LevelOneTest Coverage Results" MODIFIED="1733930271310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.level.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$SoundEffectPlayerTest.ic" NAME="SoundEffectPlayerTest Coverage Results" MODIFIED="1734066193211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.audio.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$BossProjectileTest_and_9_more.ic" NAME="BossProjectileTest and 9 more Coverage Results" MODIFIED="1733905087974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/CW2024$ProjectileTest.ic" NAME="ProjectileTest Coverage Results" MODIFIED="1733991909896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$BossProjectileTest.ic" NAME="BossProjectileTest Coverage Results" MODIFIED="1734066212372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$gameobjects_in_CW2024.ic" NAME="gameobjects in CW2024 Coverage Results" MODIFIED="1733904864000" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/CW2024$game_in_CW2024.ic" NAME="game in CW2024 Coverage Results" MODIFIED="1733927203388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/CW2024$HeavyShotProjectileTest.ic" NAME="HeavyShotProjectileTest Coverage Results" MODIFIED="1734066228049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$All_in_CW2024.ic" NAME="All in CW2024 Coverage Results" MODIFIED="1734192838956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/CW2024$SingleShotProjectileTest.ic" NAME="SingleShotProjectileTest Coverage Results" MODIFIED="1734066231843" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$AdvancedEnemyPlaneTest.ic" NAME="AdvancedEnemyPlaneTest Coverage Results" MODIFIED="1734066203611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$FighterPlaneTest.ic" NAME="FighterPlaneTest Coverage Results" MODIFIED="1734066224337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$com_finalflight_game_gameobjects_in_CW2024.ic" NAME="com.finalflight.game.gameobjects in CW2024 Coverage Results" MODIFIED="1734168951031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$com_finalflight_game_audio_in_CW2024.ic" NAME="com.finalflight.game.audio in CW2024 Coverage Results" MODIFIED="1734168911660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.audio.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$BossPlaneTest.ic" NAME="BossPlaneTest Coverage Results" MODIFIED="1734168938315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$AbstractProjectileTest.ic" NAME="AbstractProjectileTest Coverage Results" MODIFIED="1734066199488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$UserPlaneTest_testBoostEnergyDrainAndRecharge.ic" NAME="UserPlaneTest.testBoostEnergyDrainAndRecharge Coverage Results" MODIFIED="1733725196020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$UserPlaneTest.ic" NAME="UserPlaneTest Coverage Results" MODIFIED="1734230688794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$BossTest.ic" NAME="BossTest Coverage Results" MODIFIED="1733991890241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.gameobjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CW2024$MusicPlayerTest.ic" NAME="MusicPlayerTest Coverage Results" MODIFIED="1734066164643" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.finalflight.game.audio.*</FILTER>
+    </SUITE>
+  </component>
+</project>
